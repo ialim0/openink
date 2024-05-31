@@ -83,9 +83,10 @@ const Menu: React.FC = () => {
             </div>
             <div className="p-6 border-t border-gray-200 bg-gray-100">
                 <blockquote className="italic text-gray-600">
-                    "{currentQuote.quote}"
+                    &quot;{currentQuote.quote}&quot;
                     <span className="ml-2 font-semibold">- {currentQuote.author}</span>
                 </blockquote>
+
             </div>
         </div>
     );
