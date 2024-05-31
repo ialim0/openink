@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -31,12 +30,12 @@ const Menu: React.FC = () => {
                 <ul className="flex justify-center space-x-4">
                     <li>
                         <Link href="/about" className="text-lg text-blue-600 hover:text-blue-800">
-                            <a>About</a>
+                            About
                         </Link>
                     </li>
                     <li>
                         <Link href="/blog" className="text-lg text-blue-600 hover:text-blue-800">
-                            <a>Blog</a>
+                            Blog
                         </Link>
                     </li>
                 </ul>
