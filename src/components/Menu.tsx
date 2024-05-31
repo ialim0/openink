@@ -20,7 +20,7 @@ const Menu: React.FC = () => {
         const interval = setInterval(() => {
             const randomIndex = Math.floor(Math.random() * quotes.length);
             setCurrentQuote(quotes[randomIndex]);
-        }, 30000); 
+        }, 30000);
 
         return () => clearInterval(interval);
     }, []);
@@ -31,16 +31,17 @@ const Menu: React.FC = () => {
                 <ul className="flex justify-center space-x-4">
                     <li>
                         <Link href="/about" className="text-lg text-blue-600 hover:text-blue-800">
-                            About
+                            <a>About</a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/blog" className="text-lg text-blue-600 hover:text-blue-800">
-                            Blog
+                            <a>Blog</a>
                         </Link>
                     </li>
                 </ul>
             </nav>
+
             <div className="flex-grow">
                 <div className="flex flex-col items-center p-6 border-b border-gray-200">
                     <div className="w-40 h-40 overflow-hidden rounded-full mb-4">
