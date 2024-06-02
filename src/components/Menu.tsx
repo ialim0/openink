@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { FaEnvelope, FaCode, FaTools, FaLanguage, FaGithub, FaLinkedin, FaAddressCard, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaEnvelope, FaCode, FaTools, FaLanguage, FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
 
 interface Quote {
     quote: string;
@@ -77,7 +77,7 @@ const Menu: React.FC = () => {
                         <p className="text-sm mt-2">Building innovative solutions for the web and beyond.</p>
                     </div>
                 </div>
-              
+
                 <div className="p-6 bg-white rounded-lg shadow-md mt-6">
                     <h3 className="text-lg font-semibold mb-4">Tech Skills</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
