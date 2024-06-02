@@ -77,11 +77,12 @@ const Menu: React.FC = () => {
                                 Programming Languages
                             </h4>
                             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-                                <li>Go (Golang)</li>
-                                <li>Solidity</li>
+                                <li>Golang</li>
                                 <li>Rust</li>
                                 <li>Python</li>
                                 <li>JavaScript</li>
+                                <li>Solidity</li>
+                               
                             </ul>
                         </div>
                         <div className="bg-gray-100 p-4 rounded-lg">
