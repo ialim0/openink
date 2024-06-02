@@ -1,7 +1,8 @@
-"use client";
+"use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FaEnvelope, FaCode, FaTools } from 'react-icons/fa';
 
 interface Quote {
     quote: string;
@@ -30,24 +31,24 @@ const Menu: React.FC = () => {
     }, []);
 
     return (
-        <div className="flex flex-col h-full bg-gray-50 shadow-lg">
-            <nav className="p-6 border-b border-gray-200 bg-white">
+        <div className="flex flex-col h-full shadow-lg">
+            <nav className="p-6 bg-white">
                 <ul className="flex justify-center space-x-8">
                     <li>
                         <Link href="/about">
-                            <span className="text-lg font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600">About</span>
+                            <span className="text-lg font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors duration-300">About</span>
                         </Link>
                     </li>
                     <li>
                         <Link href="/blog">
-                            <span className="text-lg font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600">Blog</span>
+                            <span className="text-lg font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors duration-300">Blog</span>
                         </Link>
                     </li>
                 </ul>
             </nav>
 
             <div className="flex-grow">
-                <div className="flex flex-col items-center p-6 border-b border-gray-200 bg-white">
+                <div className="flex flex-col items-center p-6 bg-blue-50 rounded-lg shadow-md">
                     <div className="w-40 h-40 overflow-hidden rounded-full mb-4">
                         <Image
                             src="/images/profile.jpg"
@@ -60,18 +61,26 @@ const Menu: React.FC = () => {
                     <div className="text-center">
                         <h2 className="text-2xl font-bold text-gray-800">Alimoudine IDRISSOU</h2>
                         <p className="text-sm text-gray-600">Full Stack Developer</p>
+                        <p className="text-sm text-gray-600 mt-2">Building innovative solutions for the web and beyond.</p>
                     </div>
                 </div>
-                <div className="p-6 border-b border-gray-200 bg-white">
-                    <h3 className="text-lg font-semibold text-gray-800">Contact Info</h3>
+                <div className="p-6 bg-white rounded-lg shadow-md mt-6">
+                    <h3 className="text-lg font-semibold text-gray-800 flex items-center">
+                        <FaEnvelope className="mr-2 text-blue-600" />
+                        Contact Info
+                    </h3>
                     <p className="text-sm text-gray-600 mt-2">Email: i.alim0229@gmail.com</p>
-                    {/* <p className="text-sm text-gray-600">Phone: +123456789</p> */}
                 </div>
-                <div className="p-6 border-b border-gray-200 bg-white rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Tech Skills</h3>
+                <div className="p-6 bg-white rounded-lg shadow-md mt-6">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        Tech Skills
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-gray-100 p-4 rounded-lg">
-                            <h4 className="text-md font-semibold text-gray-700 mb-2">Programming Languages</h4>
+                            <h4 className="text-md font-semibold text-gray-700 mb-2 flex items-center">
+                                <FaCode className="mr-2 text-blue-600" />
+                                Programming Languages
+                            </h4>
                             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                                 <li>Go (Golang)</li>
                                 <li>Solidity</li>
@@ -81,18 +90,22 @@ const Menu: React.FC = () => {
                             </ul>
                         </div>
                         <div className="bg-gray-100 p-4 rounded-lg">
-                            <h4 className="text-md font-semibold text-gray-700 mb-2">Frameworks & Tools</h4>
+                            <h4 className="text-md font-semibold text-gray-700 mb-2 flex items-center">
+                                <FaTools className="mr-2 text-blue-600" />
+                                Frameworks & Tools
+                            </h4>
                             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                                 <li>Next.js</li>
                                 <li>React Native</li>
+                                <li>Node.js</li>
+                                <li>MongoDB</li>
+                                <li>Git</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <div className="p-6 border-t border-gray-200 bg-gray-100">
+            <div className="p-6 bg-white rounded-lg shadow-md mt-6 transition-opacity duration-500">
                 <blockquote className="italic text-gray-600">
                     &ldquo;{currentQuote.quote}&rdquo;
                     <span className="ml-2 font-semibold">- {currentQuote.author}</span>
