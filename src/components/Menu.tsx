@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { FaEnvelope, FaCode, FaTools } from 'react-icons/fa';
 
 interface Quote {
@@ -21,7 +21,6 @@ const quotes: Quote[] = [
 
 const Menu: React.FC = () => {
     const [currentQuote, setCurrentQuote] = useState<Quote>(quotes[0]);
-    const router = useRouter();
     const pathname = usePathname();
 
     useEffect(() => {
@@ -39,28 +38,19 @@ const Menu: React.FC = () => {
         <div className="flex flex-col h-full shadow-lg bg-gray-50 text-gray-800 font-sans">
             <nav className="p-6 bg-white shadow-md">
                 <ul className="flex justify-center space-x-8">
-                    <li>
-                        <Link href="/about" passHref>
-                            <span
-                                className={`text-lg font-semibold transition-colors duration-300 px-4 py-2 rounded-md ${
-                                    isActive('/about') ? 'bg-blue-600 text-white' : 'text-blue-600 hover:bg-blue-100 hover:text-blue-800'
-                                }`}
-                            >
-                                About
-                            </span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/blog" passHref>
-                            <span
-                                className={`text-lg font-semibold transition-colors duration-300 px-4 py-2 rounded-md ${
-                                    isActive('/blog') ? 'bg-blue-600 text-white' : 'text-blue-600 hover:bg-blue-100 hover:text-blue-800'
-                                }`}
-                            >
-                                Blog
-                            </span>
-                        </Link>
-                    </li>
+                    {['about', 'blog'].map((link) => (
+                        <li key={link}>
+                            <Link href={`/${link}`} passHref>
+                                <span
+                                    className={`text-lg font-semibold transition-colors duration-300 ${
+                                        isActive(`/${link}`) ? 'text-blue-800 border-b-2 border-blue-800' : 'text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600'
+                                    }`}
+                                >
+                                    {link.charAt(0).toUpperCase() + link.slice(1)}
+                                </span>
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </nav>
 
