@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter, usePathname } from 'next/navigation';
 import { FaEnvelope, FaCode, FaTools } from 'react-icons/fa';
 
 interface Quote {
@@ -20,6 +21,8 @@ const quotes: Quote[] = [
 
 const Menu: React.FC = () => {
     const [currentQuote, setCurrentQuote] = useState<Quote>(quotes[0]);
+    const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -30,32 +33,53 @@ const Menu: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
+    const isActive = (path: string) => pathname === path;
+
     return (
         <div className="flex flex-col h-full shadow-lg bg-gray-50 text-gray-800 font-sans">
             <nav className="p-6 bg-white shadow-md">
                 <ul className="flex justify-center space-x-8">
                     <li>
-                        <Link href="/about">
-                            <span className="text-lg font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors duration-300">About</span>
+                        <Link href="/about" passHref>
+                            <span
+                                className={`text-lg font-semibold transition-colors duration-300 px-4 py-2 rounded-md ${
+                                    isActive('/about') ? 'bg-blue-600 text-white' : 'text-blue-600 hover:bg-blue-100 hover:text-blue-800'
+                                }`}
+                            >
+                                About
+                            </span>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/blog">
-                            <span className="text-lg font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors duration-300">Blog</span>
+                        <Link href="/blog" passHref>
+                            <span
+                                className={`text-lg font-semibold transition-colors duration-300 px-4 py-2 rounded-md ${
+                                    isActive('/blog') ? 'bg-blue-600 text-white' : 'text-blue-600 hover:bg-blue-100 hover:text-blue-800'
+                                }`}
+                            >
+                                Blog
+                            </span>
                         </Link>
                     </li>
                 </ul>
             </nav>
 
+            <div className="p-6 bg-white rounded-lg shadow-md mt-6">
+                <blockquote className="italic text-gray-600">
+                    &ldquo;{currentQuote.quote}&rdquo;
+                    <span className="ml-2 font-semibold">- {currentQuote.author}</span>
+                </blockquote>
+            </div>
+
             <div className="flex-grow">
-                <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md">
-                    <div className="w-40 h-40 overflow-hidden rounded-full mb-4">
+                <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md mt-6">
+                    <div className="w-40 h-40 overflow-hidden rounded mb-4">
                         <Image
                             src="/images/profile.jpg"
                             alt="Profile Image"
                             width={200}
                             height={200}
-                            className="rounded-full"
+                            className="object-cover"
                         />
                     </div>
                     <div className="text-center">
@@ -82,7 +106,6 @@ const Menu: React.FC = () => {
                                 <li>Python</li>
                                 <li>JavaScript</li>
                                 <li>Solidity</li>
-                               
                             </ul>
                         </div>
                         <div className="bg-gray-100 p-4 rounded-lg">
@@ -100,12 +123,6 @@ const Menu: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="p-6 bg-white rounded-lg shadow-md mt-6">
-                <blockquote className="italic text-gray-600">
-                    &ldquo;{currentQuote.quote}&rdquo;
-                    <span className="ml-2 font-semibold">- {currentQuote.author}</span>
-                </blockquote>
             </div>
         </div>
     );
