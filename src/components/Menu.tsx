@@ -128,9 +128,6 @@ const Menu: React.FC = () => {
                     <div className="p-6 bg-white rounded-lg shadow-md mt-6 mr-6">
                         <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
                         <div className="bg-gray-100 p-4 rounded-lg">
-                            {/* <div className="flex items-center mb-2">
-            <FaAddressCard className="mr-2 text-blue-600" />
-        </div> */}
                             <div className="flex items-center space-x-2">
                                 <FaEnvelope className="text-blue-600" />
                                 <span className="text-sm">i.alim0229@gmail.com</span>
@@ -149,12 +146,7 @@ const Menu: React.FC = () => {
                             </div>
                         </div>
                     </div>
-
-
-
-
                 </div>
-
             </div>
         </div>
     );
