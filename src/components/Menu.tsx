@@ -16,7 +16,7 @@ const quotes: Quote[] = [
     { quote: "The best way to predict the future is to create it.", author: "Peter Drucker" },
     { quote: "You are never too old to set another goal or to dream a new dream.", author: "C.S. Lewis" },
     { quote: "Don&apos;t watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
-    { quote: "The harder you work for something, the greater you&apos;ll feel when you achieve it.", author: "Unknown" },
+    { quote: "The harder you work for something, the greater you will feel when you achieve it.", author: "Unknown" },
 ];
 
 const Menu: React.FC = () => {
