@@ -137,7 +137,7 @@ const Menu: React.FC = () => {
                             </div>
                             <div className="flex items-center space-x-2 mt-2">
                                 <FaMapMarkerAlt className="text-blue-600" />
-                                <span className="text-sm">Location: Senegal, Dakar</span>
+                                <span className="text-sm">Senegal, Dakar</span>
                             </div>
                             <div className="flex items-center space-x-2 mt-2">
                                 <FaGithub className="text-blue-600" />
