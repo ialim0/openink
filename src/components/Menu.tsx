@@ -1,9 +1,17 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { FaEnvelope, FaCode, FaTools, FaLanguage, FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import {
+    FaEnvelope,
+    FaCode,
+    FaTools,
+    FaLanguage,
+    FaGithub,
+    FaLinkedin,
+    FaMapMarkerAlt,
+} from "react-icons/fa";
 
 interface Quote {
     quote: string;
@@ -11,13 +19,34 @@ interface Quote {
 }
 
 const quotes: Quote[] = [
-    { quote: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
-    { quote: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
-    { quote: "The best way to predict the future is to create it.", author: "Peter Drucker" },
-    { quote: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
-    { quote: "The harder you work for something, the greater you'll feel when you achieve it.", author: "Unknown" },
+    {
+        quote:
+            "The only limit to our realization of tomorrow is our doubts of today.",
+        author: "Franklin D. Roosevelt",
+    },
+    {
+        quote:
+            "The future belongs to those who believe in the beauty of their dreams.",
+        author: "Eleanor Roosevelt",
+    },
+    {
+        quote: "The best way to predict the future is to create it.",
+        author: "Peter Drucker",
+    },
+    {
+        quote: "You are never too old to set another goal or to dream a new dream.",
+        author: "C.S. Lewis",
+    },
+    {
+        quote: "Don&apos;t watch the clock; do what it does. Keep going.",
+        author: "Sam Levenson",
+    },
+    {
+        quote:
+            "The harder you work for something, the greater you&apos;ll feel when you achieve it.",
+        author: "Unknown",
+    },
 ];
-
 
 const Menu: React.FC = () => {
     const [currentQuote, setCurrentQuote] = useState<Quote>(quotes[0]);
@@ -38,12 +67,15 @@ const Menu: React.FC = () => {
         <div className="flex flex-col h-full shadow-lg bg-gray-50 text-gray-800 font-sans">
             <nav className="p-6 bg-white shadow-md">
                 <ul className="flex justify-center space-x-8">
-                    {['about', 'blog'].map((link) => (
+                    {["about", "blog"].map((link) => (
                         <li key={link}>
                             <Link href={`/${link}`} passHref>
                                 <span
-                                    className={`text-lg font-semibold transition-colors duration-300 ${isActive(`/${link}`) ? 'text-blue-800 border-b-2 border-blue-800' : 'text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600'
-                                        }`}
+                                    className={`text-lg font-semibold transition-colors duration-300 ${
+                                        isActive(`/${link}`)
+                                            ? "text-blue-800 border-b-2 border-blue-800"
+                                            : "text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                    }`}
                                 >
                                     {link.charAt(0).toUpperCase() + link.slice(1)}
                                 </span>
@@ -74,7 +106,9 @@ const Menu: React.FC = () => {
                     <div className="text-center">
                         <h2 className="text-2xl font-bold">Alimoudine IDRISSOU</h2>
                         <p className="text-sm">Full Stack Developer</p>
-                        <p className="text-sm mt-2">Building innovative solutions for the web and beyond.</p>
+                        <p className="text-sm mt-2">
+                            Building innovative solutions for the web and beyond.
+                        </p>
                     </div>
                 </div>
 
@@ -120,8 +154,9 @@ const Menu: React.FC = () => {
                             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                                 <li>English - Fluent</li>
                                 <li>French - Native</li>
-                                <li>Spanish - Intermediate</li>
-                                <li>German - Basic</li>
+                                <li>Foodo - Native</li>
+                                <li>Fon - Native</li>
+                                <li>Dendi - Native</li>
                             </ul>
                         </div>
                     </div>
@@ -130,7 +165,9 @@ const Menu: React.FC = () => {
                         <div className="bg-gray-100 p-4 rounded-lg">
                             <div className="flex items-center space-x-2">
                                 <FaEnvelope className="text-blue-600" />
-                                <span className="text-sm">i.alim0229@gmail.com</span>
+                                <span className="text-sm">
+                                    <a href="mailto:i.alim0229@gmail.com">i.alim0229@gmail.com</a>
+                                </span>
                             </div>
                             <div className="flex items-center space-x-2 mt-2">
                                 <FaMapMarkerAlt className="text-blue-600" />
@@ -138,11 +175,17 @@ const Menu: React.FC = () => {
                             </div>
                             <div className="flex items-center space-x-2 mt-2">
                                 <FaGithub className="text-blue-600" />
-                                <span className="text-sm"><a href="https://github.com/yourgithubusername">GitHub</a></span>
+                                <span className="text-sm">
+                                    <a href="https://github.com/yourgithubusername">GitHub</a>
+                                </span>
                             </div>
                             <div className="flex items-center space-x-2 mt-2">
                                 <FaLinkedin className="text-blue-600" />
-                                <span className="text-sm"><a href="https://www.linkedin.com/in/yourlinkedinusername">LinkedIn</a></span>
+                                <span className="text-sm">
+                                    <a href="https://www.linkedin.com/in/yourlinkedinusername">
+                                        LinkedIn
+                                    </a>
+                                </span>
                             </div>
                         </div>
                     </div>
