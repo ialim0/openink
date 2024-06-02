@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { FaEnvelope, FaCode, FaTools } from 'react-icons/fa';
+import { FaEnvelope, FaCode, FaTools, FaLanguage, FaGithub, FaLinkedin, FaAddressCard } from 'react-icons/fa';
 
 interface Quote {
     quote: string;
@@ -42,9 +42,8 @@ const Menu: React.FC = () => {
                         <li key={link}>
                             <Link href={`/${link}`} passHref>
                                 <span
-                                    className={`text-lg font-semibold transition-colors duration-300 ${
-                                        isActive(`/${link}`) ? 'text-blue-800 border-b-2 border-blue-800' : 'text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600'
-                                    }`}
+                                    className={`text-lg font-semibold transition-colors duration-300 ${isActive(`/${link}`) ? 'text-blue-800 border-b-2 border-blue-800' : 'text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600'
+                                        }`}
                                 >
                                     {link.charAt(0).toUpperCase() + link.slice(1)}
                                 </span>
@@ -113,6 +112,73 @@ const Menu: React.FC = () => {
                         </div>
                     </div>
                 </div>
+                <div className="flex flex-wrap">
+                    <div className="p-6 bg-white rounded-lg shadow-md mt-6">
+                        <h3 className="text-lg font-semibold mb-4">Language Proficiency</h3>
+                        <div className="bg-gray-100 p-4 rounded-lg">
+                            <h4 className="text-md font-semibold mb-2 flex items-center">
+                                <FaLanguage className="mr-2 text-blue-600" />
+                                Languages
+                            </h4>
+                            <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li>English - Fluent</li>
+                                <li>French - Native</li>
+                                <li>Spanish - Intermediate</li>
+                                <li>German - Basic</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="p-6 bg-white rounded-lg shadow-md mt-6 mr-6">
+                        <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
+                        <div className="bg-gray-100 p-4 rounded-lg">
+                            <div className="flex items-center mb-2">
+                                <FaAddressCard className="mr-2 text-blue-600" />
+                                <span className="text-md font-semibold">Address</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <FaEnvelope className="text-blue-600" />
+                                <span className="text-sm">
+                                    <a
+                                        href="mailto:i.alim0229@gmail.com"
+                                        className="hover:underline hover:text-blue-800"
+                                    >
+                                        i.alim0229@gmail.com
+                                    </a>
+                                </span>
+                            </div>
+                            <div className="flex items-center space-x-2 mt-2">
+                                <FaGithub className="text-blue-600" />
+                                <span className="text-sm">
+                                    <a
+                                        href="https://github.com/yourgithubusername"
+                                        className="hover:underline hover:text-blue-800"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        GitHub
+                                    </a>
+                                </span>
+                            </div>
+                            <div className="flex items-center space-x-2 mt-2">
+                                <FaLinkedin className="text-blue-600" />
+                                <span className="text-sm">
+                                    <a
+                                        href="https://www.linkedin.com/in/yourlinkedinusername"
+                                        className="hover:underline hover:text-blue-800"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        LinkedIn
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
             </div>
         </div>
     );
