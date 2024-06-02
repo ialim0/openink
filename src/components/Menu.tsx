@@ -77,10 +77,7 @@ const Menu: React.FC = () => {
                         <p className="text-sm mt-2">Building innovative solutions for the web and beyond.</p>
                     </div>
                 </div>
-                <div className="p-6 bg-white rounded-lg shadow-md mt-6">
-                    <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
-                    <p className="text-sm">Email: i.alim0229@gmail.com</p>
-                </div>
+              
                 <div className="p-6 bg-white rounded-lg shadow-md mt-6">
                     <h3 className="text-lg font-semibold mb-4">Tech Skills</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
