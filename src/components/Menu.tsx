@@ -14,7 +14,6 @@ const quotes: Quote[] = [
     { quote: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
     { quote: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
     { quote: "The best way to predict the future is to create it.", author: "Peter Drucker" },
-    { quote: "You are never too old to set another goal or to dream a new dream.", author: "C.S. Lewis" },
     { quote: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
     { quote: "The harder you work for something, the greater you'll feel when you achieve it.", author: "Unknown" },
 ];
