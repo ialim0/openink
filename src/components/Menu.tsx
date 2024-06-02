@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { FaEnvelope, FaCode, FaTools, FaLanguage, FaGithub, FaLinkedin, FaAddressCard } from 'react-icons/fa';
+import { FaEnvelope, FaCode, FaTools, FaLanguage, FaGithub, FaLinkedin, FaAddressCard, FaMapMarkerAlt } from 'react-icons/fa';
 
 interface Quote {
     quote: string;
@@ -131,49 +131,28 @@ const Menu: React.FC = () => {
                     <div className="p-6 bg-white rounded-lg shadow-md mt-6 mr-6">
                         <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
                         <div className="bg-gray-100 p-4 rounded-lg">
-                            <div className="flex items-center mb-2">
-                                <FaAddressCard className="mr-2 text-blue-600" />
-                                <span className="text-md font-semibold">Address</span>
-                            </div>
+                            {/* <div className="flex items-center mb-2">
+            <FaAddressCard className="mr-2 text-blue-600" />
+        </div> */}
                             <div className="flex items-center space-x-2">
                                 <FaEnvelope className="text-blue-600" />
-                                <span className="text-sm">
-                                    <a
-                                        href="mailto:i.alim0229@gmail.com"
-                                        className="hover:underline hover:text-blue-800"
-                                    >
-                                        i.alim0229@gmail.com
-                                    </a>
-                                </span>
+                                <span className="text-sm">Email: i.alim0229@gmail.com</span>
+                            </div>
+                            <div className="flex items-center space-x-2 mt-2">
+                                <FaMapMarkerAlt className="text-blue-600" />
+                                <span className="text-sm">Location: Senegal, Dakar</span>
                             </div>
                             <div className="flex items-center space-x-2 mt-2">
                                 <FaGithub className="text-blue-600" />
-                                <span className="text-sm">
-                                    <a
-                                        href="https://github.com/yourgithubusername"
-                                        className="hover:underline hover:text-blue-800"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        GitHub
-                                    </a>
-                                </span>
+                                <span className="text-sm"><a href="https://github.com/yourgithubusername">GitHub</a></span>
                             </div>
                             <div className="flex items-center space-x-2 mt-2">
                                 <FaLinkedin className="text-blue-600" />
-                                <span className="text-sm">
-                                    <a
-                                        href="https://www.linkedin.com/in/yourlinkedinusername"
-                                        className="hover:underline hover:text-blue-800"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        LinkedIn
-                                    </a>
-                                </span>
+                                <span className="text-sm"><a href="https://www.linkedin.com/in/yourlinkedinusername">LinkedIn</a></span>
                             </div>
                         </div>
                     </div>
+
 
 
 
