@@ -173,13 +173,13 @@ const Menu: React.FC = () => {
                             <div className="flex items-center space-x-2 mt-2">
                                 <FaGithub className="text-blue-600" />
                                 <span className="text-sm">
-                                    <a href="https://github.com/yourgithubusername">GitHub</a>
+                                    <a href="https://github.com/ialim0">GitHub</a>
                                 </span>
                             </div>
                             <div className="flex items-center space-x-2 mt-2">
                                 <FaLinkedin className="text-blue-600" />
                                 <span className="text-sm">
-                                    <a href="https://www.linkedin.com/in/yourlinkedinusername">
+                                    <a href="https://www.linkedin.com/in/ialim">
                                         LinkedIn
                                     </a>
                                 </span>
