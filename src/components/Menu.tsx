@@ -71,11 +71,10 @@ const Menu: React.FC = () => {
                         <li key={link}>
                             <Link href={`/${link}`} passHref>
                                 <span
-                                    className={`text-lg font-semibold transition-colors duration-300 ${
-                                        isActive(`/${link}`)
-                                            ? "text-blue-800 border-b-2 border-blue-800"
-                                            : "text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                                    }`}
+                                    className={`text-lg font-semibold transition-colors duration-300 ${isActive(`/${link}`)
+                                        ? "text-blue-800 border-b-2 border-blue-800"
+                                        : "text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                        }`}
                                 >
                                     {link.charAt(0).toUpperCase() + link.slice(1)}
                                 </span>
@@ -106,7 +105,7 @@ const Menu: React.FC = () => {
                     <div className="text-center">
                         <h2 className="text-2xl font-bold">Alimoudine IDRISSOU</h2>
                         <p className="text-sm">Full Stack Developer</p>
-                        <p className="text-sm mt-2"> 
+                        <p className="text-sm mt-2">
                             Building innovative solutions for the web and beyond.
                         </p>
                     </div>
@@ -134,10 +133,8 @@ const Menu: React.FC = () => {
                                 Frameworks & Tools
                             </h4>
                             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li>React </li>
                                 <li>Next.js</li>
-                                <li>React Native</li>
-                                <li>Node.js</li>
-                                <li>MongoDB</li>
                                 <li>Git</li>
                             </ul>
                         </div>
@@ -155,7 +152,7 @@ const Menu: React.FC = () => {
                                 <li>English - Fluent</li>
                                 <li>French - Native</li>
                                 <li>Foodo - Native</li>
-                                <li>Fon - Native</li>
+                                <li>Fon - Fluent</li>
                                 <li>Dendi - Native</li>
                             </ul>
                         </div>
