@@ -34,7 +34,7 @@ const AboutPage: React.FC = () => {
               src="/images/alimoudine_footing.jpeg"
               alt="Alimoudine after a run"
               width={300}
-              height={200}
+              height={150}
               className="rounded-lg shadow-md"
               priority
             />
@@ -44,7 +44,7 @@ const AboutPage: React.FC = () => {
               src="/images/alimoudine_praying.jpeg"
               alt="Alimoudine praying"
               width={300}
-              height={200}
+              height={150}
               className="rounded-lg shadow-md"
               priority
             />
