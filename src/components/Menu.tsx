@@ -199,19 +199,19 @@ const Menu: React.FC = () => {
                                         <li className="flex items-center">
                                             <FaEnvelope className="mr-2 text-blue-600" />
                                             <a href="mailto:alimoudine.idrissou@example.com" className="text-sm text-gray-600">
-                                                alimoudine.idrissou@example.com
+                                                ialim
                                             </a>
                                         </li>
                                         <li className="flex items-center">
                                             <FaGithub className="mr-2 text-blue-600" />
-                                            <a href="https://github.com/alimoudine" className="text-sm text-gray-600" target="_blank" rel="noopener noreferrer">
-                                                github.com/alimoudine
+                                            <a href="https://github.com/ialim" className="text-sm text-gray-600" target="_blank" rel="noopener noreferrer">
+                                                ialim
                                             </a>
                                         </li>
                                         <li className="flex items-center">
                                             <FaLinkedin className="mr-2 text-blue-600" />
-                                            <a href="https://linkedin.com/in/alimoudine" className="text-sm text-gray-600" target="_blank" rel="noopener noreferrer">
-                                                linkedin.com/in/alimoudine
+                                            <a href="https://linkedin.com/in/ialim0" className="text-sm text-gray-600" target="_blank" rel="noopener noreferrer">
+                                                ialim
                                             </a>
                                         </li>
                                         <li className="flex items-center">
