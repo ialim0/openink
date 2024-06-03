@@ -40,7 +40,7 @@ const quotes: Quote[] = [
         author: "Sam Levenson",
     },
     {
-        quote: "The harder you work for something, the greater you&apos;ll feel when you achieve it.",
+        quote: "The harder you work for something, the greater you'll feel when you achieve it.",
         author: "Unknown",
     },
 ];
