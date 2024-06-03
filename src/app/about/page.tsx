@@ -28,7 +28,7 @@ const AboutPage: React.FC = () => {
         <p className="text-base leading-relaxed">
           When I'm not coding, I enjoy engaging in activities that help me relax and rejuvenate. Here are some glimpses of my life outside of coding:
         </p>
-        <div className="grid grid-cols-2 gap-4 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
           <div className="flex justify-center">
             <Image
               src="/images/alimoudine_footing.jpeg"
@@ -51,6 +51,7 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
       </div>
+
 
     </div>
   );
