@@ -107,8 +107,7 @@ const Menu: React.FC = () => {
                                 <path
                                     fillRule="evenodd"
                                     clipRule="evenodd"
-                                    d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm2 0v12h12V6H6z"
-                                />
+                                    d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm2 0v12h12V6H6z"></path>
                             )}
                         </svg>
                     </button>
@@ -220,6 +219,8 @@ const Menu: React.FC = () => {
                         </div>
                     </div>
                 </div>
+
+              
             </div>
         </div>
     );
