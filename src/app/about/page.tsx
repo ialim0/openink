@@ -26,30 +26,32 @@ const AboutPage: React.FC = () => {
       <div className="bg-white p-8 rounded-lg shadow-lg mt-6">
         <h3 className="text-2xl font-semibold mb-6">When I'm not coding</h3>
         <p className="text-base leading-relaxed">
-          When I'm not coding, you can find me exploring new hiking trails, reading science fiction novels, or trying out new recipes in the kitchen.
+          When I'm not coding, I enjoy engaging in activities that help me relax and rejuvenate. Here are some glimpses of my life outside of coding:
         </p>
         <div className="grid grid-cols-2 gap-4 mt-6">
           <div className="flex justify-center">
             <Image
               src="/images/alimoudine_footing.jpeg"
-              alt="Alimoudine after footing"
+              alt="Alimoudine after a run"
               width={300}
               height={200}
               className="rounded-lg shadow-md"
+              priority
             />
           </div>
           <div className="flex justify-center">
             <Image
-              src="/images/footing.jpg"
+              src="/images/alimoudine_praying.jpeg"
               alt="Alimoudine praying"
               width={300}
               height={200}
               className="rounded-lg shadow-md"
+              priority
             />
           </div>
         </div>
-
       </div>
+
     </div>
   );
 };
