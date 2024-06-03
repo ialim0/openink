@@ -92,7 +92,7 @@ const Menu: React.FC = () => {
                 </blockquote>
             </div>
 
-            <div className="flex-grow">
+            <div className="flex-grow overflow-y-auto">
                 <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md mt-6">
                     <div className="w-40 h-40 overflow-hidden rounded mb-4">
                         <Image
@@ -106,7 +106,7 @@ const Menu: React.FC = () => {
                     <div className="text-center">
                         <h2 className="text-2xl font-bold">Alimoudine IDRISSOU</h2>
                         <p className="text-sm">Full Stack Developer</p>
-                        <p className="text-sm mt-2">
+                        <p className="text-sm mt-2"> 
                             Building innovative solutions for the web and beyond.
                         </p>
                     </div>
