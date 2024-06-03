@@ -126,7 +126,7 @@ const Menu: React.FC = () => {
                 <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md mt-6">
                     <div className="w-40 h-40 overflow-hidden rounded mb-4">
                         <Image
-                            src="/images/profile.jpg"
+                            src="/images/profile.png"
                             alt="Profile Image"
                             width={200}
                             height={200}
