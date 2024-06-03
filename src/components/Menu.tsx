@@ -49,6 +49,7 @@ const quotes: Quote[] = [
 ];
 
 const Menu: React.FC = () => {
+    const [showMenu, setShowMenu] = useState(false);
     const [currentQuote, setCurrentQuote] = useState<Quote>(quotes[0]);
     const pathname = usePathname();
 
@@ -60,29 +61,61 @@ const Menu: React.FC = () => {
 
         return () => clearInterval(interval);
     }, []);
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
 
     const isActive = (path: string) => pathname === path;
 
     return (
         <div className="flex flex-col h-full shadow-lg bg-gray-50 text-gray-800 font-sans">
             <nav className="p-6 bg-white shadow-md">
-                <ul className="flex justify-center space-x-8">
-                    {["about", "blog"].map((link) => (
-                        <li key={link}>
-                            <Link href={`/${link}`} passHref>
-                                <span
-                                    className={`text-lg font-semibold transition-colors duration-300 ${isActive(`/${link}`)
-                                        ? "text-blue-800 border-b-2 border-blue-800"
-                                        : "text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                                        }`}
-                                >
-                                    {link.charAt(0).toUpperCase() + link.slice(1)}
-                                </span>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+                <div className="flex justify-between">
+                    <ul className="flex space-x-8">
+                        {["about", "blog"].map((link) => (
+                            <li key={link}>
+                                <Link href={`/${link}`} passHref>
+                                    <span
+                                        className={`text-lg font-semibold transition-colors duration-300 ${isActive(`/${link}`)
+                                            ? "text-blue-800 border-b-2 border-blue-800"
+                                            : "text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                            }`}
+                                    >
+                                        {link.charAt(0).toUpperCase() + link.slice(1)}
+                                    </span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    <button
+                        className="text-gray-600 hover:text-gray-800 focus:outline-none"
+                        onClick={toggleMenu}
+                    >
+                        <svg
+                            className="h-6 w-6 fill-current"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            {showMenu ? (
+                                <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M18.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L20.586 11H5a1 1 0 110-2h15.586l-2.293-2.293a1 1 0 010-1.414z"
+                                />
+                            ) : (
+                                <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm2 0v12h12V6H6z"
+                                />
+                            )}
+                        </svg>
+                    </button>
+                </div>
             </nav>
+
+            {showMenu && (
+                <>
 
             <div className="p-6 bg-white rounded-lg shadow-md mt-6">
                 <blockquote className="italic text-gray-600">
@@ -188,6 +221,8 @@ const Menu: React.FC = () => {
                     </div>
                 </div>
             </div>
+            </>
+             )}
         </div>
     );
 };
