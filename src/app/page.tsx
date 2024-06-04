@@ -4,7 +4,24 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
-const projects = [
+interface Project {
+  name: string;
+  description: string;
+  imageUrl: string;
+  tags: string[];
+  links: {
+    github: string;
+    demo: string;
+    live: string;
+  };
+}
+
+interface ProjectCardProps {
+  project: Project;
+  isActive: boolean;
+}
+
+const projects: Project[] = [
   {
     name: 'Decentralized Finance Platform',
     description: 'A cutting-edge DeFi solution built on Ethereum, offering smart contract-based lending, borrowing, and staking. Employs Solidity, React, and Web3.js to deliver a trustless, high-yield ecosystem.',
@@ -41,7 +58,7 @@ const projects = [
   // More projects...
 ];
 
-const ProjectCard = ({ project, isActive }) => (
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive }) => (
   <motion.div 
     className={`bg-white shadow-lg rounded-lg overflow-hidden transform ${isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-60'} transition-all duration-500`}
     initial={{ opacity: 0, y: 50 }}
@@ -83,7 +100,7 @@ const ProjectCard = ({ project, isActive }) => (
   </motion.div>
 );
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextProject = () => setCurrentIndex((currentIndex + 1) % projects.length);
