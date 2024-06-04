@@ -184,7 +184,7 @@ const Menu: React.FC = () => {
                                 <li>French - Native</li>
                                 <li>Foodo - Native</li>
                                 <li>Fon - Fluent</li>
-                                <li>Dendi - Fluent</li>
+                                <li>Dendi - Native</li>
                             </ul>
                         </div>
                     </div>
