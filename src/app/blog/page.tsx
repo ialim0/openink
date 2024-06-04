@@ -48,7 +48,12 @@ const posts = [
   // More posts...
 ];
 
-const categories = [...new Set(posts.map(post => post.category))];
+const categories: string[] = [];
+posts.forEach(post => {
+  if (!categories.includes(post.category)) {
+    categories.push(post.category);
+  }
+});
 
 const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
