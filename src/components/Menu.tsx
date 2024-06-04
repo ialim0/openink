@@ -74,11 +74,10 @@ const Menu: React.FC = () => {
                             <li key={link}>
                                 <Link href={`/${link}`} passHref>
                                     <span
-                                        className={`text-lg font-semibold transition-colors duration-300 ${
-                                            isActive(`/${link}`)
+                                        className={`text-lg font-semibold transition-colors duration-300 ${isActive(`/${link}`)
                                                 ? "text-blue-800 border-b-2 border-blue-800"
                                                 : "text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                                        }`}
+                                            }`}
                                     >
                                         {link.charAt(0).toUpperCase() + link.slice(1)}
                                     </span>
@@ -87,9 +86,8 @@ const Menu: React.FC = () => {
                         ))}
                     </ul>
                     <button
-                        className={`text-gray-600 hover:text-gray-800 focus:outline-none md:hidden ${
-                            showMenu ? "open" : ""
-                        }`}
+                        className={`text-gray-600 hover:text-gray-800 focus:outline-none md:hidden ${showMenu ? "open" : ""
+                            }`}
                         onClick={toggleMenu}
                     >
                         <svg
@@ -151,10 +149,11 @@ const Menu: React.FC = () => {
                             </h4>
                             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                                 <li>Golang</li>
+                                <li>Solidity</li>
                                 <li>Rust</li>
                                 <li>Python</li>
                                 <li>JavaScript</li>
-                                <li>Solidity</li>
+
                             </ul>
                         </div>
                         <div className="bg-gray-100 p-4 rounded-lg">
@@ -165,6 +164,7 @@ const Menu: React.FC = () => {
                             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                                 <li>React</li>
                                 <li>Next.js</li>
+                                <li>React Native</li>
                                 <li>Git</li>
                             </ul>
                         </div>
@@ -220,7 +220,7 @@ const Menu: React.FC = () => {
                     </div>
                 </div>
 
-              
+
             </div>
         </div>
     );
