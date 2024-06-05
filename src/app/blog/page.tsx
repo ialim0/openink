@@ -94,6 +94,7 @@ const BlogPage = () => {
                   alt={featuredPost.title}
                   layout="fill"
                   objectFit="cover"
+                  className="rounded-t-lg md:rounded-none md:rounded-l-lg"
                 />
               </div>
               <div className="p-8 md:w-1/2">
@@ -114,10 +115,10 @@ const BlogPage = () => {
 
         <div className="mb-12">
           <h3 className="text-xl font-semibold mb-4">Filter by Category:</h3>
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 overflow-x-auto pb-4">
             <button
               onClick={() => setSelectedCategory("All")}
-              className={`px-4 py-2 rounded-full text-sm font-medium ${
+              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${
                 selectedCategory === "All"
                   ? "bg-indigo-600 text-white"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -129,7 +130,7 @@ const BlogPage = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium ${
+                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${
                   selectedCategory === category
                     ? "bg-indigo-600 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -175,7 +176,7 @@ const BlogPage = () => {
                     // Navigate to the post page with the slug
                     window.location.href = `/blog/${post.slug}`;
                   }}
-                  className="bg-white text-indigo-700 px-6 py-3 rounded-lg font-bold hover:bg-indigo-100 transition-colors duration-200"
+                  className="bg-white text-indigo-700 px-6 py-3 rounded-lg font-bold hover:bg-indigo-100 transition-colors duration-200 mt-4"
                 >
                   Read
                 </button>

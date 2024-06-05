@@ -5,7 +5,6 @@ import ReactMarkdown from "react-markdown";
 import { readFileSync } from "fs";
 import { join } from "path";
 
-// data/posts.ts
 const posts = [
   {
     id: 1,
@@ -19,7 +18,33 @@ const posts = [
     slug: "mastering-react-hooks",
     contentFilePath: "content/posts/mastering-react-hooks.md",
   },
-  // ... other posts
+  {
+    id: 2,
+    title: "Blockchain Beyond Crypto",
+    excerpt:
+      "Explore innovative applications of blockchain technology in supply chain, healthcare, and digital identity.",
+    author: "Alimoudine IDRISSOU",
+    date: "May 18, 2024",
+    readTime: 12,
+    imageUrl: "/images/blockchain.jpg",
+    category: "Blockchain",
+    slug: "blockchain-beyond-crypto",
+    contentFilePath: "content/posts/mastering-react-hooks.md",
+
+  },
+  {
+    id: 3,
+    title: "Next.js 14: A New Era",
+    excerpt:
+      "Uncover the groundbreaking features in Next.js 14 that are setting new standards for React frameworks.",
+    author: "Alimoudine IDRISSOU",
+    date: "April 30, 2024",
+    readTime: 6,
+    imageUrl: "/images/nextjs14.jpg",
+    category: "Next.js",
+    contentFilePath: "content/posts/mastering-react-hooks.md",
+
+  },
 ];
 
 const PostPage = ({ params }: { params: { slug: string } }) => {
