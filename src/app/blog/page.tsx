@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -94,7 +93,6 @@ const BlogPage = () => {
                   alt={featuredPost.title}
                   layout="fill"
                   objectFit="cover"
-                  className="rounded-t-lg md:rounded-none md:rounded-l-lg"
                 />
               </div>
               <div className="p-8 md:w-1/2">
@@ -105,9 +103,22 @@ const BlogPage = () => {
                   {featuredPost.title}
                 </h2>
                 <p className="text-indigo-100 mb-6">{featuredPost.excerpt}</p>
-                <button className="bg-white text-indigo-700 px-6 py-3 rounded-lg font-bold hover:bg-indigo-100 transition-colors duration-200">
+                <button
+                  className="bg-white text-indigo-700 px-6 py-3 rounded-lg font-bold hover:bg-indigo-100 transition-colors duration-200"
+                  onClick={() => (window.location.href = `/blog/${featuredPost.slug}`)}
+                >
                   Read More
                 </button>
+                <div className="flex items-center mt-4">
+                  <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center mr-3">
+                    <span className="text-white text-sm font-bold">
+                      {featuredPost.author.charAt(0)}
+                    </span>
+                  </div>
+                  <span className="text-indigo-100 text-sm">
+                    By {featuredPost.author}
+                  </span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -115,10 +126,10 @@ const BlogPage = () => {
 
         <div className="mb-12">
           <h3 className="text-xl font-semibold mb-4">Filter by Category:</h3>
-          <div className="flex space-x-4 overflow-x-auto pb-4">
+          <div className="flex space-x-4">
             <button
               onClick={() => setSelectedCategory("All")}
-              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
                 selectedCategory === "All"
                   ? "bg-indigo-600 text-white"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -130,7 +141,7 @@ const BlogPage = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${
+                className={`px-4 py-2 rounded-full text-sm font-medium ${
                   selectedCategory === category
                     ? "bg-indigo-600 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -151,36 +162,44 @@ const BlogPage = () => {
               transition={{ delay: index * 0.1 }}
               className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
             >
-              <div className="relative h-48 overflow-hidden rounded-t-lg">
-                <Image
-                  src={post.imageUrl}
-                  alt={post.title}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <div className="p-6">
-                <span className="inline-block bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-semibold mb-3">
-                  {post.category}
-                </span>
-                <h2 className="text-xl font-bold mb-3 text-gray-800">
-                  {post.title}
-                </h2>
-                <p className="text-gray-600 mb-4 text-sm">{post.excerpt}</p>
-                <div className="flex justify-between items-center text-sm text-gray-500">
-                  <span>{post.date}</span>
-                  <span>{post.readTime} min read</span>
+              <button
+                className="w-full text-left"
+                onClick={() => {
+                  window.location.href = `/blog/${post.slug}`;
+                }}
+              >
+                <div className="relative h-48 overflow-hidden rounded-t-lg">
+                  <Image
+                    src={post.imageUrl}
+                    alt={post.title}
+                    layout="fill"
+                    objectFit="cover"
+                  />
                 </div>
-                <button
-                  onClick={() => {
-                    // Navigate to the post page with the slug
-                    window.location.href = `/blog/${post.slug}`;
-                  }}
-                  className="bg-white text-indigo-700 px-6 py-3 rounded-lg font-bold hover:bg-indigo-100 transition-colors duration-200 mt-4"
-                >
-                  Read
-                </button>
-              </div>
+                <div className="p-6">
+                  <span className="inline-block bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-semibold mb-3">
+                    {post.category}
+                  </span>
+                  <h2 className="text-xl font-bold mb-3 text-gray-800">
+                    {post.title}
+                  </h2>
+                  <p className="text-gray-600 mb-4 text-sm">{post.excerpt}</p>
+                  <div className="flex justify-between items-center text-sm text-gray-500">
+                    <span>{post.date}</span>
+                    <span>{post.readTime} min read</span>
+                  </div>
+                  <div className="flex items-center mt-4">
+                    <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center mr-3">
+                      <span className="text-white text-sm font-bold">
+                        {post.author.charAt(0)}
+                      </span>
+                    </div>
+                    <span className="text-gray-600 text-sm">
+                      By {post.author}
+                    </span>
+                  </div>
+                </div>
+              </button>
             </motion.div>
           ))}
         </div>
