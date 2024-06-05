@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 // data/posts.ts
-export const posts = [
+ const posts = [
   {
     id: 1,
     title: "Mastering React Hooks",
@@ -56,6 +56,7 @@ export const posts = [
   },
   // More posts...
 ];
+
 const PostPage = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
 
