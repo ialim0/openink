@@ -1,15 +1,15 @@
-"use client";
-
 import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import { readFileSync } from "fs";
+import { join } from "path";
+
 // data/posts.ts
- const posts = [
+const posts = [
   {
     id: 1,
     title: "Mastering React Hooks",
-    excerpt:
-      "Dive deep into React Hooks and learn how they revolutionize state management and side effects in functional components.",
     author: "Alimoudine IDRISSOU",
     date: "June 4, 2024",
     readTime: 8,
@@ -17,49 +17,13 @@ import Image from "next/image";
     category: "React",
     isFeatured: true,
     slug: "mastering-react-hooks",
+    contentFilePath: "content/posts/mastering-react-hooks.md",
   },
-  {
-    id: 2,
-    title: "Blockchain Beyond Crypto",
-    excerpt:
-      "Explore innovative applications of blockchain technology in supply chain, healthcare, and digital identity.",
-    author: "Alimoudine IDRISSOU",
-    date: "May 18, 2024",
-    readTime: 12,
-    imageUrl: "/images/blockchain.jpg",
-    category: "Blockchain",
-    slug: "blockchain-beyond-crypto",
-  },
-  {
-    id: 3,
-    title: "Next.js 14: A New Era",
-    excerpt:
-      "Uncover the groundbreaking features in Next.js 14 that are setting new standards for React frameworks.",
-    author: "Alimoudine IDRISSOU",
-    date: "April 30, 2024",
-    readTime: 6,
-    imageUrl: "/images/nextjs14.jpg",
-    category: "Next.js",
-    slug: "nextjs-14-a-new-era",
-  },
-  {
-    id: 4,
-    title: "AI in Code Review",
-    excerpt:
-      "Learn how AI is transforming code review processes, making them faster, more thorough, and insightful.",
-    author: "Alimoudine IDRISSOU",
-    date: "March 22, 2024",
-    readTime: 10,
-    imageUrl: "/images/ai-code-review.jpg",
-    category: "AI",
-    slug: "ai-in-code-review",
-  },
-  // More posts...
+  // ... other posts
 ];
 
 const PostPage = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
-
   const post = posts.find((p) => p.slug === slug);
 
   if (!post) {
@@ -69,6 +33,8 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
       </div>
     );
   }
+
+  const content = readFileSync(join(process.cwd(), post.contentFilePath), "utf8");
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -94,9 +60,7 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
           />
         </div>
         <div className="prose prose-lg max-w-none">
-          {/* Render the post content here */}
-          <p>{post.excerpt}</p>
-          {/* Add more paragraphs or sections as needed */}
+          <ReactMarkdown>{content}</ReactMarkdown>
         </div>
       </div>
     </div>
