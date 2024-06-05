@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
+
 
 const posts = [
   {
@@ -56,12 +58,17 @@ const posts = [
   // More posts...
 ];
 
+
+
+
 const categories: string[] = [];
 posts.forEach((post) => {
   if (!categories.includes(post.category)) {
     categories.push(post.category);
   }
 });
+const linkStyles = "text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300 flex justify-center items-center";
+
 
 const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -75,7 +82,11 @@ const BlogPage = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
+        <Link className={linkStyles} href="/" passHref>
+          Go Back to Home
+        </Link>
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+    
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl mb-6">
           Thoughts on Tech & Innovation
         </h1>
@@ -105,9 +116,11 @@ const BlogPage = () => {
                 <p className="text-indigo-100 mb-6">{featuredPost.excerpt}</p>
                 <button
                   className="bg-white text-indigo-700 px-6 py-3 rounded-lg font-bold hover:bg-indigo-100 transition-colors duration-200"
-                  onClick={() => (window.location.href = `/blog/${featuredPost.slug}`)}
                 >
+                                <Link href={`/blog/${featuredPost.slug}`} passHref>
+
                   Read More
+                  </Link>
                 </button>
                 <div className="flex items-center mt-4">
                   <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center mr-3">
@@ -162,12 +175,9 @@ const BlogPage = () => {
               transition={{ delay: index * 0.1 }}
               className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
             >
-              <button
-                className="w-full text-left"
-                onClick={() => {
-                  window.location.href = `/blog/${post.slug}`;
-                }}
-              >
+            
+                              <Link href={`/blog/${post.slug}`} passHref>
+
                 <div className="relative h-48 overflow-hidden rounded-t-lg">
                   <Image
                     src={post.imageUrl}
@@ -199,7 +209,7 @@ const BlogPage = () => {
                     </span>
                   </div>
                 </div>
-              </button>
+                </Link>
             </motion.div>
           ))}
         </div>

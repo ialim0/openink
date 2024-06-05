@@ -5,8 +5,7 @@ import Link from "next/link";
 const containerStyles = "bg-white p-8 rounded-lg shadow-lg mt-6";
 const textStyles = "text-base mb-4 leading-relaxed";
 const headingStyles = "text-2xl font-semibold mb-6";
-const linkStyles = " text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300 flex justify-center items-center";
-
+const linkStyles = "text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300 flex justify-center items-center";
 
 const AboutPage: React.FC = () => {
   return (
