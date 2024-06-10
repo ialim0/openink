@@ -5,14 +5,14 @@ import Link from "next/link";
 const containerStyles = "bg-white p-8 rounded-lg shadow-lg mt-6";
 const textStyles = "text-base mb-4 leading-relaxed";
 const headingStyles = "text-2xl font-semibold mb-6";
-const linkStyles = "text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300 flex justify-center items-center";
+const linkStyles = "text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300 flex justify-center items-center mb-6";
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="px-6 py-8">
+    <div className="px-6 py-8 bg-gray-50 min-h-screen">
       <div className={containerStyles}>
-        <Link className={linkStyles} href="/" passHref>
-          Go Back to Home
+        <Link href="/" passHref>
+          <span className={linkStyles}>Go Back to Home</span>
         </Link>
         <h3 className={headingStyles}>Bio</h3>
         <p className={textStyles}>
@@ -71,7 +71,7 @@ const AboutPage: React.FC = () => {
       </div>
       <div className={containerStyles}>
         <h3 className={headingStyles}>When I'm not coding</h3>
-        <p className="text-base leading-relaxed">
+        <p className={textStyles}>
           When I'm not coding, I enjoy engaging in activities that help me relax
           and rejuvenate. Here are some glimpses of my life outside of coding:
         </p>

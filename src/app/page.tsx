@@ -7,7 +7,7 @@ import { ChevronLeftIcon, ChevronRightIcon, XIcon } from '@heroicons/react/solid
 interface Project {
   name: string;
   description: string;
-  imageUrl: string;
+  imageUrls: string[];
   tags: string[];
   links: {
     github: string;
@@ -26,7 +26,7 @@ const projects: Project[] = [
   {
     name: 'Decentralized Finance Platform',
     description: 'A cutting-edge DeFi solution built on Ethereum, offering smart contract-based lending, borrowing, and staking. Employs Solidity, React, and Web3.js to deliver a trustless, high-yield ecosystem.',
-    imageUrl: "/images/defi-project.jpg",
+    imageUrls: ["/images/defi-project1.jpg", "/images/defi-project2.jpg", "/images/defi-project3.jpg"],
     tags: ['Solidity', 'React', 'Web3.js', 'Ethereum'],
     links: {
       github: 'https://github.com/alimouid/defi-platform',
@@ -37,7 +37,7 @@ const projects: Project[] = [
   {
     name: 'AI-Driven Data Analytics',
     description: 'An intelligent data analytics tool that uses machine learning to derive actionable insights from vast datasets. Built with Python, TensorFlow, and React, it offers predictive modeling and interactive visualizations.',
-    imageUrl: '/images/ai-analytics.jpg',
+    imageUrls: ['/images/ai-analytics1.jpg', '/images/ai-analytics2.jpg'],
     tags: ['Python', 'TensorFlow', 'React', 'D3.js'],
     links: {
       github: 'https://github.com/alimouid/ai-analytics',
@@ -48,7 +48,7 @@ const projects: Project[] = [
   {
     name: 'Blockchain Supply Chain',
     description: 'A transparent supply chain solution leveraging blockchain for end-to-end tracking. Uses Hyperledger Fabric, Node.js, and Vue.js to ensure product authenticity and streamline logistics.',
-    imageUrl: '/images/blockchain-supply.jpg',
+    imageUrls: ['/images/blockchain-supply1.jpg', '/images/blockchain-supply2.jpg'],
     tags: ['Hyperledger', 'Node.js', 'Vue.js', 'Docker'],
     links: {
       github: 'https://github.com/alimouid/blockchain-supply',
@@ -69,7 +69,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive, onClick })
   >
     <div className="relative h-96 overflow-hidden">
       <Image
-        src={project.imageUrl}
+        src={project.imageUrls[0]}
         alt={project.name}
         layout="fill"
         objectFit="cover"
@@ -85,69 +85,75 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive, onClick })
           <span key={tag} className="px-3 py-1 text-sm bg-indigo-100 text-indigo-800 rounded-full">{tag}</span>
         ))}
       </div>
-      <div className="flex justify-between space-x-4">
-        {Object.entries(project.links).map(([type, url]) => (
-          <a
-            key={type}
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg shadow-md transition duration-300 text-center"
-          >
-            {type === 'github' ? 'Code' : type.charAt(0).toUpperCase() + type.slice(1)}
-          </a>
-        ))}
-      </div>
     </div>
   </motion.div>
 );
 
-const ProjectModal: React.FC<{ project: Project, onClose: () => void }> = ({ project, onClose }) => (
-  <motion.div
-    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-  >
+const ProjectModal: React.FC<{ project: Project, onClose: () => void }> = ({ project, onClose }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const nextImage = () => setCurrentImageIndex((currentImageIndex + 1) % project.imageUrls.length);
+  const prevImage = () => setCurrentImageIndex((currentImageIndex - 1 + project.imageUrls.length) % project.imageUrls.length);
+
+  return (
     <motion.div
-      className="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full relative"
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: 50, opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
-      <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-        <XIcon className="w-6 h-6" />
-      </button>
-      <h2 className="text-2xl font-bold mb-4">{project.name}</h2>
-      <Image
-        src={project.imageUrl}
-        alt={project.name}
-        width={600}
-        height={400}
-        className="rounded-lg mb-4"
-      />
-      <p className="text-gray-700 mb-4">{project.description}</p>
-      <div className="mb-4 flex flex-wrap gap-2">
-        {project.tags.map(tag => (
-          <span key={tag} className="px-3 py-1 text-sm bg-indigo-100 text-indigo-800 rounded-full">{tag}</span>
-        ))}
-      </div>
-      <div className="flex justify-between space-x-4">
-        {Object.entries(project.links).map(([type, url]) => (
-          <a
-            key={type}
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg shadow-md transition duration-300 text-center"
-          >
-            {type === 'github' ? 'Code' : type.charAt(0).toUpperCase() + type.slice(1)}
-          </a>
-        ))}
-      </div>
+      <motion.div
+        className="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full relative"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 50, opacity: 0 }}
+      >
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+          <XIcon className="w-6 h-6" />
+        </button>
+        <h2 className="text-2xl font-bold mb-4">{project.name}</h2>
+        <div className="relative h-64 mb-4">
+          <Image
+            src={project.imageUrls[currentImageIndex]}
+            alt={`${project.name} screenshot`}
+            layout="fill"
+            objectFit="contain"
+            className="rounded-lg"
+          />
+          {project.imageUrls.length > 1 && (
+            <>
+              <button onClick={prevImage} className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg text-indigo-600 hover:text-indigo-800 transition-colors duration-300">
+                <ChevronLeftIcon className="w-6 h-6" />
+              </button>
+              <button onClick={nextImage} className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg text-indigo-600 hover:text-indigo-800 transition-colors duration-300">
+                <ChevronRightIcon className="w-6 h-6" />
+              </button>
+            </>
+          )}
+        </div>
+        <p className="text-gray-700 mb-4">{project.description}</p>
+        <div className="mb-4 flex flex-wrap gap-2">
+          {project.tags.map(tag => (
+            <span key={tag} className="px-3 py-1 text-sm bg-indigo-100 text-indigo-800 rounded-full">{tag}</span>
+          ))}
+        </div>
+        <div className="flex justify-between space-x-4">
+          {Object.entries(project.links).map(([type, url]) => (
+            <a
+              key={type}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg shadow-md transition duration-300 text-center"
+            >
+              {type === 'github' ? 'Code' : type.charAt(0).toUpperCase() + type.slice(1)}
+            </a>
+          ))}
+        </div>
+      </motion.div>
     </motion.div>
-  </motion.div>
-);
+  );
+};
 
 const HomePage: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
