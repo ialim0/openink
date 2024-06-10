@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
+import { ChevronLeftIcon, ChevronRightIcon, XIcon } from '@heroicons/react/solid';
 
 interface Project {
   name: string;
@@ -19,6 +19,7 @@ interface Project {
 interface ProjectCardProps {
   project: Project;
   isActive: boolean;
+  onClick: () => void;
 }
 
 const projects: Project[] = [
@@ -36,7 +37,7 @@ const projects: Project[] = [
   {
     name: 'AI-Driven Data Analytics',
     description: 'An intelligent data analytics tool that uses machine learning to derive actionable insights from vast datasets. Built with Python, TensorFlow, and React, it offers predictive modeling and interactive visualizations.',
-    imageUrl: '/path/to/ai-analytics.jpg',
+    imageUrl: '/images/ai-analytics.jpg',
     tags: ['Python', 'TensorFlow', 'React', 'D3.js'],
     links: {
       github: 'https://github.com/alimouid/ai-analytics',
@@ -47,7 +48,7 @@ const projects: Project[] = [
   {
     name: 'Blockchain Supply Chain',
     description: 'A transparent supply chain solution leveraging blockchain for end-to-end tracking. Uses Hyperledger Fabric, Node.js, and Vue.js to ensure product authenticity and streamline logistics.',
-    imageUrl: '/path/to/blockchain-supply.jpg',
+    imageUrl: '/images/blockchain-supply.jpg',
     tags: ['Hyperledger', 'Node.js', 'Vue.js', 'Docker'],
     links: {
       github: 'https://github.com/alimouid/blockchain-supply',
@@ -58,12 +59,13 @@ const projects: Project[] = [
   // More projects...
 ];
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive }) => (
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive, onClick }) => (
   <motion.div 
-    className={`bg-white shadow-lg rounded-lg overflow-hidden transform ${isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-60'} transition-all duration-500`}
+    className={`bg-white shadow-lg rounded-lg overflow-hidden transform ${isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-60'} transition-all duration-500 cursor-pointer`}
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -50 }}
+    onClick={onClick}
   >
     <div className="relative h-96 overflow-hidden">
       <Image
@@ -100,11 +102,62 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive }) => (
   </motion.div>
 );
 
+const ProjectModal: React.FC<{ project: Project, onClose: () => void }> = ({ project, onClose }) => (
+  <motion.div
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    <motion.div
+      className="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full relative"
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 50, opacity: 0 }}
+    >
+      <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <XIcon className="w-6 h-6" />
+      </button>
+      <h2 className="text-2xl font-bold mb-4">{project.name}</h2>
+      <Image
+        src={project.imageUrl}
+        alt={project.name}
+        width={600}
+        height={400}
+        className="rounded-lg mb-4"
+      />
+      <p className="text-gray-700 mb-4">{project.description}</p>
+      <div className="mb-4 flex flex-wrap gap-2">
+        {project.tags.map(tag => (
+          <span key={tag} className="px-3 py-1 text-sm bg-indigo-100 text-indigo-800 rounded-full">{tag}</span>
+        ))}
+      </div>
+      <div className="flex justify-between space-x-4">
+        {Object.entries(project.links).map(([type, url]) => (
+          <a
+            key={type}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg shadow-md transition duration-300 text-center"
+          >
+            {type === 'github' ? 'Code' : type.charAt(0).toUpperCase() + type.slice(1)}
+          </a>
+        ))}
+      </div>
+    </motion.div>
+  </motion.div>
+);
+
 const HomePage: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const nextProject = () => setCurrentIndex((currentIndex + 1) % projects.length);
   const prevProject = () => setCurrentIndex((currentIndex - 1 + projects.length) % projects.length);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   return (
     <div className="bg-gradient-to-br from-gray-50 to-indigo-100 min-h-screen">
@@ -134,7 +187,7 @@ const HomePage: React.FC = () => {
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
             >
-              <ProjectCard project={projects[currentIndex]} isActive={true} />
+              <ProjectCard project={projects[currentIndex]} isActive={true} onClick={openModal} />
             </motion.div>
           </AnimatePresence>
           
@@ -156,6 +209,15 @@ const HomePage: React.FC = () => {
           ))}
         </div>
       </div>
+      
+      <AnimatePresence>
+        {modalOpen && (
+          <ProjectModal 
+            project={projects[currentIndex]} 
+            onClose={closeModal} 
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
