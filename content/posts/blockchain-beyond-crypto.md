@@ -1,5 +1,4 @@
 
-<!-- ![Blockchain Beyond Crypto](/images/profile.jpg) -->
 
 # Blockchain Beyond Crypto
 
