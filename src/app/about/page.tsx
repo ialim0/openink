@@ -16,7 +16,7 @@ const AboutPage: React.FC = () => {
         </Link>
         <h3 className={headingStyles}>Bio</h3>
         <p className={textStyles}>
-          My journey began at a young age, when I discovered a deep fascination
+          My journey began  when I discovered a deep fascination
           with numbers and patterns. As a child, I would spend hours solving
           complex math problems, captivated by the elegance and logic of the
           discipline. This passion only grew stronger as I progressed through

@@ -60,7 +60,7 @@ const projects: Project[] = [
 ];
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive, onClick }) => (
-  <motion.div 
+  <motion.div
     className={`bg-white shadow-lg rounded-lg overflow-hidden transform ${isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-60'} transition-all duration-500 cursor-pointer`}
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive, onClick })
       <p className="text-gray-800 mb-6 leading-relaxed">{project.description}</p>
       <div className="mb-6 flex flex-wrap gap-2">
         {project.tags.map(tag => (
-          <span key={tag} className="px-3 py-1 text-sm bg-indigo-100 text-indigo-800 rounded-full">{tag}</span>
+          <span key={tag} className="px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-full">{tag}</span>
         ))}
       </div>
     </div>
@@ -122,10 +122,10 @@ const ProjectModal: React.FC<{ project: Project, onClose: () => void }> = ({ pro
           />
           {project.imageUrls.length > 1 && (
             <>
-              <button onClick={prevImage} className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg text-indigo-600 hover:text-indigo-800 transition-colors duration-300">
+              <button onClick={prevImage} className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg text-blue-600 hover:text-blue-800 transition-colors duration-300">
                 <ChevronLeftIcon className="w-6 h-6" />
               </button>
-              <button onClick={nextImage} className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg text-indigo-600 hover:text-indigo-800 transition-colors duration-300">
+              <button onClick={nextImage} className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg text-blue-600 hover:text-blue-800 transition-colors duration-300">
                 <ChevronRightIcon className="w-6 h-6" />
               </button>
             </>
@@ -134,7 +134,7 @@ const ProjectModal: React.FC<{ project: Project, onClose: () => void }> = ({ pro
         <p className="text-gray-700 mb-4">{project.description}</p>
         <div className="mb-4 flex flex-wrap gap-2">
           {project.tags.map(tag => (
-            <span key={tag} className="px-3 py-1 text-sm bg-indigo-100 text-indigo-800 rounded-full">{tag}</span>
+            <span key={tag} className="px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-full">{tag}</span>
           ))}
         </div>
         <div className="flex justify-between space-x-4">
@@ -144,7 +144,7 @@ const ProjectModal: React.FC<{ project: Project, onClose: () => void }> = ({ pro
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg shadow-md transition duration-300 text-center"
+              className="flex-1 py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-md transition duration-300 text-center"
             >
               {type === 'github' ? 'Code' : type.charAt(0).toUpperCase() + type.slice(1)}
             </a>
@@ -166,16 +166,15 @@ const HomePage: React.FC = () => {
   const closeModal = () => setModalOpen(false);
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-indigo-100 min-h-screen">
+    <div className="bg-gradient-to-br from-gray-50 to-blue-100 min-h-screen">
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-500 sm:text-6xl text-center mb-6"
+          className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-500 sm:text-6xl text-center mb-6"
         >
-          Crafting Digital Brilliance
-        </motion.h1>
-        <motion.p 
+          Welcome !        </motion.h1>
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -183,10 +182,10 @@ const HomePage: React.FC = () => {
         >
           I'm Alimoudine IDRISSOU, a visionary full-stack developer specializing in blockchain and AI. With a passion for decentralized systems and machine learning, I architect solutions that redefine industries.
         </motion.p>
-        
+
         <div className="mt-20 relative">
           <AnimatePresence initial={false}>
-            <motion.div 
+            <motion.div
               key={currentIndex}
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
@@ -196,31 +195,31 @@ const HomePage: React.FC = () => {
               <ProjectCard project={projects[currentIndex]} isActive={true} onClick={openModal} />
             </motion.div>
           </AnimatePresence>
-          
-          <button onClick={prevProject} className="absolute top-1/2 -left-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg text-indigo-600 hover:text-indigo-800 transition-colors duration-300">
+
+          <button onClick={prevProject} className="absolute top-1/2 -left-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg text-blue-600 hover:text-blue-800 transition-colors duration-300">
             <ChevronLeftIcon className="w-8 h-8" />
           </button>
-          <button onClick={nextProject} className="absolute top-1/2 -right-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg text-indigo-600 hover:text-indigo-800 transition-colors duration-300">
+          <button onClick={nextProject} className="absolute top-1/2 -right-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg text-blue-600 hover:text-blue-800 transition-colors duration-300">
             <ChevronRightIcon className="w-8 h-8" />
           </button>
         </div>
-        
+
         <div className="mt-12 flex justify-center space-x-4">
           {projects.map((_, idx) => (
-            <button 
-              key={idx} 
+            <button
+              key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`w-3 h-3 rounded-full ${idx === currentIndex ? 'bg-indigo-600' : 'bg-indigo-300'}`}
+              className={`w-3 h-3 rounded-full ${idx === currentIndex ? 'bg-blue-600' : 'bg-blue-300'}`}
             />
           ))}
         </div>
       </div>
-      
+
       <AnimatePresence>
         {modalOpen && (
-          <ProjectModal 
-            project={projects[currentIndex]} 
-            onClose={closeModal} 
+          <ProjectModal
+            project={projects[currentIndex]}
+            onClose={closeModal}
           />
         )}
       </AnimatePresence>
