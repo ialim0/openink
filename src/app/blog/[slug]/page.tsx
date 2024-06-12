@@ -1,8 +1,9 @@
-import React from "react";
-import { readFileSync, readdirSync } from "fs";
+import { readFileSync } from "fs";
 import { join } from "path";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+import { notFound } from "next/navigation";
+import { FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
 
 const postsDirectory = join(process.cwd(), "content/posts");
 
@@ -81,62 +82,77 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
   const post = posts.find((p) => p.slug === params.slug);
 
   if (!post) {
-    return (
-      <div className="bg-white min-h-screen flex items-center justify-center">
-        <h1 className="text-3xl font-bold text-gray-800">Post not found</h1>
-      </div>
-    );
+    notFound();
   }
 
   const content = readFileSync(join(postsDirectory, post.contentFilePath), "utf8");
 
   return (
-    <div className="bg-white min-h-screen">
-      <div className="max-w-4xl mx-auto py-12 px-6">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">{post.title}</h1>
+    <div className="bg-white min-h-screen py-12 px-4">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-gray-800 mb-6">{post.title}</h1>
         <div className="flex items-center mb-6">
-          <span className="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">
+          <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">
             {post.category}
           </span>
           <span className="text-gray-600 text-sm">{post.date}</span>
           <span className="text-gray-600 text-sm mx-1">•</span>
           <span className="text-gray-600 text-sm">{post.readTime} min read</span>
         </div>
-        <div className="relative h-96 mb-8 rounded-lg overflow-hidden shadow-lg">
+        <div className="relative h-96 mb-8 rounded-lg overflow-hidden shadow-md">
           <Image
             src={post.imageUrl}
             alt={post.title}
             layout="fill"
             objectFit="cover"
+            className="transition-transform duration-500 ease-in-out transform hover:scale-105"
           />
         </div>
-        <div className="prose prose-lg max-w-none text-gray-800">
+        <div className="prose prose-lg max-w-none text-gray-800 mb-8">
           <ReactMarkdown>{content}</ReactMarkdown>
         </div>
-        <div className="flex justify-center mt-8">
+        <div className="flex items-center space-x-4 bg-gray-50 p-6 rounded-lg shadow-sm animate-slide-in-left">
+          <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200">
+            <Image
+              src="/images/profile.png"
+              alt={post.author}
+              width={64}
+              height={64}
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-gray-800">{post.author}</p>
+            <p className="text-sm text-gray-600">Author</p>
+          </div>
+        </div>
+        <div className="flex justify-center mt-8 space-x-4">
           <a
             href={`https://www.linkedin.com/sharing/share/?url=https://example.com/${post.slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full mr-3"
+            className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:-translate-y-1"
           >
-            <i className="fab fa-linkedin mr-2"></i> Share on LinkedIn
+            <FaLinkedin />
+            <span>LinkedIn</span>
           </a>
           <a
             href={`https://twitter.com/intent/tweet?text=${post.title}&url=https://example.com/${post.slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-400 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-full mr-3"
+            className="flex items-center space-x-2 bg-blue-400 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:-translate-y-1"
           >
-            <i className="fab fa-twitter mr-2"></i> Share on Twitter
+            <FaTwitter />
+            <span>Twitter</span>
           </a>
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=https://example.com/${post.slug}&title=${post.title}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-800 hover:bg-blue-900 text-white font-semibold py-2 px-4 rounded-full"
+            className="flex items-center space-x-2 bg-blue-800 hover:bg-blue-900 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:-translate-y-1"
           >
-            <i className="fab fa-facebook mr-2"></i> Share on Facebook
+            <FaFacebook />
+            <span>Facebook</span>
           </a>
         </div>
       </div>
