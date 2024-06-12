@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
-import { posts } from "../data/page";
+import { posts } from "../data/postsData";
 import Link from "next/link";
 
 const postsDirectory = join(process.cwd(), "content/posts");
