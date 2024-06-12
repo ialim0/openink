@@ -1,11 +1,25 @@
 import React from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import ReactMarkdown from "react-markdown";
-import { readFileSync } from "fs";
+import { readFileSync, readdirSync } from "fs";
 import { join } from "path";
+import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
-const posts = [
+const postsDirectory = join(process.cwd(), "content/posts");
+
+interface Post {
+  id: number;
+  title: string;
+  author: string;
+  date: string;
+  readTime: number;
+  imageUrl: string;
+  category: string;
+  isFeatured?: boolean;
+  slug: string;
+  contentFilePath: string;
+}
+
+const posts: Post[] = [
   {
     id: 1,
     title: "Mastering React Hooks",
@@ -16,7 +30,7 @@ const posts = [
     category: "React",
     isFeatured: true,
     slug: "mastering-react-hooks",
-    contentFilePath: "content/posts/mastering-react-hooks.md",
+    contentFilePath: "mastering-react-hooks.md",
   },
   {
     id: 2,
@@ -27,7 +41,7 @@ const posts = [
     imageUrl: "/images/blockchain.jpg",
     category: "Blockchain",
     slug: "blockchain-beyond-crypto",
-    contentFilePath: "content/posts/blockchain-beyond-crypto.md",
+    contentFilePath: "blockchain-beyond-crypto.md",
   },
   {
     id: 3,
@@ -38,13 +52,33 @@ const posts = [
     imageUrl: "/images/nextjs14.jpg",
     category: "Next.js",
     slug: "nextjs-14-a-new-era",
-    contentFilePath: "content/posts/nextjs-14-a-new-era.md",
+    contentFilePath: "nextjs-14-a-new-era.md",
   },
 ];
 
+export async function generateStaticParams() {
+  return posts.map(post => ({
+    slug: post.slug,
+  }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = posts.find((p) => p.slug === params.slug);
+
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+    };
+  }
+
+  return {
+    title: post.title,
+    description: `${post.title} by ${post.author}`,
+  };
+}
+
 const PostPage = ({ params }: { params: { slug: string } }) => {
-  const { slug } = params;
-  const post = posts.find((p) => p.slug === slug);
+  const post = posts.find((p) => p.slug === params.slug);
 
   if (!post) {
     return (
@@ -54,7 +88,7 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
     );
   }
 
-  const content = readFileSync(join(process.cwd(), post.contentFilePath), "utf8");
+  const content = readFileSync(join(postsDirectory, post.contentFilePath), "utf8");
 
   return (
     <div className="bg-white min-h-screen">
