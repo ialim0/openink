@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { posts } from "./data/postsData";
+import { FaSearch } from "react-icons/fa";
 
 
 
@@ -38,15 +39,7 @@ const BlogPage = () => {
           Thoughts on Tech & Innovation
         </h1>
 
-        <div className="mb-8 flex justify-center">
-          <input
-            type="text"
-            placeholder="Search posts..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full max-w-md px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-indigo-600 outline-none"
-          />
-        </div>
+
 
         {featuredPosts.length > 0 && (
           <div className="mb-16">
@@ -54,9 +47,8 @@ const BlogPage = () => {
               Featured Posts
             </h2>
             <motion.div
-              className={`${
-                featuredPosts.length > 1 ? "flex overflow-x-scroll space-x-4" : ""
-              }`}
+              className={`${featuredPosts.length > 1 ? "flex overflow-x-scroll space-x-4" : ""
+                }`}
               drag={featuredPosts.length > 1 ? "x" : false}
               dragConstraints={featuredPosts.length > 1 ? { right: 0, left: -300 } : {}}
             >
@@ -66,11 +58,10 @@ const BlogPage = () => {
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
-                  className={`bg-indigo-700 text-white rounded-xl shadow-xl overflow-hidden ${
-                    featuredPosts.length > 1
-                      ? "min-w-[300px] sm:min-w-[400px] md:min-w-[500px]"
-                      : "w-full"
-                  }`}
+                  className={`bg-indigo-700 text-white rounded-xl shadow-xl overflow-hidden ${featuredPosts.length > 1
+                    ? "min-w-[300px] sm:min-w-[400px] md:min-w-[500px]"
+                    : "w-full"
+                    }`}
                 >
                   <div className="relative h-64">
                     <Image
@@ -107,17 +98,43 @@ const BlogPage = () => {
             </motion.div>
           </div>
         )}
+        <div className="mb-8 flex justify-center items-center">
+          <div className="relative w-full max-w-md group">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+              <FaSearch className="text-gray-500 transition-transform duration-300 transform group-hover:scale-125 group-hover:text-indigo-600" />
+            </span>
+            <input
+              type="text"
+              placeholder="Search posts..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-10 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-indigo-600 outline-none transition-shadow duration-300 shadow-md focus:shadow-lg bg-white group-hover:bg-indigo-50"
+            />
+            {searchQuery && (
+              <span className="absolute inset-y-0 right-0 flex items-center pr-3 transition-opacity duration-300 opacity-100">
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="text-gray-500 hover:text-gray-700 transition-colors duration-300"
+                >
+                  Clear
+                </button>
+              </span>
+            )}
+          </div>
+        </div>
+
+
+
 
         <div className="mb-12 text-center">
           <h3 className="text-xl font-semibold mb-4">Filter by Category:</h3>
           <div className="flex justify-center flex-wrap gap-4">
             <button
               onClick={() => setSelectedCategory("All")}
-              className={`px-4 py-2 rounded-full text-sm font-medium ${
-                selectedCategory === "All"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-              }`}
+              className={`px-4 py-2 rounded-full text-sm font-medium ${selectedCategory === "All"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
             >
               All
             </button>
@@ -125,11 +142,10 @@ const BlogPage = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium ${
-                  selectedCategory === category
-                    ? "bg-indigo-600 text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
+                className={`px-4 py-2 rounded-full text-sm font-medium ${selectedCategory === category
+                  ? "bg-indigo-600 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
               >
                 {category}
               </button>

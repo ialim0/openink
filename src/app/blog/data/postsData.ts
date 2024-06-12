@@ -1,4 +1,3 @@
-// data/postsData.ts
 export interface Post {
     id: number;
     title: string;
