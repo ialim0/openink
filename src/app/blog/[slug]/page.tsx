@@ -3,8 +3,8 @@ import { join } from "path";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { FaLinkedin, FaTwitter, FaFacebook, FaUserCircle } from "react-icons/fa";
-import { posts} from "../data/page";
+import { FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
+import { posts } from "../data/page";
 import Link from "next/link";
 
 const postsDirectory = join(process.cwd(), "content/posts");
@@ -68,28 +68,25 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
             href={`https://www.linkedin.com/sharing/share/?url=https://example.com/${post.slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 bg-[#0077b5] hover:bg-[#005582] text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:-translate-y-1"
+            className="bg-[#0077b5] hover:bg-[#005582] text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:-translate-y-1"
           >
-            <FaLinkedin />
-            <span>Share on LinkedIn</span>
+            <FaLinkedin size={24} />
           </a>
           <a
             href={`https://twitter.com/intent/tweet?text=${post.title}&url=https://example.com/${post.slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 bg-[#1DA1F2] hover:bg-[#0d95e8] text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:-translate-y-1"
+            className="bg-[#1DA1F2] hover:bg-[#0d95e8] text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:-translate-y-1"
           >
-            <FaTwitter />
-            <span>Share on Twitter</span>
+            <FaTwitter size={24} />
           </a>
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=https://example.com/${post.slug}&title=${post.title}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 bg-[#1877F2] hover:bg-[#145dbf] text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:-translate-y-1"
+            className="bg-[#1877F2] hover:bg-[#145dbf] text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:-translate-y-1"
           >
-            <FaFacebook />
-            <span>Share on Facebook</span>
+            <FaFacebook size={24} />
           </a>
         </div>
       </div>
