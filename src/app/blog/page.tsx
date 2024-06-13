@@ -63,6 +63,7 @@ const BlogPage = () => {
                       alt={post.title}
                       layout="fill"
                       objectFit="cover"
+                      className="transition-transform duration-500 hover:scale-105"
                     />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-75"></div>
@@ -70,10 +71,14 @@ const BlogPage = () => {
                     <span className="inline-block bg-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-3">
                       Featured
                     </span>
-                    <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-                    <p className="text-gray-200 mb-4">{post.excerpt}</p>
+                    <h2 className="text-xl font-bold mb-2 transition-transform duration-500 hover:translate-x-2">
+                      {post.title}
+                    </h2>
+                    <p className="text-gray-200 mb-4 transition-transform duration-500 hover:-translate-x-2">
+                      {post.excerpt}
+                    </p>
                     <Link href={`/blog/${post.slug}`}>
-                      <span className="inline-block bg-white text-indigo-700 px-4 py-2 rounded-lg font-semibold hover:bg-indigo-100 transition-colors duration-200">
+                      <span className="inline-block bg-white text-indigo-700 px-4 py-2 rounded-lg font-semibold hover:bg-indigo-100 transition-colors duration-200 transition-transform duration-500 hover:rotate-3">
                         Read More
                       </span>
                     </Link>
