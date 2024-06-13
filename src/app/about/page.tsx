@@ -2,18 +2,22 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const containerStyles = "bg-white p-8 rounded-lg shadow-lg mt-6";
+const containerStyles = "p-8 ";
 const textStyles = "text-base mb-4 leading-relaxed";
 const headingStyles = "text-2xl font-semibold mb-6";
-const linkStyles = "text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300 flex justify-center items-center mb-6";
+const linkStyles = "inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300";
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="px-6 py-8 bg-gray-50 min-h-screen">
-      <div className={containerStyles}>
-        <Link href="/" passHref>
-          <span className={linkStyles}>Go Back to Home</span>
+    <div className="px-6 py-8 bg-white-50 min-h-screen">
+        <Link href="/" className={linkStyles}>
+          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a1 1 0 00-.707 1.707l5.5 5.5H3a1 1 0 000 2h11.793l-5.5 5.5A1 1 0 1010 18l7-7-7-7A1 1 0 0010 2z" />
+          </svg>
+          Go Back to Home
         </Link>
+      <div className={containerStyles}>
+      
         <h3 className={headingStyles}>Bio</h3>
         <p className={textStyles}>
           My journey began  when I discovered a deep fascination

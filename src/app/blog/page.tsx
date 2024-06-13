@@ -14,9 +14,8 @@ posts.forEach((post) => {
     categories.push(post.category);
   }
 });
+const linkStyles = "inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300";
 
-const linkStyles =
-  "text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300 flex justify-center items-center mb-6";
 
 const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -32,16 +31,18 @@ const BlogPage = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+
         <Link href="/" className={linkStyles}>
+          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a1 1 0 00-.707 1.707l5.5 5.5H3a1 1 0 000 2h11.793l-5.5 5.5A1 1 0 1010 18l7-7-7-7A1 1 0 0010 2z" />
+          </svg>
           Go Back to Home
         </Link>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-6 text-center">
-          Thoughts on Tech & Innovation
-        </h1>
+
         {featuredPosts.length > 0 && (
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Featured Posts
+              Blog Posts
             </h2>
             <div
               className={`${featuredPosts.length > 1
@@ -125,8 +126,8 @@ const BlogPage = () => {
             <button
               onClick={() => setSelectedCategory("All")}
               className={`px-4 py-2 rounded-full text-sm font-medium ${selectedCategory === "All"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
             >
               All
@@ -136,8 +137,8 @@ const BlogPage = () => {
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium ${selectedCategory === category
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                   }`}
               >
                 {category}
