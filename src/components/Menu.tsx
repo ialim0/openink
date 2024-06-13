@@ -149,10 +149,11 @@ const Menu: React.FC = () => {
                             </h4>
                             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                                 <li>Golang</li>
-                                <li>Solidity</li>
-                                <li>Rust</li>
                                 <li>Python</li>
                                 <li>JavaScript</li>
+                                <li>Solidity</li>
+                                <li>Rust</li>
+                               
 
                             </ul>
                         </div>

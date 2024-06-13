@@ -45,16 +45,16 @@ const BlogPage = () => {
             </h2>
             <div
               className={`${featuredPosts.length > 1
-                  ? "flex overflow-x-auto space-x-4 snap-x snap-mandatory"
-                  : ""
+                ? "flex overflow-x-auto space-x-4 snap-x snap-mandatory"
+                : ""
                 }`}
             >
               {featuredPosts.map((post) => (
                 <div
                   key={post.id}
                   className={`relative text-white rounded-xl overflow-hidden ${featuredPosts.length > 1
-                      ? "min-w-[300px] sm:min-w-[400px] md:min-w-[500px] snap-start"
-                      : "w-full"
+                    ? "min-w-[300px] sm:min-w-[400px] md:min-w-[500px] snap-start"
+                    : "w-full"
                     }`}
                 >
                   <div className="relative h-48">
@@ -116,15 +116,17 @@ const BlogPage = () => {
 
 
 
-
         <div className="mb-12 text-center">
-          <h3 className="text-xl font-semibold mb-4">Filter by Category:</h3>
+          <h3 className="text-xl font-semibold mb-4 relative">
+            Filter by Category:
+            <span className="absolute -bottom-1 left-0 w-16 h-1 bg-blue-500"></span>
+          </h3>
           <div className="flex justify-center flex-wrap gap-4">
             <button
               onClick={() => setSelectedCategory("All")}
               className={`px-4 py-2 rounded-full text-sm font-medium ${selectedCategory === "All"
-                ? "bg-indigo-600 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
             >
               All
@@ -134,8 +136,8 @@ const BlogPage = () => {
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium ${selectedCategory === category
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                   }`}
               >
                 {category}
@@ -148,10 +150,10 @@ const BlogPage = () => {
           {filteredPosts.map((post, index) => (
             <motion.div
               key={post.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, type: "spring" }}
+              className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
             >
               <Link href={`/blog/${post.slug}`}>
                 <div>
@@ -161,30 +163,32 @@ const BlogPage = () => {
                       alt={post.title}
                       layout="fill"
                       objectFit="cover"
+                      className="transition-transform duration-500 hover:scale-105"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-500 opacity-50 transition-opacity duration-500 hover:opacity-75"></div>
                   </div>
                   <div className="p-6">
-                    <span className="inline-block bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-semibold mb-3">
+                    <span className="inline-block bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-semibold mb-3">
                       {post.category}
                     </span>
-                    <h2 className="text-xl font-bold mb-3 text-gray-800">
+                    <h2 className="text-xl font-bold mb-3 text-gray-800 transition-transform duration-500 hover:translate-x-2">
                       {post.title}
                     </h2>
-                    <p className="text-gray-600 mb-4 text-sm">{post.excerpt}</p>
+                    <p className="text-gray-600 mb-4 text-sm transition-transform duration-500 hover:-translate-x-2">
+                      {post.excerpt}
+                    </p>
                     <div className="flex justify-between items-center text-sm text-gray-500">
                       <span>{post.date}</span>
                       <span>{post.readTime} min read</span>
                     </div>
                     <div className="flex items-center mt-4 relative group">
-                      <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center mr-3">
+                      <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center mr-3 transition-transform duration-500 hover:rotate-12">
                         <span className="text-white text-sm font-bold">
                           {post.author.charAt(0)}
                         </span>
                       </div>
-                      <span className="text-gray-600 text-sm">
-                        By {post.author}
-                      </span>
-                      <div className="absolute left-0 -bottom-8 transform translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-opacity duration-300 bg-gray-900 text-white text-xs rounded py-1 px-2">
+                      <span className="text-gray-600 text-sm">By {post.author}</span>
+                      <div className="absolute -top-8 left-0 transform -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-opacity duration-300 bg-gray-900 text-white text-xs rounded py-1 px-2">
                         {post.author}
                       </div>
                     </div>
