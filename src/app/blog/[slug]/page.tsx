@@ -31,7 +31,7 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
         </Link>
         <h1 className="text-4xl font-extrabold text-gray-900 mb-6">{post.title}</h1>
         <div className="flex items-center mb-8 text-sm text-gray-600 space-x-3">
-          <span className="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">
+          <span className="bg-blue-200 text-blue-800 px-3 py-1 rounded-full font-semibold">
             {post.category}
           </span>
           <span>{post.date}</span>
