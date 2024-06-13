@@ -173,7 +173,7 @@ const HomePage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-500 sm:text-6xl text-center mb-6"
         >
-          Welcome !        </motion.h1>
+          Hi !        </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
