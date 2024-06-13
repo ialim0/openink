@@ -38,32 +38,26 @@ const BlogPage = () => {
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-6 text-center">
           Thoughts on Tech & Innovation
         </h1>
-
-
-
         {featuredPosts.length > 0 && (
           <div className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
               Featured Posts
             </h2>
-            <motion.div
-              className={`${featuredPosts.length > 1 ? "flex overflow-x-scroll space-x-4" : ""
+            <div
+              className={`${featuredPosts.length > 1
+                  ? "flex overflow-x-auto space-x-4 snap-x snap-mandatory"
+                  : ""
                 }`}
-              drag={featuredPosts.length > 1 ? "x" : false}
-              dragConstraints={featuredPosts.length > 1 ? { right: 0, left: -300 } : {}}
             >
               {featuredPosts.map((post) => (
-                <motion.div
+                <div
                   key={post.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className={`bg-indigo-700 text-white rounded-xl shadow-xl overflow-hidden ${featuredPosts.length > 1
-                    ? "min-w-[300px] sm:min-w-[400px] md:min-w-[500px]"
-                    : "w-full"
+                  className={`relative text-white rounded-xl overflow-hidden ${featuredPosts.length > 1
+                      ? "min-w-[300px] sm:min-w-[400px] md:min-w-[500px] snap-start"
+                      : "w-full"
                     }`}
                 >
-                  <div className="relative h-64">
+                  <div className="relative h-48">
                     <Image
                       src={post.imageUrl}
                       alt={post.title}
@@ -71,33 +65,25 @@ const BlogPage = () => {
                       objectFit="cover"
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-75"></div>
+                  <div className="absolute inset-x-0 bottom-0 p-6">
                     <span className="inline-block bg-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-3">
                       Featured
                     </span>
-                    <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
-                    <p className="text-indigo-100 mb-4">{post.excerpt}</p>
+                    <h2 className="text-xl font-bold mb-2">{post.title}</h2>
+                    <p className="text-gray-200 mb-4">{post.excerpt}</p>
                     <Link href={`/blog/${post.slug}`}>
-                      <span className="inline-block bg-white text-indigo-700 px-4 py-2 rounded-lg font-bold hover:bg-indigo-100 transition-colors duration-200">
+                      <span className="inline-block bg-white text-indigo-700 px-4 py-2 rounded-lg font-semibold hover:bg-indigo-100 transition-colors duration-200">
                         Read More
                       </span>
                     </Link>
-                    <div className="flex items-center mt-4">
-                      <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center mr-3">
-                        <span className="text-white text-sm font-bold">
-                          {post.author.charAt(0)}
-                        </span>
-                      </div>
-                      <span className="text-indigo-100 text-sm">
-                        By {post.author}
-                      </span>
-                    </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         )}
+
         <div className="mb-8 flex justify-center items-center">
           <div className="relative w-full max-w-md group">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
