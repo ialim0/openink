@@ -180,7 +180,7 @@ const HomePage: React.FC = () => {
           transition={{ delay: 0.2 }}
           className="mt-6 max-w-3xl text-center mx-auto text-xl text-gray-600 leading-relaxed"
         >
-          I'm Alimoudine IDRISSOU, a visionary full-stack developer specializing in blockchain and AI. With a passion for decentralized systems and machine learning, I architect solutions that redefine industries.
+          I'm Alimoudine IDRISSOU, a visionary full-stack developer specializing in blockchain and AI.
         </motion.p>
 
         <div className="mt-20 relative">
