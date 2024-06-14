@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { FaTimes,FaBars } from "react-icons/fa";
 import {
     FaEnvelope,
     FaCode,
@@ -90,24 +91,11 @@ const Menu: React.FC = () => {
                             }`}
                         onClick={toggleMenu}
                     >
-                        <svg
-                            className="h-6 w-6 fill-current"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            {showMenu ? (
-                                <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M18.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L20.586 11H5a1 1 0 110-2h15.586l-2.293-2.293a1 1 0 010-1.414z"
-                                />
-                            ) : (
-                                <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm2 0v12h12V6H6z"></path>
-                            )}
-                        </svg>
+                      {showMenu ? (
+                <FaTimes />
+            ) : (
+                <FaBars />
+            )}
                     </button>
                 </div>
             </nav>
