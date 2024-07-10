@@ -1,21 +1,9 @@
-'use client'
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import {
-    FaTimes,
-    FaBars,
-    FaEnvelope,
-    FaCodeBranch,
-    FaLanguage,
-    FaGithub,
-    FaLinkedin,
-    FaMapMarkerAlt,
-    FaBrain,
-    FaRobot,
-    FaMicrochip,
-} from "react-icons/fa";
+"use client"
+import React, { useEffect } from 'react';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import {  FaBrain, FaRobot, FaMicrochip, FaHome, FaBlog, FaUser, FaProjectDiagram, FaMoon, FaSun } from 'react-icons/fa';
+import { useDarkMode } from '@/context/DarkModeContext';
 
 interface Quote {
     quote: string;
@@ -46,8 +34,8 @@ const aiQuotes: Quote[] = [
 ];
 
 const Menu: React.FC = () => {
-    const [showMenu, setShowMenu] = useState(false);
-    const [currentQuote, setCurrentQuote] = useState<Quote>(aiQuotes[0]);
+    const { darkMode, toggleDarkMode } = useDarkMode();
+    const [currentQuote, setCurrentQuote] = React.useState<Quote>(aiQuotes[0]);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -59,194 +47,123 @@ const Menu: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const toggleMenu = () => {
-        setShowMenu(!showMenu);
-    };
-
-    const closeMenu = () => {
-        setShowMenu(false);
-    };
-
     const isActive = (path: string) => pathname === path;
 
     return (
-        <div className="flex flex-col h-full bg-gradient-to-br from-gray-900 to-blue-900 text-gray-100 font-sans">
-            <nav className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg">
-                <div className="flex justify-between items-center">
+        <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
+            <nav className={`sticky top-0 z-50 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-md`}>
+                <div className="container mx-auto px-6 py-3 flex justify-between items-center">
                     <div className="flex items-center space-x-2">
-                        <FaCodeBranch className="text-blue-400 text-2xl" />
+                        <FaBrain className="text-blue-500 text-2xl" />
                         <span className="text-xl font-bold">AI Innovator</span>
                     </div>
-
-                    <button
-                        className={`text-gray-300 hover:text-blue-400 focus:outline-none md:hidden ${showMenu ? "open" : ""
-                            }`}
-                        onClick={toggleMenu}
-                        aria-label={showMenu ? "Close menu" : "Open menu"}
-                    >
-                        {showMenu ? <FaTimes /> : <FaBars />}
-                    </button>
+                    <div className="flex items-center space-x-4">
+                        {['home', 'blog', 'about', 'projects'].map((link) => (
+                            <a
+                                key={link}
+                                href={link === 'home' ? '/' : `/${link}`}
+                                className={`text-sm font-medium ${isActive(`/${link}`) ? 'text-blue-500' : `${darkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'}`} transition-colors duration-300`}
+                            >
+                                {link === 'home' && <FaHome className="inline mr-1" />}
+                                {link === 'blog' && <FaBlog className="inline mr-1" />}
+                                {link === 'about' && <FaUser className="inline mr-1" />}
+                                {link === 'projects' && <FaProjectDiagram className="inline mr-1" />}
+                                {link.charAt(0).toUpperCase() + link.slice(1)}
+                            </a>
+                        ))}
+                        <button
+                            onClick={toggleDarkMode}
+                            className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-200 text-gray-700'} transition-colors duration-300`}
+                        >
+                            {darkMode ? <FaSun /> : <FaMoon />}
+                        </button>
+                    </div>
                 </div>
             </nav>
 
-            <div
-                className={`flex-grow overflow-y-auto ${showMenu ? "block" : "hidden"} md:block`}
-            >
-                <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg mt-6 mx-4">
-                    <ul className="flex flex-col space-y-4">
-                        {["about", "blog", "projects"].map((link) => (
-                            <li key={link}>
-                                <Link
-                                    className={`text-lg font-semibold transition-colors duration-300 ${isActive(`/${link}`)
-                                            ? "text-blue-400 border-b-2 border-blue-400"
-                                            : "text-gray-300 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                        }`}
-                                    href={`/${link}`}
-                                    passHref
-                                    onClick={closeMenu}
-                                >
-                                    {link.charAt(0).toUpperCase() + link.slice(1)}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-
-                <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg mt-6 mx-4">
-                    <div className="flex flex-col items-center">
-                        <div className="w-40 h-40 overflow-hidden rounded-full mb-4 border-4 border-blue-400">
+            <main className="container mx-auto px-6 py-8">
+                <section className="mb-12">
+                    <div className="flex flex-col md:flex-row items-center">
+                        <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 md:mb-0 md:mr-8">
                             <Image
                                 src="/images/profile.png"
-                                alt="Profile Image"
-                                width={200}
-                                height={200}
+                                alt="Alimoudine IDRISSOU"
+                                width={256}
+                                height={256}
                                 className="object-cover"
                             />
                         </div>
-                        <div className="text-center">
-                            <h2 className="text-2xl font-bold text-blue-400">
-                                Alimoudine IDRISSOU
-                            </h2>
-                            <p className="text-sm text-gray-300">
-                                AI & Machine Learning Specialist
-                            </p>
-                            <p className="text-sm mt-2 text-gray-400">
-                                Pioneering the future of AI and transforming industries
-                                through innovative solutions.
+                        <div className="text-center md:text-left">
+                            <h1 className="text-4xl font-bold mb-2">Alimoudine IDRISSOU</h1>
+                            <p className="text-xl text-blue-500 mb-4">AI & Machine Learning Specialist</p>
+                            <p className="text-lg max-w-2xl">
+                                Pioneering the future of AI and transforming industries through innovative solutions.
                             </p>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg mt-6 mx-4">
-                    <h3 className="text-lg font-semibold mb-4 text-blue-400">
-                        AI & Tech Expertise
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
-                            <h4 className="text-md font-semibold mb-2 flex items-center text-gray-200">
-                                <FaRobot className="mr-2 text-blue-400" />
+                <section className="mb-12">
+                    <h2 className="text-2xl font-bold mb-6">AI & Tech Expertise</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
+                            <h3 className="text-xl font-semibold mb-4 flex items-center">
+                                <FaRobot className="mr-2 text-blue-500" />
                                 AI & ML Technologies
-                            </h4>
-                            <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
-                                <li>Deep Learning</li>
-                                <li>Natural Language Processing</li>
-                                <li>Computer Vision</li>
-                                <li>Reinforcement Learning</li>
-                                <li>Neural Networks</li>
-                            </ul>
-                        </div>
-                        <div className="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
-                            <h4 className="text-md font-semibold mb-2 flex items-center text-gray-200">
-                                <FaMicrochip className="mr-2 text-blue-400" />
-                                Tools & Frameworks
-                            </h4>
-                            <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
-                                <li>TensorFlow</li>
-                                <li>PyTorch</li>
-                                <li>Scikit-learn</li>
-                                <li>OpenAI Gym</li>
-                                <li>Keras</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 mx-4">
-                    <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg">
-                        <h3 className="text-lg font-semibold mb-4 text-blue-400">
-                            Language Proficiency
-                        </h3>
-                        <div className="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
-                            <h4 className="text-md font-semibold mb-2 flex items-center text-gray-200">
-                                <FaLanguage className="mr-2 text-blue-400" />
-                                Languages
-                            </h4>
-                            <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
-                                <li>English - Fluent</li>
-                                <li>French - Native</li>
-                                <li>Foodo - Native</li>
-                                <li>Fon - Fluent</li>
-                                <li>Dendi - Native</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg">
-                        <h3 className="text-lg font-semibold mb-4 text-blue-400">Connect</h3>
-                        <div className="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
-                            <ul className="list-none space-y-2">
-                                <li className="flex items-center">
-                                    <FaEnvelope className="mr-2 text-blue-400" />
-                                    <a
-                                        href="mailto:alimoudine.idrissou@example.com"
-                                        className="hover:text-blue-400"
-                                    >
-                                        alimoudine.idrissou@example.com
-                                    </a>
-                                </li>
-                                <li className="flex items-center">
-                                    <FaMapMarkerAlt className="mr-2 text-blue-400" />
-                                    <span className="text-sm text-gray-300">
-                                        Paris, France
+                            </h3>
+                            <div className="flex flex-wrap gap-2">
+                                {['Deep Learning', 'NLP', 'Computer Vision', 'Reinforcement Learning', 'Neural Networks'].map((skill) => (
+                                    <span key={skill} className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm">
+                                        {skill}
                                     </span>
-                                </li>
-                                <li className="flex items-center">
-                                    <FaGithub className="mr-2 text-blue-400" />
-                                    <a
-                                        href="https://github.com/alimoudine"
-                                        className="hover:text-blue-400"
-                                    >
-                                        github.com/alimoudine
-                                    </a>
-                                </li>
-                                <li className="flex items-center">
-                                    <FaLinkedin className="mr-2 text-blue-400" />
-                                    <a
-                                        href="https://www.linkedin.com/in/alimoudineidrissou/"
-                                        className="hover:text-blue-400"
-                                    >
-                                        linkedin.com/in/alimoudineidrissou
-                                    </a>
-                                </li>
-                            </ul>
+                                ))}
+                            </div>
+                        </div>
+                        <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
+                            <h3 className="text-xl font-semibold mb-4 flex items-center">
+                                <FaMicrochip className="mr-2 text-blue-500" />
+                                Tools & Frameworks
+                            </h3>
+                            <div className="flex flex-wrap gap-2">
+                                {['TensorFlow', 'PyTorch', 'Scikit-learn', 'OpenAI Gym', 'Keras'].map((tool) => (
+                                    <span key={tool} className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm">
+                                        {tool}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg mt-6 mx-4">
-                    <h3 className="text-lg font-semibold mb-4 text-blue-400">AI Quote</h3>
-                    <div className="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
-                        <p className="text-sm text-gray-300 italic">
-                            "{currentQuote.quote}"
-                        </p>
-                        <p className="text-sm text-gray-400 mt-2">
-                            - {currentQuote.author}
-                        </p>
+                <section className="mb-12">
+                    <h2 className="text-2xl font-bold mb-6">Featured Projects</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {[1, 2, 3].map((project) => (
+                            <div key={project} className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg transition-transform duration-300 hover:scale-105`}>
+                                <h3 className="text-xl font-semibold mb-2">Project {project}</h3>
+                                <p className="text-sm mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" className="text-blue-500 hover:underline">Learn more</a>
+                            </div>
+                        ))}
                     </div>
+                </section>
+
+                <section className="mb-12">
+                    <h2 className="text-2xl font-bold mb-6">AI Quote of the Moment</h2>
+                    <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
+                        <p className="text-xl">{currentQuote.quote}</p>
+                        <p className="text-lg text-gray-500 mt-2">- {currentQuote.author}</p>
+                    </div>
+                </section>
+            </main>
+
+            <footer className={`bg-gray-200 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                <div className="container mx-auto px-6 py-3">
+                    <p className="text-sm text-center">
+                        &copy; {new Date().getFullYear()} Alimoudine IDRISSOU - All rights reserved.
+                    </p>
                 </div>
-            </div>
+            </footer>
         </div>
     );
 };

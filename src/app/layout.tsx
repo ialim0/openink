@@ -1,8 +1,9 @@
+// src/app/layout.tsx
 import React from 'react';
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Menu from '../components/Menu';
+import { LayoutWrapper } from '../components/LayoutWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -12,15 +13,10 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <html lang="en">
-    <body className={`${inter.className} h-screen flex flex-col md:flex-row bg-gray-50`}>
-      <aside className="w-full md:w-1/3 p-8 bg-white border-r border-gray-200 shadow-lg flex flex-col justify-between">
-        <Menu />
-      </aside>
-      <main className="flex-1 p-8 bg-gray-100 overflow-y-auto">
-        {children}
-      </main>
-    </body>
+  <html lang="en" className={inter.className}>
+    <LayoutWrapper>
+      {children}
+    </LayoutWrapper>
   </html>
 );
 
