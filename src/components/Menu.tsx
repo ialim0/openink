@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FaTimes,FaBars } from "react-icons/fa";
+import { FaTimes, FaBars } from "react-icons/fa";
 import {
     FaEnvelope,
     FaCode,
@@ -47,7 +47,7 @@ const quotes: Quote[] = [
 ];
 
 const Menu: React.FC = () => {
-    const [showMenu, setShowMenu] = useState(true);
+    const [showMenu, setShowMenu] = useState(false); // Set initial state to false
     const [currentQuote, setCurrentQuote] = useState<Quote>(quotes[0]);
     const pathname = usePathname();
 
@@ -91,16 +91,16 @@ const Menu: React.FC = () => {
                             }`}
                         onClick={toggleMenu}
                     >
-                      {showMenu ? (
-                <FaTimes />
-            ) : (
-                <FaBars />
-            )}
+                        {showMenu ? (
+                            <FaTimes />
+                        ) : (
+                            <FaBars />
+                        )}
                     </button>
                 </div>
             </nav>
 
-            <div className={`flex-grow overflow-y-auto md:block ${showMenu ? 'block' : 'hidden'} md:block`}>
+            <div className={`flex-grow overflow-y-auto ${showMenu ? 'block' : 'hidden'} md:block`}>
                 <div className="p-6 bg-white rounded-lg shadow-md mt-6">
                     <blockquote className="italic text-gray-600">
                         &ldquo;{currentQuote.quote}&rdquo;
@@ -141,8 +141,6 @@ const Menu: React.FC = () => {
                                 <li>JavaScript</li>
                                 <li>Solidity</li>
                                 <li>Rust</li>
-                               
-
                             </ul>
                         </div>
                         <div className="bg-gray-100 p-4 rounded-lg">
@@ -208,8 +206,6 @@ const Menu: React.FC = () => {
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     );
