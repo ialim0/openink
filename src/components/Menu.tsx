@@ -3,7 +3,19 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FaTimes, FaBars, FaEnvelope, FaCode, FaTools, FaLanguage, FaGithub, FaLinkedin, FaMapMarkerAlt, FaBrain, FaRobot, FaMicrochip } from "react-icons/fa";
+import {
+    FaTimes,
+    FaBars,
+    FaEnvelope,
+    FaCodeBranch,
+    FaLanguage,
+    FaGithub,
+    FaLinkedin,
+    FaMapMarkerAlt,
+    FaBrain,
+    FaRobot,
+    FaMicrochip,
+} from "react-icons/fa";
 
 interface Quote {
     quote: string;
@@ -51,6 +63,10 @@ const Menu: React.FC = () => {
         setShowMenu(!showMenu);
     };
 
+    const closeMenu = () => {
+        setShowMenu(false);
+    };
+
     const isActive = (path: string) => pathname === path;
 
     return (
@@ -58,25 +74,13 @@ const Menu: React.FC = () => {
             <nav className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-2">
-                        <FaBrain className="text-blue-400 text-2xl" />
+                        <FaCodeBranch className="text-blue-400 text-2xl" />
                         <span className="text-xl font-bold">AI Innovator</span>
                     </div>
-                    <ul className="hidden md:flex space-x-8">
-                        {["about", "blog", "projects"].map((link) => (
-                            <li key={link}>
-                                <Link     className={`text-lg font-semibold transition-colors duration-300 ${
-                                            isActive(`/${link}`)
-                                                ? "text-blue-400 border-b-2 border-blue-400"
-                                                : "text-gray-300 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                        }`} href={`/${link}`} passHref>
-                                
-                                        {link.charAt(0).toUpperCase() + link.slice(1)}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+
                     <button
-                        className={`text-gray-300 hover:text-blue-400 focus:outline-none md:hidden ${showMenu ? "open" : ""}`}
+                        className={`text-gray-300 hover:text-blue-400 focus:outline-none md:hidden ${showMenu ? "open" : ""
+                            }`}
                         onClick={toggleMenu}
                         aria-label={showMenu ? "Close menu" : "Open menu"}
                     >
@@ -85,35 +89,60 @@ const Menu: React.FC = () => {
                 </div>
             </nav>
 
-            <div className={`flex-grow overflow-y-auto ${showMenu ? 'block' : 'hidden'} md:block`}>
+            <div
+                className={`flex-grow overflow-y-auto ${showMenu ? "block" : "hidden"} md:block`}
+            >
                 <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg mt-6 mx-4">
-                    <blockquote className="italic text-blue-300">
-                        &ldquo;{currentQuote.quote}&rdquo;
-                        <span className="ml-2 font-semibold text-gray-300">- {currentQuote.author}</span>
-                    </blockquote>
+                    <ul className="flex flex-col space-y-4">
+                        {["about", "blog", "projects"].map((link) => (
+                            <li key={link}>
+                                <Link
+                                    className={`text-lg font-semibold transition-colors duration-300 ${isActive(`/${link}`)
+                                            ? "text-blue-400 border-b-2 border-blue-400"
+                                            : "text-gray-300 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        }`}
+                                    href={`/${link}`}
+                                    passHref
+                                    onClick={closeMenu}
+                                >
+                                    {link.charAt(0).toUpperCase() + link.slice(1)}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
-                <div className="flex flex-col items-center p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg mt-6 mx-4">
-                    <div className="w-40 h-40 overflow-hidden rounded-full mb-4 border-4 border-blue-400">
-                        <Image
-                            src="/images/profile.png"
-                            alt="Profile Image"
-                            width={200}
-                            height={200}
-                            className="object-cover"
-                        />
-                    </div>
-                    <div className="text-center">
-                        <h2 className="text-2xl font-bold text-blue-400">Alimoudine IDRISSOU</h2>
-                        <p className="text-sm text-gray-300">AI & Machine Learning Specialist</p>
-                        <p className="text-sm mt-2 text-gray-400">
-                            Pioneering the future of AI and transforming industries through innovative solutions.
-                        </p>
+
+                <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg mt-6 mx-4">
+                    <div className="flex flex-col items-center">
+                        <div className="w-40 h-40 overflow-hidden rounded-full mb-4 border-4 border-blue-400">
+                            <Image
+                                src="/images/profile.png"
+                                alt="Profile Image"
+                                width={200}
+                                height={200}
+                                className="object-cover"
+                            />
+                        </div>
+                        <div className="text-center">
+                            <h2 className="text-2xl font-bold text-blue-400">
+                                Alimoudine IDRISSOU
+                            </h2>
+                            <p className="text-sm text-gray-300">
+                                AI & Machine Learning Specialist
+                            </p>
+                            <p className="text-sm mt-2 text-gray-400">
+                                Pioneering the future of AI and transforming industries
+                                through innovative solutions.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
                 <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg mt-6 mx-4">
-                    <h3 className="text-lg font-semibold mb-4 text-blue-400">AI & Tech Expertise</h3>
+                    <h3 className="text-lg font-semibold mb-4 text-blue-400">
+                        AI & Tech Expertise
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
                             <h4 className="text-md font-semibold mb-2 flex items-center text-gray-200">
@@ -146,7 +175,9 @@ const Menu: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 mx-4">
                     <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg">
-                        <h3 className="text-lg font-semibold mb-4 text-blue-400">Language Proficiency</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-blue-400">
+                            Language Proficiency
+                        </h3>
                         <div className="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
                             <h4 className="text-md font-semibold mb-2 flex items-center text-gray-200">
                                 <FaLanguage className="mr-2 text-blue-400" />
@@ -168,28 +199,51 @@ const Menu: React.FC = () => {
                             <ul className="list-none space-y-2">
                                 <li className="flex items-center">
                                     <FaEnvelope className="mr-2 text-blue-400" />
-                                    <a href="mailto:alimoudine.idrissou@example.com" className="text-sm text-gray-300 hover:text-blue-400">
+                                    <a
+                                        href="mailto:alimoudine.idrissou@example.com"
+                                        className="hover:text-blue-400"
+                                    >
                                         alimoudine.idrissou@example.com
                                     </a>
                                 </li>
                                 <li className="flex items-center">
+                                    <FaMapMarkerAlt className="mr-2 text-blue-400" />
+                                    <span className="text-sm text-gray-300">
+                                        Paris, France
+                                    </span>
+                                </li>
+                                <li className="flex items-center">
                                     <FaGithub className="mr-2 text-blue-400" />
-                                    <a href="https://github.com/ialim" className="text-sm text-gray-300 hover:text-blue-400" target="_blank" rel="noopener noreferrer">
-                                        github.com/ialim
+                                    <a
+                                        href="https://github.com/alimoudine"
+                                        className="hover:text-blue-400"
+                                    >
+                                        github.com/alimoudine
                                     </a>
                                 </li>
                                 <li className="flex items-center">
                                     <FaLinkedin className="mr-2 text-blue-400" />
-                                    <a href="https://linkedin.com/in/ialim0" className="text-sm text-gray-300 hover:text-blue-400" target="_blank" rel="noopener noreferrer">
-                                        linkedin.com/in/ialim0
+                                    <a
+                                        href="https://www.linkedin.com/in/alimoudineidrissou/"
+                                        className="hover:text-blue-400"
+                                    >
+                                        linkedin.com/in/alimoudineidrissou
                                     </a>
-                                </li>
-                                <li className="flex items-center">
-                                    <FaMapMarkerAlt className="mr-2 text-blue-400" />
-                                    <span className="text-sm text-gray-300">Senegal, Dakar</span>
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+
+                <div className="p-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg mt-6 mx-4">
+                    <h3 className="text-lg font-semibold mb-4 text-blue-400">AI Quote</h3>
+                    <div className="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                        <p className="text-sm text-gray-300 italic">
+                            "{currentQuote.quote}"
+                        </p>
+                        <p className="text-sm text-gray-400 mt-2">
+                            - {currentQuote.author}
+                        </p>
                     </div>
                 </div>
             </div>
