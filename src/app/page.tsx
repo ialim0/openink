@@ -19,27 +19,27 @@ const HomePage: React.FC = () => {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
-      <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:py-32 lg:px-8">
+      <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:py-20 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center"
         >
-          <h1 className={`text-5xl font-extrabold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+          <h1 className={`text-3xl sm:text-5xl font-extrabold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>
             Hi, I'm Alimoudine IDRISSOU
           </h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className={`mt-6 max-w-3xl mx-auto text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
+            className={`mt-4 sm:mt-6 max-w-md mx-auto text-base sm:text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
           >
             A visionary full-stack developer specializing in blockchain and AI, crafting innovative solutions for tomorrow's challenges.
           </motion.p>
         </motion.div>
 
-        <div className="mt-24 relative">
+        <div className="mt-12 sm:mt-16 relative">
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={currentIndex}
@@ -57,32 +57,32 @@ const HomePage: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={prevProject}
-            className={`absolute top-1/2 -left-16 transform -translate-y-1/2 p-3 rounded-full shadow-lg 
+            className={`absolute top-1/2 -left-10 sm:-left-16 transform -translate-y-1/2 p-3 rounded-full shadow-lg 
             ${darkMode ? 'bg-gray-800 text-blue-400 hover:text-blue-300' : 'bg-white text-blue-600 hover:text-blue-800'} 
             transition-colors duration-300`}
           >
-            <ChevronLeftIcon className="w-8 h-8" />
+            <ChevronLeftIcon className="w-6 sm:w-8 h-6 sm:h-8" />
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={nextProject}
-            className={`absolute top-1/2 -right-16 transform -translate-y-1/2 p-3 rounded-full shadow-lg 
+            className={`absolute top-1/2 -right-10 sm:-right-16 transform -translate-y-1/2 p-3 rounded-full shadow-lg 
             ${darkMode ? 'bg-gray-800 text-blue-400 hover:text-blue-300' : 'bg-white text-blue-600 hover:text-blue-800'} 
             transition-colors duration-300`}
           >
-            <ChevronRightIcon className="w-8 h-8" />
+            <ChevronRightIcon className="w-6 sm:w-8 h-6 sm:h-8" />
           </motion.button>
         </div>
 
-        <div className="mt-12 flex justify-center space-x-4">
+        <div className="mt-8 sm:mt-12 flex justify-center space-x-2 sm:space-x-4">
           {projects.map((_, idx) => (
             <motion.button
               key={idx}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.8 }}
               onClick={() => setCurrentIndex(idx)}
-              className={`w-3 h-3 rounded-full ${
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
                 idx === currentIndex 
                   ? (darkMode ? 'bg-blue-400' : 'bg-blue-600') 
                   : (darkMode ? 'bg-blue-700' : 'bg-blue-300')

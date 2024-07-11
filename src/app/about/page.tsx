@@ -1,23 +1,41 @@
+
+"use client"
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
-
-const containerStyles = "max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-md";
-const textStyles = "text-lg mb-4 leading-relaxed text-gray-700";
-const headingStyles = "text-3xl font-bold mb-6 text-gray-900";
-const subheadingStyles = "text-xl font-semibold mb-4 text-gray-800";
-const linkStyles = "inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300";
-const imageContainerStyles = "flex justify-center items-center mb-4";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const AboutPage: React.FC = () => {
+  const { darkMode } = useDarkMode();
+
+  const containerStyles = `max-w-4xl mx-auto p-8 rounded-lg shadow-md ${
+    darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"
+  }`;
+  const textStyles = `text-lg mb-4 leading-relaxed ${
+    darkMode ? "text-gray-300" : "text-gray-700"
+  }`;
+  const headingStyles = `text-3xl font-bold mb-6 ${
+    darkMode ? "text-gray-100" : "text-gray-900"
+  }`;
+  const subheadingStyles = `text-xl font-semibold mb-4 ${
+    darkMode ? "text-gray-200" : "text-gray-800"
+  }`;
+  const linkStyles = `inline-flex items-center ${
+    darkMode ? "text-blue-400 hover:text-blue-300" : "text-blue-600 hover:text-blue-800"
+  } font-semibold transition-colors duration-300`;
+  const imageContainerStyles = "flex justify-center items-center mb-4";
+
   return (
     <>
       <Head>
         <title>About Me - My Journey and Expertise</title>
-        <meta name="description" content="Learn about my journey, expertise, and passions beyond coding." />
+        <meta
+          name="description"
+          content="Learn about my journey, expertise, and passions beyond coding."
+        />
       </Head>
-      <div className="px-6 py-8 bg-gray-100 min-h-screen">
+      <div className={`px-6 py-8 ${darkMode ? "bg-gray-900" : "bg-gray-100"} min-h-screen`}>
         <div className={containerStyles}>
           <Link href="/" className={linkStyles}>
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">

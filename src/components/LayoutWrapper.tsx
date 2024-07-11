@@ -3,7 +3,6 @@ import React, { useState, useCallback } from 'react';
 import { DarkModeProvider, useDarkMode } from '@/context/DarkModeContext';
 import Menu from './Menu';
 import { FaBars, FaTimes, FaBrain, FaHome, FaBlog, FaUser, FaProjectDiagram, FaMoon, FaSun } from 'react-icons/fa';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 interface LayoutWrapperProps {
