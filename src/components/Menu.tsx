@@ -135,7 +135,6 @@ const Menu: React.FC = () => {
                 </section>
 
                 <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-6">AI Quote of the Moment</h2>
                     <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
                         <p className="text-xl">{currentQuote.quote}</p>
                         <p className="text-lg text-gray-500 mt-2">- {currentQuote.author}</p>

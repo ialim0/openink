@@ -23,22 +23,22 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
   const content = readFileSync(join(postsDirectory, post.contentFilePath), "utf8");
 
   return (
-    <div className="bg-white min-h-screen flex flex-col items-center">
+    <div className="min-h-screen flex flex-col items-center">
       <div className="max-w-4xl w-full py-12 px-6">
-        <Link href="/blog" className="flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300 mb-4">
+        <Link href="/blog" className="flex items-center  transition-colors duration-300 mb-4">
           <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 00-.707 1.707l5.5 5.5H3a1 1 0 000 2h11.793l-5.5 5.5A1 1 0 1010 18l7-7-7-7A1 1 0 0010 2z" /></svg>
           Go Back
         </Link>
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-6">{post.title}</h1>
-        <div className="flex items-center mb-8 text-sm text-gray-600 space-x-3">
-          <span className="bg-blue-200 text-blue-800 px-3 py-1 rounded-full font-semibold">
+        <h1 className="text-4xl font-extrabold  mb-6">{post.title}</h1>
+        <div className="flex items-center mb-8 text-sm  space-x-3">
+          <span className=" px-3 py-1 rounded-full font-semibold">
             {post.category}
           </span>
           <span>{post.date}</span>
           <span>•</span>
           <span>{post.readTime} min read</span>
         </div>
-        <div className="relative h-96 mb-8 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-105">
+        <div className="relative h-96 mb-8 rounded-lg overflow-hidden transform transition-transform duration-500 hover:scale-105">
           <Image
             src={post.imageUrl}
             alt={post.title}
@@ -46,11 +46,11 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
             objectFit="cover"
           />
         </div>
-        <div className="prose prose-lg max-w-none text-gray-800 mb-8">
+        <div className="prose prose-lg max-w-none  mb-8">
           <ReactMarkdown>{content}</ReactMarkdown>
         </div>
-        <div className="flex items-center bg-gradient-to-r from-gray-100 to-gray-200 p-6 rounded-lg shadow-lg">
-          <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-300 shadow-sm">
+        <div className="flex items-center p-6 rounded-lg ">
+          {/* <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-300 ">
             <Image
               src="/images/profile.png"
               alt={post.author}
@@ -58,10 +58,10 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
               height={64}
               className="object-cover"
             />
-          </div>
+          </div> */}
           <div className="ml-4">
-            <p className="text-xl font-semibold text-gray-900">{post.author}</p>
-            <p className="text-sm text-gray-500">Author</p>
+            <p className="text-xl font-semibold ">{post.author}</p>
+            <p className="text-sm ">Author</p>
           </div>
         </div>
 
