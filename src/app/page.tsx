@@ -20,24 +20,53 @@ const HomePage: React.FC = () => {
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
       <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:py-20 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center"
-        >
-          <h1 className={`text-3xl sm:text-5xl font-extrabold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-            Hi, I'm Alimoudine I.
-          </h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className={`mt-4 sm:mt-6 max-w-md mx-auto text-base sm:text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
-          >
-            A visionary full-stack developer specializing in blockchain and AI, crafting innovative solutions for tomorrow's challenges.
-          </motion.p>
-        </motion.div>
+      <motion.div
+  initial={{ opacity: 0, y: -50 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, ease: "easeOut" }}
+  className="text-center px-4 py-12 sm:py-20"
+>
+  <h1 className={`text-4xl sm:text-6xl font-extrabold ${darkMode ? 'text-blue-400' : 'text-blue-600'} mb-4`}>
+    Hi, I'm Alimoudine I.
+  </h1>
+  <motion.h2
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.2, duration: 0.8 }}
+    className={`text-2xl sm:text-3xl font-bold ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-6`}
+  >
+    Software Engineer & AI Enthusiast
+  </motion.h2>
+  <motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.4, duration: 0.8 }}
+    className={`mt-4 sm:mt-6 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
+  >
+    Passionate about leveraging cutting-edge technologies to solve complex problems. 
+    Specializing in AI, machine learning, and full-stack development to create 
+    innovative solutions that make a difference.
+  </motion.p>
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.6, duration: 0.8 }}
+    className="mt-8 sm:mt-10 flex justify-center space-x-4"
+  >
+    <a 
+      href="#projects" 
+      className={`px-6 py-3 rounded-full text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out ${darkMode ? 'hover:bg-blue-500' : ''}`}
+    >
+      View Projects
+    </a>
+    <a 
+      href="#contact" 
+      className={`px-6 py-3 rounded-full ${darkMode ? 'bg-gray-700 text-white hover:bg-gray-600' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'} transition duration-300 ease-in-out`}
+    >
+      Contact Me
+    </a>
+  </motion.div>
+</motion.div>
 
         <div className="mt-12 sm:mt-16 relative">
           <AnimatePresence initial={false} mode="wait">
