@@ -4,7 +4,6 @@ import { DarkModeProvider, useDarkMode } from '@/context/DarkModeContext';
 import Menu from './Menu';
 import { FaBars, FaTimes, FaBrain, FaHome, FaBlog, FaUser,  FaMoon, FaSun, FaCode } from 'react-icons/fa';
 import { usePathname, useRouter } from 'next/navigation';
-import { FaCodeFork } from 'react-icons/fa6';
 
 interface LayoutWrapperProps {
   children: React.ReactNode;

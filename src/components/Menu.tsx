@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { FaBrain, FaRobot, FaMicrochip,  FaLinkedin, FaGithub, FaTwitter, FaEnvelope,  } from 'react-icons/fa';
+import {  FaRobot, FaMicrochip,  FaLinkedin, FaGithub, FaTwitter, FaEnvelope,  } from 'react-icons/fa';
 import { useDarkMode } from '@/context/DarkModeContext';
 import Link from 'next/link';
 
@@ -69,21 +69,20 @@ const Menu: React.FC = () => {
                         </div>
                         <div className="text-center md:text-left">
                             <h1 className="text-4xl font-bold mb-2">Alimoudine I.</h1>
-                            <p className="text-xl text-blue-500 mb-4">AI & Machine Learning Specialist</p>
+                            <p className="text-xl text-blue-500 mb-4">Software Engineer (AI)</p>
                             <p className="text-lg max-w-2xl">
-                                Pioneering the future of AI and transforming industries through innovative solutions.
-                            </p>
+                            Coding to transform ideas into intelligent software solutions. </p>
                         </div>
                     </div>
                 </section>
 
                 <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-6">AI & Tech Expertise</h2>
+                    <h2 className="text-2xl font-bold mb-6">Interests</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
                             <h3 className="text-xl font-semibold mb-4 flex items-center">
                                 <FaRobot className="mr-2 text-blue-500" />
-                                AI & ML Technologies
+                                Technologies
                             </h3>
                             <div className="flex flex-wrap gap-2">
                                 {['Deep Learning', 'NLP', 'Computer Vision', 'Reinforcement Learning', 'Neural Networks'].map((skill) => (
