@@ -137,29 +137,32 @@ const Menu: React.FC = () => {
                     </div>
                 </section>
             </main>
-
-            <footer className={`${darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-200 text-gray-700'} py-8`}>
+            <footer className={`${darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-200 text-gray-700'} py-12`}>
                 <div className="container mx-auto px-6">
-                    <div className="flex flex-wrap justify-between">
-                        <div className="w-full md:w-auto mb-6 md:mb-0">
-                            <h3 className="text-lg font-semibold">Connect with me</h3>
-                            <div className="flex space-x-4 mt-4">
-                                <a href="https://www.linkedin.com/in/ialim" className="text-blue-500 hover:text-blue-700">
-                                    <FaLinkedin className="text-2xl" />
+                    <div className="flex flex-col md:flex-row justify-between items-center">
+                        <div className="mb-6 md:mb-0">
+                            <h3 className="text-xl font-semibold mb-4">Connect with me</h3>
+                            <div className="flex space-x-6">
+                                <a href="https://www.linkedin.com/in/ialim" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 transition-colors duration-300">
+                                    <FaLinkedin className="text-3xl" />
                                 </a>
-                                <a href="https://github.com/ialim0" className="text-gray-700 hover:text-gray-900">
-                                    <FaGithub className="text-2xl" />
+                                <a href="https://github.com/ialim0" target="_blank" rel="noopener noreferrer" className={`${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-black'} transition-colors duration-300`}>
+                                    <FaGithub className="text-3xl" />
                                 </a>
-                                <a href="https://twitter.com/ialim0" className="text-blue-400 hover:text-blue-600">
-                                    <FaTwitter className="text-2xl" />
+                                <a href="https://twitter.com/ialim0" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-600 transition-colors duration-300">
+                                    <FaTwitter className="text-3xl" />
                                 </a>
-                                <a href="mailto:i.alim0229@gmail.com" className="text-red-500 hover:text-red-700">
-                                    <FaEnvelope className="text-2xl" />
+                                <a href="mailto:i.alim0229@gmail.com" className="text-red-500 hover:text-red-700 transition-colors duration-300">
+                                    <FaEnvelope className="text-3xl" />
                                 </a>
                             </div>
                         </div>
+                        <div className="text-center md:text-right">
+                            <p className="text-sm mb-2">Alimoudine I.</p>
+                            <p className="text-xs">Software Engineer | AI Enthusiast</p>
+                        </div>
                     </div>
-                    <div className="border-t border-gray-300 mt-8 pt-8 text-sm text-center">
+                    <div className="border-t border-gray-500 mt-8 pt-8 text-sm text-center">
                         <p>&copy; {new Date().getFullYear()} Alimoudine I. All rights reserved.</p>
                     </div>
                 </div>
