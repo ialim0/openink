@@ -27,7 +27,7 @@ const HomePage: React.FC = () => {
           className="text-center"
         >
           <h1 className={`text-3xl sm:text-5xl font-extrabold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-            Hi, I'm Alimoudine IDRISSOU
+            Hi, I'm Alimoudine I.
           </h1>
           <motion.p
             initial={{ opacity: 0 }}

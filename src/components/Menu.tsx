@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { FaBrain, FaRobot, FaMicrochip, FaHome, FaBlog, FaUser, FaProjectDiagram, FaMoon, FaSun, FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaBars, FaTimes } from 'react-icons/fa';
+import { FaBrain, FaRobot, FaMicrochip,  FaLinkedin, FaGithub, FaTwitter, FaEnvelope,  } from 'react-icons/fa';
 import { useDarkMode } from '@/context/DarkModeContext';
 import Link from 'next/link';
 
@@ -49,9 +49,7 @@ const Menu: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const isActive = (path: string) => pathname === path;
 
-    const toggleMenu = () => setMenuOpen(!menuOpen);
 
     return (
         <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
@@ -70,7 +68,7 @@ const Menu: React.FC = () => {
                             />
                         </div>
                         <div className="text-center md:text-left">
-                            <h1 className="text-4xl font-bold mb-2">Alimoudine IDRISSOU</h1>
+                            <h1 className="text-4xl font-bold mb-2">Alimoudine I.</h1>
                             <p className="text-xl text-blue-500 mb-4">AI & Machine Learning Specialist</p>
                             <p className="text-lg max-w-2xl">
                                 Pioneering the future of AI and transforming industries through innovative solutions.
@@ -148,23 +146,23 @@ const Menu: React.FC = () => {
                         <div className="w-full md:w-auto mb-6 md:mb-0">
                             <h3 className="text-lg font-semibold">Connect with me</h3>
                             <div className="flex space-x-4 mt-4">
-                                <a href="https://www.linkedin.com/in/alimoudine-idrissou/" className="text-blue-500 hover:text-blue-700">
+                                <a href="https://www.linkedin.com/in/ialim" className="text-blue-500 hover:text-blue-700">
                                     <FaLinkedin className="text-2xl" />
                                 </a>
-                                <a href="https://github.com/alimoudine-idrissou" className="text-gray-700 hover:text-gray-900">
+                                <a href="https://github.com/ialim0" className="text-gray-700 hover:text-gray-900">
                                     <FaGithub className="text-2xl" />
                                 </a>
-                                <a href="https://twitter.com/alimoudine_i" className="text-blue-400 hover:text-blue-600">
+                                <a href="https://twitter.com/ialim0" className="text-blue-400 hover:text-blue-600">
                                     <FaTwitter className="text-2xl" />
                                 </a>
-                                <a href="mailto:alimoudine.idrissou@gmail.com" className="text-red-500 hover:text-red-700">
+                                <a href="mailto:i.alim0229@gmail.com" className="text-red-500 hover:text-red-700">
                                     <FaEnvelope className="text-2xl" />
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div className="border-t border-gray-300 mt-8 pt-8 text-sm text-center">
-                        <p>&copy; {new Date().getFullYear()} Alimoudine IDRISSOU. All rights reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} Alimoudine I. All rights reserved.</p>
                     </div>
                 </div>
             </footer>
