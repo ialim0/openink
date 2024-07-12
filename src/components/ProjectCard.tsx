@@ -32,6 +32,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive, onClick })
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -50 }}
       onClick={onClick}
+      id='projects'
     >
       <div className="relative h-96 overflow-hidden">
         <Image
