@@ -34,7 +34,7 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
           <span>•</span>
           <span>{post.readTime} min read</span>
         </div>
-        <div className="relative h-96 mb-8 rounded-lg overflow-hidden transform transition-transform duration-500 hover:scale-105">
+        <div className="relative h-96 mb-8 rounded-lg overflow-hidden ">
           <Image
             src={post.imageUrl}
             alt={post.title}
