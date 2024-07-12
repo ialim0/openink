@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import {  FaRobot, FaMicrochip,  FaLinkedin, FaGithub, FaTwitter, FaEnvelope,  } from 'react-icons/fa';
+import { FaRobot, FaMicrochip, FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaCode } from 'react-icons/fa';
 import { useDarkMode } from '@/context/DarkModeContext';
 import Link from 'next/link';
 
@@ -53,7 +53,7 @@ const Menu: React.FC = () => {
 
     return (
         <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
-            
+
 
             <main className="container mx-auto px-6 py-8">
                 <section className="mb-12">
@@ -71,40 +71,44 @@ const Menu: React.FC = () => {
                             <h1 className="text-4xl font-bold mb-2">Alimoudine I.</h1>
                             <p className="text-xl text-blue-500 mb-4">Software Engineer (AI)</p>
                             <p className="text-lg max-w-2xl">
-                            Coding to transform ideas into intelligent software solutions. </p>
+                                Dedicated to creating innovative solutions through code. </p>
                         </div>
                     </div>
                 </section>
-
                 <section className="mb-12">
                     <h2 className="text-2xl font-bold mb-6">Interests</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-                            <h3 className="text-xl font-semibold mb-4 flex items-center">
-                                <FaRobot className="mr-2 text-blue-500" />
-                                Technologies
-                            </h3>
-                            <div className="flex flex-wrap gap-2">
-                                {['Deep Learning', 'NLP', 'Computer Vision', 'Reinforcement Learning', 'Neural Networks'].map((skill) => (
-                                    <span key={skill} className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm">
-                                        {skill}
-                                    </span>
-                                ))}
+                    <div className="space-y-6">
+                        {[
+                            {
+                                title: "Technologies",
+                                icon: <FaRobot />,
+                                items: ['AI (Retrieval & Search)', 'Cloud (Deployment)', 'Digital Finance (Crypto)']
+                            },
+                            {
+                                title: "Tools & Frameworks",
+                                icon: <FaMicrochip />,
+                                items: ['Langchain', 'Vector Databases', 'Transformers', 'Hugging Face Spaces', 'PyTorch', 'Scikit-learn', 'React', 'Next.js', 'FastAPI', 'Flask']
+                            },
+                            {
+                                title: "Programming Languages",
+                                icon: <FaCode />,
+                                items: ['Python', 'Go', 'Rust', 'JavaScript']
+                            }
+                        ].map((category, index) => (
+                            <div key={index} className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
+                                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                                    {React.cloneElement(category.icon, { className: "mr-2 text-blue-500" })}
+                                    {category.title}
+                                </h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {category.items.map((item) => (
+                                        <span key={item} className={`px-3 py-1 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'} ${darkMode ? 'text-white' : 'text-gray-800'} rounded-full text-sm transition-colors duration-300 hover:bg-blue-500 hover:text-white`}>
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                        <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-                            <h3 className="text-xl font-semibold mb-4 flex items-center">
-                                <FaMicrochip className="mr-2 text-blue-500" />
-                                Tools & Frameworks
-                            </h3>
-                            <div className="flex flex-wrap gap-2">
-                                {['TensorFlow', 'PyTorch', 'Scikit-learn', 'OpenAI Gym', 'Keras'].map((tool) => (
-                                    <span key={tool} className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm">
-                                        {tool}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </section>
 
@@ -113,19 +117,25 @@ const Menu: React.FC = () => {
                     <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
                         <div className="space-y-4">
                             <div>
-                                <h3 className="text-xl font-semibold">Ph.D. in Artificial Intelligence</h3>
-                                <p className="text-lg text-blue-500">Stanford University</p>
-                                <p className="text-md text-gray-500">2018 - 2022</p>
+                                <h3 className="text-xl font-semibold">M.S. in Digital Finance</h3>
+                                <a href="https://esmt.sn/" target="_blank" rel="noopener noreferrer" className="text-lg text-blue-500 hover:underline">
+                                    Ecole Supérieure Multinationale des Télécommunications, Sénégal
+                                </a>
+                                <p className="text-md text-gray-500">2021 - 2023</p>
                             </div>
                             <div>
-                                <h3 className="text-xl font-semibold">M.S. in Computer Science</h3>
-                                <p className="text-lg text-blue-500">Massachusetts Institute of Technology</p>
-                                <p className="text-md text-gray-500">2016 - 2018</p>
+                                <h3 className="text-xl font-semibold">B.S. in Mathematics and Computer Science</h3>
+                                <a href="https://uac.bj/" target="_blank" rel="noopener noreferrer" className="text-lg text-blue-500 hover:underline">
+                                    Université Abomey Calavi, Bénin
+                                </a>
+                                <p className="text-md text-gray-500">2017 - 2021</p>
                             </div>
                             <div>
-                                <h3 className="text-xl font-semibold">B.S. in Computer Engineering</h3>
-                                <p className="text-lg text-blue-500">University of California, Berkeley</p>
-                                <p className="text-md text-gray-500">2012 - 2016</p>
+                                <h3 className="text-xl font-semibold">B.S. in Planning Sciences</h3>
+                                <a href="https://eneam.uac.bj/" target="_blank" rel="noopener noreferrer" className="text-lg text-blue-500 hover:underline">
+                                    Ecole Nationale d'Economie Appliquée et de Management, Bénin
+                                </a>
+                                <p className="text-md text-gray-500">2017 - 2020</p>
                             </div>
                         </div>
                     </div>
