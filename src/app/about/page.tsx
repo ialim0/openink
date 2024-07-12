@@ -37,12 +37,7 @@ const AboutPage: React.FC = () => {
       </Head>
       <div className={`px-6 py-8 ${darkMode ? "bg-gray-900" : "bg-gray-100"} min-h-screen`}>
         <div className={containerStyles}>
-          <Link href="/" className={linkStyles}>
-            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a1 1 0 00-.707 1.707l5.5 5.5H3a1 1 0 000 2h11.793l-5.5 5.5A1 1 0 1010 18l7-7-7-7A1 1 0 0010 2z" />
-            </svg>
-            Go Back to Home
-          </Link>
+      
           <section className="mt-8">
             <h1 className={headingStyles}>Bio</h1>
             <article>

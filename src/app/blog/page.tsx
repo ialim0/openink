@@ -31,12 +31,7 @@ const BlogPage = () => {
       </Head>
       <div className={`${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'} min-h-screen`}>
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-          <Link href="/" className={linkStyles}>
-            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a1 1 0 00-.707 1.707l5.5 5.5H3a1 1 0 000 2h11.793l-5.5 5.5A1 1 0 1010 18l7-7-7-7A1 1 0 0010 2z" />
-            </svg>
-            Go Back to Home
-          </Link>
+     
 
           <div className="mb-8 flex justify-center items-center">
             <div className="relative w-full max-w-md group">

@@ -25,10 +25,7 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
   return (
     <div className="min-h-screen flex flex-col items-center">
       <div className="max-w-4xl w-full py-12 px-6">
-        <Link href="/blog" className="flex items-center  transition-colors duration-300 mb-4">
-          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 00-.707 1.707l5.5 5.5H3a1 1 0 000 2h11.793l-5.5 5.5A1 1 0 1010 18l7-7-7-7A1 1 0 0010 2z" /></svg>
-          Go Back
-        </Link>
+   
         <h1 className="text-4xl font-extrabold  mb-6">{post.title}</h1>
         <div className="flex items-center mb-8 text-sm  space-x-3">
           <span className=" px-3 py-1 rounded-full font-semibold">
