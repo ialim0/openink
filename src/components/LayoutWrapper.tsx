@@ -29,7 +29,7 @@ const LayoutContent: React.FC<LayoutWrapperProps> = ({ children }) => {
         <div className="container mx-auto px-6 py-3 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <FaCode className="text-blue-500 text-2xl" />
-            <span className="text-xl font-bold">Welcome </span>
+            <span className="text-xl font-bold">Alimoudine I. </span>
           </div>
           <div className="md:hidden">
             <button
