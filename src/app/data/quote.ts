@@ -7,8 +7,7 @@ const quotes = [
       quote: "The future belongs to those who believe in the beauty of their dreams.",
       author: "Eleanor Roosevelt",
     },
-    // ... add the rest of your quotes here
-  ];
+$  ];
   
   export default quotes;
 

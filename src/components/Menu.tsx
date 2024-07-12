@@ -2,54 +2,27 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { FaRobot, FaMicrochip, FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaCode } from 'react-icons/fa';
+import { FaRobot, FaMicrochip, FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaCode, FaSyncAlt, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 import { useDarkMode } from '@/context/DarkModeContext';
 import Link from 'next/link';
+import quotes from '@/app/data/quote';
 
-interface Quote {
-    quote: string;
-    author: string;
-}
 
-const aiQuotes: Quote[] = [
-    {
-        quote: "The development of full artificial intelligence could spell the end of the human race.",
-        author: "Stephen Hawking",
-    },
-    {
-        quote: "AI is likely to be either the best or worst thing to happen to humanity.",
-        author: "Elon Musk",
-    },
-    {
-        quote: "The pace of progress in artificial intelligence is incredibly fast.",
-        author: "Satya Nadella",
-    },
-    {
-        quote: "Artificial intelligence will reach human levels by around 2029.",
-        author: "Ray Kurzweil",
-    },
-    {
-        quote: "The key to artificial intelligence has always been the representation.",
-        author: "Jeff Hawkins",
-    },
-];
 
 const Menu: React.FC = () => {
     const { darkMode, toggleDarkMode } = useDarkMode();
-    const [currentQuote, setCurrentQuote] = useState<Quote>(aiQuotes[0]);
     const [menuOpen, setMenuOpen] = useState(false);
     const pathname = usePathname();
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const randomIndex = Math.floor(Math.random() * aiQuotes.length);
-            setCurrentQuote(aiQuotes[randomIndex]);
-        }, 30000);
-
-        return () => clearInterval(interval);
-    }, []);
 
 
+    const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+
+    const cycleQuote = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    };
+
+    const currentQuote = quotes[currentQuoteIndex];
 
     return (
         <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
@@ -142,9 +115,25 @@ const Menu: React.FC = () => {
                 </section>
 
                 <section className="mb-12">
-                    <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-                        <p className="text-xl">{currentQuote.quote}</p>
-                        <p className="text-lg text-gray-500 mt-2">- {currentQuote.author}</p>
+                    <h2 className="text-2xl font-bold mb-6">Favorite Quotes</h2>
+                    <div className={`p-8 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg relative overflow-hidden`}>
+                        <div className="absolute top-3 right-3">
+                            <button
+                                onClick={cycleQuote}
+                                className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
+                                aria-label="Next quote"
+                            >
+                                <FaSyncAlt className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <blockquote className="relative">
+                            <FaQuoteLeft className={`absolute top-0 left-0 w-6 h-6 ${darkMode ? 'text-gray-700' : 'text-gray-300'}`} />
+                            <p className="text-xl mt-8 mb-6 mx-8 italic">{currentQuote.quote}</p>
+                            <footer className="text-right mr-8">
+                                <cite className="text-lg text-gray-500 not-italic">— {currentQuote.author}</cite>
+                            </footer>
+                            <FaQuoteRight className={`absolute bottom-0 right-0 w-6 h-6 ${darkMode ? 'text-gray-700' : 'text-gray-300'}`} />
+                        </blockquote>
                     </div>
                 </section>
             </main>
