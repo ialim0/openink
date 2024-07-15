@@ -14,9 +14,15 @@ export const metadata: Metadata = {
 
 const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <html lang="en" className={inter.className}>
-    <LayoutWrapper>
-      {children}
-    </LayoutWrapper>
+    <head>
+      {/* Netlify Widget */}
+      <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
+    </head>
+    <body>
+      <LayoutWrapper>
+        {children}
+      </LayoutWrapper>
+    </body>
   </html>
 );
 
