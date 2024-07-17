@@ -158,7 +158,7 @@ const Menu: React.FC = () => {
                         </div>
                         <div className="text-center md:text-right">
                             <p className="text-sm mb-2">Alimoudine I.</p>
-                            <p className="text-xs">Software Engineer | AI Enthusiast</p>
+                            <p className="text-xs">Software Engineer (AI) </p>
                         </div>
                     </div>
                     <div className="border-t border-gray-500 mt-8 pt-8 text-sm text-center">
