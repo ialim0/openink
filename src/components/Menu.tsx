@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { FaRobot, FaMicrochip, FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaCode, FaSyncAlt, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 import { useDarkMode } from '@/context/DarkModeContext';
-import Link from 'next/link';
 import quotes from '@/app/data/quote';
 
 

@@ -86,7 +86,7 @@ const HomePage: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={prevProject}
-            className={`absolute top-1/2 -left-10 sm:-left-16 transform -translate-y-1/2 p-3 rounded-full shadow-lg 
+            className={`absolute top-1/2 -left-5 sm:-left-10 lg:-left-16 transform -translate-y-1/2 p-3 rounded-full shadow-lg 
             ${darkMode ? 'bg-gray-800 text-blue-400 hover:text-blue-300' : 'bg-white text-blue-600 hover:text-blue-800'} 
             transition-colors duration-300`}
           >
@@ -96,7 +96,7 @@ const HomePage: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={nextProject}
-            className={`absolute top-1/2 -right-10 sm:-right-16 transform -translate-y-1/2 p-3 rounded-full shadow-lg 
+            className={`absolute top-1/2 -right-5 sm:-right-10 lg:-right-16 transform -translate-y-1/2 p-3 rounded-full shadow-lg 
             ${darkMode ? 'bg-gray-800 text-blue-400 hover:text-blue-300' : 'bg-white text-blue-600 hover:text-blue-800'} 
             transition-colors duration-300`}
           >
