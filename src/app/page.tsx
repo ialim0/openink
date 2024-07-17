@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
             transition={{ delay: 0.2, duration: 0.8 }}
             className={`text-2xl sm:text-3xl font-bold ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-6`}
           >
-            Software Engineer & AI Enthusiast
+            Software Engineer (AI)
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -44,8 +44,7 @@ const HomePage: React.FC = () => {
             className={`mt-4 sm:mt-6 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
           >
             Passionate about leveraging cutting-edge technologies to solve complex problems.
-            Specializing in AI, machine learning, and full-stack development to create
-            innovative solutions that make a difference.
+      
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
