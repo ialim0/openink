@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { DarkModeProvider, useDarkMode } from '@/context/DarkModeContext';
 import Menu from './Menu';
-import { FaBars, FaTimes, FaBrain, FaHome, FaBlog, FaUser, FaMoon, FaSun, FaCode } from 'react-icons/fa';
+import { FaBars, FaTimes, FaCode, FaHome, FaBlog, FaUser, FaMoon, FaSun } from 'react-icons/fa';
 import { usePathname, useRouter } from 'next/navigation';
 
 interface LayoutWrapperProps {
@@ -24,7 +24,7 @@ const LayoutContent: React.FC<LayoutWrapperProps> = ({ children }) => {
   }, [router]);
 
   return (
-    <div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
+    <div className={`h-screen flex flex-col ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
       <nav className={`sticky top-0 z-50 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-md`}>
         <div className="container mx-auto px-6 py-3 flex justify-between items-center">
           <div className="flex items-center space-x-2">
@@ -64,12 +64,16 @@ const LayoutContent: React.FC<LayoutWrapperProps> = ({ children }) => {
         </div>
       </nav>
 
-      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
-        <aside className={`md:w-1/3 p-8 ${darkMode ? 'bg-gray-800' : 'bg-white'} border-r border-gray-200 shadow-lg flex flex-col justify-between ${menuVisible ? 'fixed inset-0 z-40 mt-40' : 'hidden'} md:block md:relative md:h-full overflow-y-auto`}>
-          <Menu />
+      <div className="flex flex-1 overflow-hidden">
+        <aside className={`w-full md:w-1/3 flex-shrink-0 ${darkMode ? 'bg-gray-800' : 'bg-white'} border-r border-gray-200 shadow-lg ${menuVisible ? 'fixed inset-0 z-40' : 'hidden'} md:block md:relative`}>
+          <div className="h-full overflow-y-auto">
+            <Menu />
+          </div>
         </aside>
-        <main className={`md:w-2/3 flex-1 p-8 ${darkMode ? 'bg-gray-800' : 'bg-gray-100'} overflow-y-auto`}>
-          {children}
+        <main className={`w-full md:w-2/3 ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+          <div className="h-full overflow-y-auto p-8">
+            {children}
+          </div>
         </main>
       </div>
     </div>
