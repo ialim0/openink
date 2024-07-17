@@ -40,7 +40,7 @@ const AboutPage: React.FC = () => {
                 As a child, I found myself drawn to mathematics. This interest led me down an unexpected path - at 19, I had the opportunity to teach high school math. It was challenging, but I learned so much from my students.
               </p>
               <p className={textStyles}>
-                Over time, I began to wonder if there were ways to apply mathematical thinking to larger problems. Seeking to deepen my understanding, two B.Sc. degrees - one in Mathematics and Computer Science, another in Planning Sciences - followed by an M.Sc. in Digital Finance. These studies gave me a strong theoretical foundation, but I felt there was still more to learn about practical application in the tech industry.
+                Over time, I began to wonder if there were ways to apply mathematical thinking to larger problems. Seeking to deepen my understanding, I pursued two B.Sc. degrees - one in Mathematics and Computer Science, another in Planning Sciences - followed by an M.Sc. in Digital Finance. These studies gave me a strong theoretical foundation, but I felt there was still more to learn about practical application in the tech industry.
 
               </p>
               <p className={textStyles}>
