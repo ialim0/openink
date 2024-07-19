@@ -1,10 +1,9 @@
-// src/app/layout.tsx
 import React from 'react';
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { LayoutWrapper } from '../components/LayoutWrapper';
-import { SessionProvider } from "next-auth/react"
+import AuthProvider from '@/providers /AuthProvider';
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -21,12 +20,11 @@ const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
     </head>
     <body>
-    <SessionProvider >
-
-      <LayoutWrapper>
-        {children}
-      </LayoutWrapper>
-      </SessionProvider>
+      <AuthProvider>
+        <LayoutWrapper>
+          {children}
+        </LayoutWrapper>
+      </AuthProvider>
 
     </body>
   </html>
