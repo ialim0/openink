@@ -33,14 +33,14 @@ const Menu: React.FC = () => {
                         <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 md:mb-0 md:mr-8">
                             <Image
                                 src="/images/profile.png"
-                                alt="Alimoudine IDRISSOU"
+                                alt="Alim Idrissou"
                                 width={256}
                                 height={256}
                                 className="object-cover"
                             />
                         </div>
                         <div className="text-center md:text-left">
-                            <h1 className="text-4xl font-bold mb-2">Alimoudine I.</h1>
+                            <h1 className="text-4xl font-bold mb-2">Alim Idrissou.</h1>
                             <p className="text-xl text-blue-500 mb-4">Software Engineer (AI)</p>
                             <p className="text-lg max-w-2xl">
                                 Dedicated to creating innovative solutions through code. </p>
@@ -157,12 +157,15 @@ const Menu: React.FC = () => {
                             </div>
                         </div>
                         <div className="text-center md:text-right">
-                            <p className="text-sm mb-2">Alimoudine I.</p>
+                            <p className="text-sm mb-2">Alim Idrissou.</p>
                             <p className="text-xs">Software Engineer (AI) </p>
                         </div>
                     </div>
                     <div className="border-t border-gray-500 mt-8 pt-8 text-sm text-center">
-                        <p>&copy; {new Date().getFullYear()} Alimoudine I. All rights reserved.</p>
+            
+                    <p className={` text-sm text-gray-200 italic`}>
+              Note: My legal name is Alimoudine Idrissou.
+            </p>
                     </div>
                 </div>
             </footer>
