@@ -163,7 +163,7 @@ const Menu: React.FC = () => {
                     </div>
                     <div className="border-t border-gray-500 mt-8 pt-8 text-sm text-center">
             
-                    <p className={` text-sm text-gray-200 italic`}>
+                    <p className={`text-center md:text-right italic`}>
               Note: My legal name is Alimoudine Idrissou.
             </p>
                     </div>
