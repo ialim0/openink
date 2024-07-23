@@ -1,98 +1,95 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-import ReactMarkdown from "react-markdown";
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import { FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
-import { posts } from "../data/postsData";
+import "react-notion/src/styles.css";
+import "prismjs/themes/prism-tomorrow.css";
+import { NotionRenderer } from "react-notion";
+import notion from "@/lib";
+import { convertToPost } from "@/functions/convertToPost";
+import Link from "next/link";
+import TopScrollButton from "../../../components/TopScrollButton";
+import Container from '@/components/Container';
+import ArticleList from '@/components/ArticleList';
+import { getAllPosts } from "@/functions/getAllPosts";
+import { Article } from "@/lib/types";
+import getLocalizedDate from "@/utils/getLocalizedDate";
+import { getTagFilteredPosts } from "@/functions/articleFilteredPosts";
+import SocialshareButtons from "@/components/SocialshareButtons";
 
-const postsDirectory = join(process.cwd(), "content/posts");
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
+  const { id } = searchParams;
 
-const PostPage = ({ params }: { params: { slug: string } }) => {
-  const post = posts.find((p) => p.slug === params.slug);
-
-  if (!post) {
-    notFound();
+  if (!id) {
+    return <div>Error: No ID provided</div>;
   }
 
-  if (!post.contentFilePath) {
-    notFound();
-  }
+  try {
+    const response = await fetch(`https://notion-api.splitbee.io/v1/page/${id}`, {
+      next: { revalidate: 60 },
+    });
 
-  const content = readFileSync(join(postsDirectory, post.contentFilePath), "utf8");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-  return (
-    <div className="min-h-screen flex flex-col items-center">
-      <div className="max-w-4xl w-full py-12 px-6">
-   
-        <h1 className="text-4xl font-extrabold  mb-6">{post.title}</h1>
-        <div className="flex items-center mb-8 text-sm  space-x-3">
-          <span className=" px-3 py-1 rounded-full font-semibold">
-            {post.category}
-          </span>
-          <span>{post.date}</span>
-          <span>•</span>
-          <span>{post.readTime} min read</span>
-        </div>
-        <div className="relative h-96 mb-8 rounded-lg overflow-hidden ">
-          <Image
-            src={post.imageUrl}
-            alt={post.title}
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
-        <div className="prose prose-lg max-w-none  mb-8">
-          <ReactMarkdown>{content}</ReactMarkdown>
-        </div>
-        <div className="flex items-center p-6 rounded-lg ">
-          {/* <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-300 ">
-            <Image
-              src="/images/profile.png"
-              alt={post.author}
-              width={64}
-              height={64}
-              className="object-cover"
-            />
-          </div> */}
-          <div className="ml-4">
-            <p className="text-xl font-semibold ">{post.author}</p>
-            <p className="text-sm ">Author</p>
+    const blockMap = await response.json();
+    const pageProperties = await notion.pages.retrieve({ page_id: id });
+    const postDetails = convertToPost(pageProperties);
+    const moreArticles: Article[] = await getAllPosts();
+
+    const formattedTime = getLocalizedDate(postDetails.date);
+    const slug = postDetails.slug || '';
+    const tags = postDetails.tags || [];
+
+    const tagPosts: Article[] = await getTagFilteredPosts({ tags, slug: String(slug) });
+
+    return (
+      <div className="space-y-5 max-w-7xl m-auto min-h-screen">
+        {postDetails.coverImage && (
+          <img className="object-cover w-full h-52 xl:rounded-[20px] aspect-video" src={postDetails.coverImage} alt="Cover" />
+        )}
+
+        <div>
+          <div className="text-center space-y-5 text-sm mx-auto mt-3">
+            <div className="tracking-tight sm:text-4xl">
+              {postDetails.title}
+            </div>
+            <div className="text-md leading-8 sm:mt-4">
+              <div>
+                <time dateTime={formattedTime}>{formattedTime}</time>
+              </div>
+              <div className="font-semibold">
+                {postDetails.author}
+              </div>
+              <SocialshareButtons
+                shareUrl={`http://localhost:3000/${postDetails.slug}?id=${postDetails.id}`}
+                title={postDetails.title}
+              />
+            </div>
+          </div>
+          <div className="max-w-4xl px-6 mx-auto mb-24 space-y-8 md:px-8 pt-4 border-t mt-4">
+            {blockMap && <NotionRenderer blockMap={blockMap} />}
+          </div>
+          <div className="py-12 border-t">
+            <Container>
+              <div className="flex items-center justify-between my-8">
+                <div className="text-3xl font-bold text-gray-900">Latest articles</div>
+                <Link href="/blog">
+                  <span className="font-semibold text-gray-900 cursor-pointer">
+                    More articles ➜
+                  </span>
+                </Link>
+              </div>
+              <ArticleList articles={tagPosts} />
+            </Container>
           </div>
         </div>
-
-        <div className="flex justify-center mt-8 space-x-4">
-          <a
-            href={`https://www.linkedin.com/sharing/share/?url=https://example.com/${post.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#0077b5] hover:bg-[#005582] text-white font-semibold py-2 px-4 rounded-lg transition duration-200 transform hover:translate-y-1"
-          >
-            <FaLinkedin size={24} />
-          </a>
-          <a
-            href={`https://twitter.com/intent/tweet?text=${post.title}&url=https://example.com/${post.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#1DA1F2] hover:bg-[#0d95e8] text-white font-semibold py-2 px-4 rounded-lg transition duration-200 transform hover:translate-y-1"
-          >
-            <FaTwitter size={24} />
-          </a>
-          <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=https://example.com/${post.slug}&title=${post.title}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#1877F2] hover:bg-[#145dbf] text-white font-semibold py-2 px-4 rounded-lg transition duration-200 transform hover:translate-y-1"
-          >
-            <FaFacebook size={24} />
-          </a>
-        </div>
+        <TopScrollButton />
       </div>
-    </div>
-
-
-
-  );
-};
-
-export default PostPage;
+    );
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return <div>Error loading page. Please try again later.</div>;
+  }
+}
