@@ -29,7 +29,6 @@ const AboutPage: React.FC = () => {
 
   const Biography = () => (
     <section className="mt-8 max-w-3xl mx-auto">
-    <h1 className={styles.heading}>Numbers and Code</h1>
 
     <article className="space-y-6">
       <p className={styles.text}>
@@ -48,7 +47,6 @@ const AboutPage: React.FC = () => {
         Balancing two demanding fields taught me the invaluable lessons of time management, perseverance, and teamwork. Without the collaborative efforts and support of my peers, earning my Bachelor's in Mathematics would have been insurmountable. This experience underscored the power of cooperation and mutual support.
       </p>
 
-      <h2 className={styles.subheading}>From Theory to Practice</h2>
 
       <p className={styles.text}>
         After my second year, I embraced the opportunity to teach mathematics to first-year high school students. This first foray into professional teaching proved incredibly rewarding, allowing me to manage a classroom and engage with students who felt like younger siblings.
@@ -58,7 +56,6 @@ const AboutPage: React.FC = () => {
         Upon completing my degrees, I was awarded a Master's scholarship in Digital Finance in Senegal in 2021. This opportunity allowed me to explore the practical applications of technology in finance, coinciding with the mobile payment revolution in West Africa.
       </p>
 
-      <h2 className={styles.subheading}>Embracing Software Engineering</h2>
 
       <p className={styles.text}>
         My career took another significant turn when I encountered the <a href="https://01-edu.org/" target="_blank" rel="noopener noreferrer" className={styles.link}>01 Edu System</a>, an innovative curriculum in software engineering and programming. Despite my extensive academic background, this program offered a unique opportunity to hone practical skills and delve deeper into technology.
@@ -84,7 +81,6 @@ const AboutPage: React.FC = () => {
         These volunteer experiences have not only allowed me to give back to the community but have also enriched my understanding of how technology can be leveraged for social impact.
       </p>
 
-      <h2 className={styles.subheading}>Balancing Technical and Personal Growth</h2>
 
       <p className={styles.text}>
         To complement my technical pursuits, I embrace endurance sports like running, and team sports such as football and basketball. I also enjoy strategic video games like PES, FIFA, and Dream League on mobile.
@@ -103,7 +99,6 @@ const AboutPage: React.FC = () => {
 
   const VolunteerProjects = () => (
     <section className="mt-8">
-      <h2 className={styles.subheading}>Volunteer Projects</h2>
       <ul className="list-disc pl-6 space-y-2 mb-4">
         <li className={styles.text}>
           <a href="https://e-smartraining.org/en/" target="_blank" rel="noopener noreferrer" className={styles.link}>E-smart training</a>: Applying my skills to real-world problems and helping others learn through technology.
@@ -117,12 +112,11 @@ const AboutPage: React.FC = () => {
 
   const PersonalInterests = () => (
     <section className="mt-12">
-      <h2 className={styles.subheading}>Personal Interests</h2>
       <p className={styles.text}>
         I also enjoy engaging in activities that help me relax and rejuvenate. (Pray or Read). Me in 2022:
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-        <ImageWithCaption src="/images/alim_footing.jpeg" alt="Alim after a run" caption="After a refreshing run" />
+        {/* <ImageWithCaption src="/images/alim_footing.jpeg" alt="Alim after a run" caption="After a refreshing run" /> */}
         <ImageWithCaption src="/images/alim_praying.png" alt="Alim praying" caption="A moment of reflection" />
       </div>
     </section>
