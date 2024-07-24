@@ -15,11 +15,13 @@ const Tags = ({ tagFrequencyMap }: { tagFrequencyMap: TagFrequencyMap }) => {
         const selected = name === slug;
 
         return (
+          <Button className={selected ? "bg-gray-500" : ""}>
+
           <Link href={selected ? "/search" : `/tag/${name}`} key={index}>
-            <Button className={selected ? "bg-gray-500" : ""}>
               {`${name} (${number})`}
-            </Button>
           </Link>
+          </Button>
+
         );
       })}
     </div>

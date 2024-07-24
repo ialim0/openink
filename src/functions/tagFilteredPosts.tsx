@@ -31,7 +31,6 @@ export const getTagFilteredPosts = async ({
 
     return tagFilteredPosts;
   } catch (error) {
-    // Handle the error, log it, or throw a more specific exception if needed.
     console.error("Error fetching tag-filtered posts:", error);
     throw error;
   }
