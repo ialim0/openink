@@ -9,47 +9,27 @@ type Props = {
 
 export default function ArticleCard({ article }: Props) {
   const slug = slugify(article.slug).toLowerCase();
-  const formattedTime = getLocalizedDate(article.date);
+  const formattedDate = getLocalizedDate(article.date);
 
   return (
     <Link href={`/blog/${slug}?id=${article.id}`}>
-      <div className="flex flex-col overflow-hidden cursor-pointer group">
-        <div className="relative">
-          <div className="absolute">
-            {article?.tags?.map(tag => (
-              <div
-                key={tag}
-                className="relative shadow z-[2] inline-flex items-center px-3 py-1.5 mb-2 mr-2 text-xs font-bold text-gray-600 uppercase bg-gray-100 rounded left-3 top-3"
-              >
+      <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
+        <img
+          className="w-full h-48 object-cover"
+          src={article.coverImage}
+          alt={article.title}
+        />
+        <div className="p-4">
+          <h2 className="text-xl font-semibold mb-2">{article.title}</h2>
+          <p className="text-gray-600 mb-4 line-clamp-2">{article.summary}</p>
+          <div className="flex flex-wrap gap-2 mb-2">
+            {article.tags.map(tag => (
+              <span key={tag} className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
                 {tag}
-              </div>
+              </span>
             ))}
           </div>
-          <div className=" filter contrast-[0.9]">
-            <img
-              className="object-cover w-full h-52 transition rounded-lg aspect-video group-hover:opacity-90 bg-gray-50"
-              src={article.coverImage}
-              alt={'article cover'}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col justify-between flex-1 py-4 bg-white">
-          <div className="flex-1">
-            <p className="text-xl font-semibold text-gray-900">{article.title}</p>
-            <p className="mt-3 text-base text-gray-500 line-clamp-2">{article.summary}</p>
-          </div>
-          <div className="flex items-center mt-4">
-            <div className="flex mb-2 space-x-1 text-sm text-gray-400">
-              {article.tags.map(tag => (
-                <div key={tag}>
-                  <span className="font-semibold text-gray-600">{tag} </span>
-                  <span aria-hidden="true">&middot;</span>
-                </div>
-              ))}
-              <time dateTime={formattedTime}>{formattedTime}</time>
-            </div>
-            {/* <p className="text-sm font-medium text-gray-900">{article?.author?.name}</p> */}
-          </div>
+          <time className="text-sm text-gray-500">{formattedDate}</time>
         </div>
       </div>
     </Link>

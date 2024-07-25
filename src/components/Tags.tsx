@@ -4,24 +4,27 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 const Tags = ({ tagFrequencyMap }: { tagFrequencyMap: TagFrequencyMap }) => {
-  const params = useParams();
-  const { slug } = params;
-  const flatTags = Object.entries(tagFrequencyMap).map(([name, number]) => ({ name, number }));
-  flatTags.sort((a, b) => a.name.localeCompare(b.name));
+  const { slug } = useParams();
+
+  const sortedTags = Object.entries(tagFrequencyMap)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([name, number]) => ({ name, number }));
 
   return (
-    <div className="gap-2 flex flex-wrap">
-      {flatTags.map(({ name, number }, index) => {
-        const selected = name === slug;
-
+    <div className="flex flex-wrap gap-2">
+      {sortedTags.map(({ name, number }) => {
+        const isSelected = name === slug;
         return (
-          <Button className={selected ? "bg-gray-500" : ""}>
-
-          <Link href={selected ? "/search" : `/tag/${name}`} key={index}>
+          <Link 
+            key={name} 
+            href={isSelected ? "/search" : `/tag/${name}`}
+          >
+            <Button 
+              className={isSelected ? "bg-gray-500" : ""}
+            >
               {`${name} (${number})`}
+            </Button>
           </Link>
-          </Button>
-
         );
       })}
     </div>
