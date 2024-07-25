@@ -13,6 +13,8 @@ export type FooterNavItem = {
 };
 
 export type Article = {
+  wordCount: number;
+  readTime: any;
   id: string;
   title: string;
   date: string;

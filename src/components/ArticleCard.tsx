@@ -2,6 +2,7 @@ import { Article } from '@/lib/types';
 import slugify from 'slugify';
 import getLocalizedDate from '@/utils/getLocalizedDate';
 import Link from 'next/link';
+import { ClockIcon } from 'lucide-react';
 
 type Props = {
   article: Article;
@@ -29,7 +30,15 @@ export default function ArticleCard({ article }: Props) {
               </span>
             ))}
           </div>
-          <time className="text-sm text-gray-500">{formattedDate}</time>
+          <div className="flex items-center justify-between text-sm text-gray-500">
+            <time>{formattedDate}</time>
+            {article.readTime && (
+              <div className="flex items-center">
+                <ClockIcon className="w-4 h-4 mr-1" />
+                <span>{article.readTime} min read</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </Link>
