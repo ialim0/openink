@@ -21,16 +21,11 @@ interface Block {
   [key: string]: any;
 }
 
+
 export default async function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
   const { id } = searchParams;
 
-  const response = await fetch(`https://notion-api.splitbee.io/v1/page/${id}`, {
-    next: { revalidate: 60 },
-  });
 
-  const block = await notion.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID as string,
-  });
 
   const getBlocks = cache(async (blockID: string) => {
     const blockId = blockID.replace(/-/g, '');
@@ -52,6 +47,8 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
   const tags = postDetails.tags || [];
   const tagPosts: Article[] = await getTagFilteredPosts({ tags, slug: String(slug) });
   const blocks: Block[] = await getBlocks(id);
+  const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/${postDetails.slug}?id=${postDetails.id}`;
+
 
   if (!blocks) {
     return <div />;

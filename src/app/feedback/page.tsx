@@ -52,17 +52,26 @@ const FeedbackPage: React.FC = () => {
 
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxw4DmM7xiV8DwOW54zAV1Mj1OFu4hbg5mQb3Jdehfks_h4wzskuBbOn0sJeSHEM7G3/exec",
+        "https://script.google.com/macros/s/AKfycbxPkyahdE8E2ajDMwSuyDqriVPO6j1WOpkKu0Fe_QvKzAd3QcVg8n8xdsm1r1f6AnLo/exec",
         {
           method: "POST",
           body: formDataToSend,
         }
       );
-      if (response.ok) {
-        setIsSubmitted(true);
-        setFormData({ name: '', email: '', feedback: '' });
-      } else {
-        setFormError("Form submission error. Please try again later.");
+      const result = await response.text();
+      console.log("Response:", result);
+
+      try {
+        const jsonResult = JSON.parse(result);
+        if (jsonResult.result === "success") {
+          setIsSubmitted(true);
+          setFormData({ name: '', email: '', feedback: '' });
+        } else {
+          setFormError("Form submission error: " + (jsonResult.message || "Unknown error"));
+        }
+      } catch (error) {
+        console.error("Error parsing response:", error);
+        setFormError("An unexpected error occurred. Please try again later.");
       }
     } catch (error) {
       console.error("Form submission error:", error);
@@ -77,6 +86,9 @@ const FeedbackPage: React.FC = () => {
       firstInputRef.current.focus();
     }
   }, []);
+
+
+
 
   const styles = {
     container: `max-w-2xl mx-auto p-8 rounded-lg shadow-md ${
