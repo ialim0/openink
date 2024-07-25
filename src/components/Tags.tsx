@@ -1,30 +1,38 @@
-import { Button } from "@/components/button";
-import { TagFrequencyMap } from "@/lib/types";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { TagFrequencyMap } from "@/lib/types";
 
 const Tags = ({ tagFrequencyMap }: { tagFrequencyMap: TagFrequencyMap }) => {
   const { slug } = useParams();
+  const router = useRouter();
 
   const sortedTags = Object.entries(tagFrequencyMap)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([name, number]) => ({ name, number }));
 
+  const handleTagClick = (tagName: string) => {
+    router.push(tagName === slug ? "/search" : `/tag/${tagName}`);
+  };
+
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2 mb-6">
       {sortedTags.map(({ name, number }) => {
         const isSelected = name === slug;
         return (
-          <Link 
-            key={name} 
-            href={isSelected ? "/search" : `/tag/${name}`}
+          <button
+            key={name}
+            onClick={() => handleTagClick(name)}
+            className={`
+              px-3 py-1 rounded-full text-sm font-medium transition-colors duration-200
+              ${isSelected
+                ? "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }
+            `}
           >
-            <Button 
-              className={isSelected ? "bg-gray-500" : ""}
-            >
-              {`${name} (${number})`}
-            </Button>
-          </Link>
+            {name}
+            <span className="ml-1 text-xs opacity-70">({number})</span>
+          </button>
         );
       })}
     </div>

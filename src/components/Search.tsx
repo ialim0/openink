@@ -32,17 +32,16 @@ const Search = ({
   const paginatedPosts = filteredBlogPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+    if (currentPage < totalPages) setCurrentPage((prevPage) => prevPage + 1);
   };
 
   const handlePreviousPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+    if (currentPage > 1) setCurrentPage((prevPage) => prevPage - 1);
   };
 
   return (
-    <>
+    <div className="space-y-5">
       <Input
-        className="mb-5"
         placeholder={slug ? `Search in #${normalizedSlug}` : "Search Articles"}
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
@@ -79,7 +78,7 @@ const Search = ({
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
