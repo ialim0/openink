@@ -38,7 +38,7 @@ const AboutPage: React.FC = () => {
           My career took a significant turn when I joined the <a href="https://01-edu.org/" target="_blank" rel="noopener noreferrer" className={styles.link}>01 Edu System</a>, where I developed proficiency in Golang, Python, Rust, and JavaScript.
         </p>
         <p className={styles.text}>
-          I've had the chance to work on projects with teams from the US, France, and Australia as Freelancer . While I'm still learning, this experience has introduced me to different aspects of AI, from basic machine learning concepts to how AI integrates with other systems.
+          I've had the chance to work on projects with teams from the US, France, and Australia as remote engineers . While I'm still learning, this experience has introduced me to different aspects of AI, from basic machine learning concepts to how AI integrates with other systems.
         </p>
         <p className={styles.text}>
           These projects have been challenging but rewarding. They've pushed me to improve my technical skills and taught me how to communicate better with people from different backgrounds. I'm grateful for these opportunities and am excited to continue learning and growing in this field.
