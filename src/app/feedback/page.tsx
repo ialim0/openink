@@ -51,13 +51,11 @@ const FeedbackPage: React.FC = () => {
     formDataToSend.append("feedback", feedback);
 
     try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxPkyahdE8E2ajDMwSuyDqriVPO6j1WOpkKu0Fe_QvKzAd3QcVg8n8xdsm1r1f6AnLo/exec",
-        {
-          method: "POST",
-          body: formDataToSend,
-        }
-      );
+      const response = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {
+        method: "POST",
+        body: formDataToSend,
+      });
+      
       const result = await response.text();
       console.log("Response:", result);
 
@@ -131,15 +129,10 @@ const FeedbackPage: React.FC = () => {
         
         <div className={styles.infoBox}>
           <h2 className="text-xl font-semibold mb-3">Why Your Feedback Matters</h2>
-          <p className="mb-3">Your honest feedback is invaluable for personal and professional growth. It helps:</p>
-          <ul className="list-disc pl-5 mb-3 space-y-1">
-            <li>Identify blind spots in skills or behavior</li>
-            <li>Provide new perspectives</li>
-            <li>Encourage continuous improvement</li>
-            <li>Enhance collaboration and service</li>
-          </ul>
-          <p className="font-medium">Your feedback remains anonymous unless you choose to provide your name or email.</p>
+          <p className="mb-3">Your honest feedback is invaluable for personal and professional growth. </p>
         </div>
+        <p className="font-medium mb-3">Your feedback remains anonymous unless you choose to provide your name or email.</p>
+
 
         {isSubmitted ? (
           <div className={styles.successMessage}>

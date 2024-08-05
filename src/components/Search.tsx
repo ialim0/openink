@@ -1,13 +1,13 @@
 "use client";
 
-import { Input } from "@/components/input";
-import { Article, TagFrequencyMap } from "@/lib/types";
 import { useState } from "react";
-import Tags from "./Tags";
 import { useParams } from "next/navigation";
+import { Input } from "@/components/input";
+import Tags from "./Tags";
 import Feed from "./Feed";
+import { Article, TagFrequencyMap } from "@/lib/types";
 
-const POSTS_PER_PAGE = 4;
+const POSTS_PER_PAGE = 1;
 
 const Search = ({
   publishedPosts,
@@ -46,35 +46,30 @@ const Search = ({
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
-
       <Tags tagFrequencyMap={tagFrequencyMap} />
-
       {filteredBlogPosts.length === 0 ? (
         <p className="text-gray-500 text-center">No posts found.</p>
       ) : (
         <>
           <Feed articles={paginatedPosts} />
-
           <div className="flex justify-between items-center mt-4">
-            <button
-              className={`px-4 py-2 rounded ${currentPage === 1 ? "cursor-not-allowed text-gray-400" : "text-blue-600 hover:text-blue-800"}`}
-              onClick={handlePreviousPage}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-
-            <span className="text-gray-500">
-              Page {currentPage} of {totalPages}
-            </span>
-
-            <button
-              className={`px-4 py-2 rounded ${currentPage === totalPages ? "cursor-not-allowed text-gray-400" : "text-blue-600 hover:text-blue-800"}`}
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
+            {currentPage > 1 && (
+              <button
+                className="px-4 py-2 rounded text-blue-600 hover:text-blue-800"
+                onClick={handlePreviousPage}
+              >
+                Previous
+              </button>
+            )}
+            <span className="text-gray-500">Page {currentPage} of {totalPages}</span>
+            {currentPage < totalPages && (
+              <button
+                className="px-4 py-2 rounded text-blue-600 hover:text-blue-800"
+                onClick={handleNextPage}
+              >
+                Next
+              </button>
+            )}
           </div>
         </>
       )}

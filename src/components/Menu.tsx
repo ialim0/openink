@@ -30,12 +30,12 @@ const Menu: React.FC = () => {
             <main className="container mx-auto px-6 py-8">
                 <section className="mb-12">
                     <div className="flex flex-col md:flex-row items-center">
-                        <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 md:mb-0 md:mr-8">
+                        <div className="w-48 h-48 md:w-64 md:h-64  overflow-hidden mb-6 md:mb-0 md:mr-8">
                             <Image
                                 src="/images/profile.png"
                                 alt="Alim Idrissou"
-                                width={256}
-                                height={256}
+                                width={200}
+                                height={280}
                                 className="object-cover"
                             />
                         </div>
