@@ -13,6 +13,7 @@ const Articles = async () => {
         publishedPosts={publishedPosts}
         tagFrequencyMap={tagFrequencyMap}
       />
+      
     </div>
   );
 };

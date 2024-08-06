@@ -1,13 +1,17 @@
+// components/Search.tsx
+
 "use client";
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import { useDarkMode } from "@/context/DarkModeContext";
 import { Input } from "@/components/input";
 import Tags from "./Tags";
 import Feed from "./Feed";
+import Newsletter from "./Newsletter";
 import { Article, TagFrequencyMap } from "@/lib/types";
 
-const POSTS_PER_PAGE =4 ;
+const POSTS_PER_PAGE = 4;
 
 const Search = ({
   publishedPosts,
@@ -16,6 +20,7 @@ const Search = ({
   publishedPosts: Article[];
   tagFrequencyMap: TagFrequencyMap;
 }) => {
+  const { darkMode } = useDarkMode();
   const [searchValue, setSearchValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { slug } = useParams();
@@ -39,8 +44,15 @@ const Search = ({
     if (currentPage > 1) setCurrentPage((prevPage) => prevPage - 1);
   };
 
+  const styles = {
+    container: `max-w-4xl mx-auto p-8 rounded-lg shadow-lg ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`,
+    heading: `text-3xl font-bold mb-6 ${darkMode ? "text-gray-100" : "text-gray-900"}`,
+    button: `px-4 py-2 rounded-md font-medium text-white transition duration-150 ease-in-out ${darkMode ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`,
+  };
+
   return (
-    <div className="space-y-5">
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Search Articles</h1>
       <Input
         placeholder={slug ? `Search in #${normalizedSlug}` : "Search Articles"}
         value={searchValue}
@@ -48,31 +60,27 @@ const Search = ({
       />
       <Tags tagFrequencyMap={tagFrequencyMap} />
       {filteredBlogPosts.length === 0 ? (
-        <p className="text-gray-500 text-center">No posts found.</p>
+        <p className="text-gray-500 text-center mt-4">No posts found.</p>
       ) : (
         <>
           <Feed articles={paginatedPosts} />
           <div className="flex justify-between items-center mt-4">
             {currentPage > 1 && (
-              <button
-                className="px-4 py-2 rounded text-blue-600 hover:text-blue-800"
-                onClick={handlePreviousPage}
-              >
+              <button className={styles.button} onClick={handlePreviousPage}>
                 Previous
               </button>
             )}
-            <span className="text-gray-500">Page {currentPage} of {totalPages}</span>
+            <span className={`text-${darkMode ? 'gray-300' : 'gray-500'}`}>Page {currentPage} of {totalPages}</span>
             {currentPage < totalPages && (
-              <button
-                className="px-4 py-2 rounded text-blue-600 hover:text-blue-800"
-                onClick={handleNextPage}
-              >
+              <button className={styles.button} onClick={handleNextPage}>
                 Next
               </button>
             )}
           </div>
         </>
       )}
+
+      {/* <Newsletter /> */}
     </div>
   );
 };
