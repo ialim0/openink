@@ -27,24 +27,21 @@ const HomePage: React.FC = () => {
           className="text-center px-4 py-12 sm:py-20"
         >
           <h1 className={`text-4xl sm:text-6xl font-extrabold ${darkMode ? 'text-blue-400' : 'text-blue-600'} mb-4`}>
-            Hi, I'm Alim Idrissou.
-          </h1>
+          Welcome! I'm Alim Idrissou,          </h1>
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
             className={`text-2xl sm:text-3xl font-bold ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-6`}
           >
-            Software Engineer (AI)
-          </motion.h2>
+AI-focused Software Engineer dedicated to transforming abstract concepts into concrete solutions.          </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             className={`mt-4 sm:mt-6 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
           >
-            Passionate about leveraging cutting-edge technologies to solve complex problems.
-      
+I'm passionate about creating smart, efficient solutions that drive innovation and improve lives.      
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
