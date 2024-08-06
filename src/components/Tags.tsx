@@ -16,18 +16,13 @@ const Tags = ({ tagFrequencyMap }: { tagFrequencyMap: TagFrequencyMap }) => {
   return (
     <div className="flex flex-wrap gap-2 mb-6">
       {sortedTags.map(({ name, number }) => {
-        const isSelected = name === slug;
         return (
           <button
             key={name}
             onClick={() => handleTagClick(name)}
             className={`
               px-2 py-1 text-sm
-              transition-colors duration-200
-              ${isSelected
-                ? 'font-semibold text-blue-600 underline'
-                : 'text-gray-600 hover:text-gray-800'
-              }
+         
             `}
           >
             {name}
