@@ -34,7 +34,7 @@ const Menu: React.FC = () => {
                             <Image
                                 src="/images/profile.png"
                                 alt="Alim Idrissou"
-                                width={200}
+                                width={180}
                                 height={280}
                                 className="object-cover"
                             />
