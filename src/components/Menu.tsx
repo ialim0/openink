@@ -54,7 +54,7 @@ const Menu: React.FC = () => {
                             {
                                 title: "Technologies",
                                 icon: <FaRobot />,
-                                items: ['AI (Retrieval & Search)', 'Cloud (Deployment)', 'Digital Finance (Financial literacy & Crypto)']
+                                items: ['LLM Engineering', 'Planning and Local Development', 'Blockchain & Crypto']
                             },
                             {
                                 title: "Tools & Frameworks",
