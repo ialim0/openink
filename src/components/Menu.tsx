@@ -28,8 +28,8 @@ const Menu: React.FC = () => {
 
 
             <main className="container mx-auto px-6 py-8">
-                <section className="mb-12">
-                    <div className="flex flex-col md:flex-row items-center">
+            <section className="mt-60 md:mt-0 mb-12">
+                    <div className="flex flex-col  md:flex-row items-center">
                         <div className="w-48 h-48 md:w-64 md:h-64  overflow-hidden mb-6 md:mb-0 md:mr-8">
                             <Image
                                 src="/images/profile.png"
