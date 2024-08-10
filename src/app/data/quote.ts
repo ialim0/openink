@@ -1,6 +1,10 @@
 const quotes = [
     {
-      quote: "The only limit to our realization of tomorrow is our doubts of today.",
+      quote: "Good ideas are always crazy until they're not.",
+      author: "Larry Page",
+    },
+    {
+      quote: "Il n'est pas vrai que la ligne droite soit toujours le plus court chemin.",
       author: "Franklin D. Roosevelt",
     },
     {
