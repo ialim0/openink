@@ -4,7 +4,7 @@ const quotes = [
       author: "Larry Page",
     },
     {
-      quote: "It's not true that a straight line is always the shortest route. ",
+      quote: "It's not true that a straight line is always the shortest route.",
       author: "Gotthold Ephraim Lessing",
     },
 
