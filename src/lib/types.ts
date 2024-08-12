@@ -1,4 +1,4 @@
-import { type } from "os";
+import { ReactNode } from "react";
 
 export interface LinkItem {
   id: number;
