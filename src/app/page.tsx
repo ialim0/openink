@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import { ProjectCard, ProjectModal } from '@/components/ProjectCard';
-import { projects } from './blog/projects';
+import { projects } from './projects';
 import { useDarkMode } from '@/context/DarkModeContext';
 
 const HomePage: React.FC = () => {
