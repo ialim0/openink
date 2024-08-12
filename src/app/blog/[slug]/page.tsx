@@ -14,7 +14,7 @@ import { Article } from "@/lib/types";
 import { Redis } from "@upstash/redis";
 import { ReportView } from './view';
 import { LikeButton } from '@/components/LikeButton';
-import { Clock, Eye, User } from 'lucide-react';
+import { Clock, Eye, User, Heart } from 'lucide-react';
 
 interface Block {
   id: string;
@@ -50,8 +50,8 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
       
       <header className="mb-12">
         <div className="relative w-full h-96 mb-8">
-          <Image 
-            src={postDetails.coverImage} 
+          <Image
+            src={postDetails.coverImage}
             alt={postDetails.title}
             layout="fill"
             objectFit="cover"
@@ -74,7 +74,6 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
             <Eye size={18} className="mr-2" />
             <span>{viewsCount} views</span>
           </div>
-          <LikeButton slug={postDetails.slug} />
         </div>
         
         <div className="flex items-center space-x-4">
@@ -96,6 +95,19 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
         shareUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/${postDetails.slug}?id=${postDetails.id}`}
         title={postDetails.title}
       />
+
+      <div className="mt-12 border-t pt-8">
+        <div className="flex items-center justify-center space-x-4">
+          <Heart size={24} className="text-red-500" />
+          <span className="text-lg font-semibold">Enjoyed this post? Show your love!</span>
+        </div>
+        <div className="mt-4 flex justify-center">
+          <LikeButton slug={postDetails.slug} size="large" />
+        </div>
+        <p className="text-center mt-4 text-gray-600">
+          Your appreciation helps us create more great content!
+        </p>
+      </div>
 
       <section className="mt-16 border-t pt-12">
         <div className="flex justify-between items-center mb-8">

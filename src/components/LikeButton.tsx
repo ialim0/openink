@@ -3,15 +3,26 @@
 import { useState, useEffect } from 'react';
 import { Heart } from 'lucide-react';
 
-export function LikeButton({ slug }: { slug: string }) {
+interface LikeButtonProps {
+  slug: string;
+  size?: 'small' | 'large';
+}
+
+export function LikeButton({ slug, size = 'small' }: LikeButtonProps) {
   const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/like?slug=${slug}`)
-      .then(res => res.json())
-      .then(data => setLikes(data.likes));
+    fetchLikes();
+    const hasLiked = localStorage.getItem(`liked_${slug}`);
+    if (hasLiked) setHasLiked(true);
   }, [slug]);
+
+  const fetchLikes = async () => {
+    const response = await fetch(`/api/like?slug=${slug}`);
+    const data = await response.json();
+    setLikes(data.likes);
+  };
 
   const handleLike = async () => {
     if (hasLiked) return;
@@ -27,15 +38,23 @@ export function LikeButton({ slug }: { slug: string }) {
     if (res.ok) {
       setLikes(prev => prev + 1);
       setHasLiked(true);
+      localStorage.setItem(`liked_${slug}`, 'true');
     }
   };
 
+  const buttonClass = size === 'large' 
+    ? 'p-4 text-xl'
+    : 'p-2 text-sm';
+
   return (
-    <button 
-      onClick={handleLike} 
-      className={`flex items-center space-x-2 ${hasLiked ? 'text-red-500' : 'text-gray-500'} hover:text-red-500 transition-colors`}
+    <button
+      onClick={handleLike}
+      className={`flex items-center space-x-2 ${buttonClass} ${
+        hasLiked ? 'text-red-500' : 'text-gray-500'
+      } hover:text-red-500 transition-colors duration-200`}
+      disabled={hasLiked}
     >
-      <Heart size={20} fill={hasLiked ? 'currentColor' : 'none'} />
+      <Heart fill={hasLiked ? 'currentColor' : 'none'} />
       <span>{likes}</span>
     </button>
   );
