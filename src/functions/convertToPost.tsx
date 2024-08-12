@@ -16,5 +16,7 @@ export const convertToPost = (item: any): Article => ({
   coverImage: item.properties?.coverImage?.files[0]?.file?.url,
   author: item.properties.author.created_by.name,
   wordCount: 0,
-  readTime: undefined
+  readTime: undefined,
+  content: undefined,
+  viewsCount: undefined
 });
