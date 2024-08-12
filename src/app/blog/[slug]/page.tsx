@@ -98,15 +98,12 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 
       <div className="mt-12 border-t pt-8">
         <div className="flex items-center justify-center space-x-4">
-          <Heart size={24} className="text-red-500" />
           <span className="text-lg font-semibold">Enjoyed this post? Show your love!</span>
         </div>
         <div className="mt-4 flex justify-center">
           <LikeButton slug={postDetails.slug} size="large" />
         </div>
-        <p className="text-center mt-4 text-gray-600">
-          Your appreciation helps us create more great content!
-        </p>
+     
       </div>
 
       <section className="mt-16 border-t pt-12">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams } from "next/navigation";
 import { useDarkMode } from "@/context/DarkModeContext";
 import { Input } from "@/components/input";
@@ -8,7 +8,7 @@ import Tags from "./Tags";
 import Feed from "./Feed";
 import { Article, TagFrequencyMap } from "@/lib/types";
 
-const POSTS_PER_PAGE = 4;
+const POSTS_PER_PAGE = 6;
 
 const Search = ({
   publishedPosts,
@@ -24,56 +24,56 @@ const Search = ({
 
   const normalizedSlug = typeof slug === "string" ? slug.replace(/%20/g, " ") : "";
 
-  const filteredBlogPosts = publishedPosts.filter((post) => {
-    const searchContent = `${post.title} ${post.summary} ${post.tags?.join(" ") || ""}`;
-    return searchContent.toLowerCase().includes(searchValue.toLowerCase());
-  });
+  const filteredBlogPosts = useMemo(() => {
+    return publishedPosts.filter((post) => {
+      const searchContent = `${post.title} ${post.summary} ${post.tags?.join(" ") || ""}`;
+      return searchContent.toLowerCase().includes(searchValue.toLowerCase());
+    });
+  }, [publishedPosts, searchValue]);
 
   const totalPages = Math.ceil(filteredBlogPosts.length / POSTS_PER_PAGE);
-  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-  const paginatedPosts = filteredBlogPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+  const paginatedPosts = filteredBlogPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage((prevPage) => prevPage + 1);
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) setCurrentPage((prevPage) => prevPage - 1);
-  };
-
-  const styles = {
-    container: `max-w-4xl mx-auto p-8 rounded-lg shadow-lg ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`,
-    heading: `text-3xl font-bold mb-6 ${darkMode ? "text-gray-100" : "text-gray-900"}`,
-    button: `px-4 py-2 rounded-md font-medium text-white transition duration-150 ease-in-out ${darkMode ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`,
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    window.scrollTo(0, 0);
   };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.heading}>Search Articles</h1>
+    <div className={`max-w-4xl mx-auto p-6 ${darkMode ? "text-gray-100" : "text-gray-900"}`}>
+      <h1 className="text-3xl font-bold mb-6">Explore Articles</h1>
       <Input
-        placeholder={slug ? `Search in #${normalizedSlug}` : "Search Articles"}
+        placeholder={slug ? `Search in #${normalizedSlug}` : "Search articles..."}
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
+        className="mb-6"
       />
-      <Tags tagFrequencyMap={tagFrequencyMap} />
+      <Tags tagFrequencyMap={tagFrequencyMap}  />
       {filteredBlogPosts.length === 0 ? (
-        <p className="text-gray-500 text-center mt-4">No posts found.</p>
+        <p className="text-center mt-8 text-lg">No posts found. Try a different search term.</p>
       ) : (
         <>
           <Feed articles={paginatedPosts} />
-          <div className="flex justify-between items-center mt-4">
-            {currentPage > 1 && (
-              <button className={styles.button} onClick={handlePreviousPage}>
-                Previous
-              </button>
-            )}
-            <span className={`text-${darkMode ? 'gray-300' : 'gray-500'}`}>Page {currentPage} of {totalPages}</span>
-            {currentPage < totalPages && (
-              <button className={styles.button} onClick={handleNextPage}>
-                Next
-              </button>
-            )}
-          </div>
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center mt-8 space-x-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`px-3 py-1 rounded-md transition-colors ${
+                    currentPage === page
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+          )}
         </>
       )}
     </div>
