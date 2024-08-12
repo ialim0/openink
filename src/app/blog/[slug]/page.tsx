@@ -1,24 +1,28 @@
-import "react-notion/src/styles.css";
 import "prismjs/themes/prism-tomorrow.css";
 import { Fragment, cache } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import notion from "@/lib";
 import { convertToPost } from "@/functions/convertToPost";
-import { getAllPosts } from "@/functions/getAllPosts";
 import { getTagFilteredPosts } from "@/functions/articleFilteredPosts";
 import { renderBlock } from "@/components/Render";
 import TopScrollButton from "@/components/TopScrollButton";
-import Container from '@/components/Container';
 import ArticleList from '@/components/ArticleList';
 import SocialshareButtons from "@/components/SocialshareButtons";
 import getLocalizedDate from "@/utils/getLocalizedDate";
 import { Article } from "@/lib/types";
+import { Redis } from "@upstash/redis";
+import { ReportView } from './view';
+import { LikeButton } from '@/components/LikeButton';
+import { Clock, Eye, User } from 'lucide-react';
 
 interface Block {
   id: string;
   type: string;
   [key: string]: any;
 }
+
+const redis = Redis.fromEnv();
 
 const getBlocks = cache(async (blockID: string) => {
   const blockId = blockID.replace(/-/g, '');
@@ -38,34 +42,66 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 
   if (!blocks) return null;
 
+  const viewsCount = await redis.get<number>(`pageviews:posts:${postDetails.slug}`) || 0;
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
-      <img className="w-full h-64 object-cover rounded-lg" src={postDetails.coverImage} alt={postDetails.title} />
+    <div className="max-w-3xl mx-auto px-4 py-12">
+      <ReportView slug={postDetails.slug} />
       
-      <header className="text-center space-y-4">
-        <h1 className="text-3xl font-bold">{postDetails.title}</h1>
-        <div className="text-sm text-gray-600">
-          <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
-          <span className="mx-2">•</span>
-          <span>{postDetails.author}</span>
+      <header className="mb-12">
+        <div className="relative w-full h-96 mb-8">
+          <Image 
+            src={postDetails.coverImage} 
+            alt={postDetails.title}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg shadow-lg"
+          />
         </div>
-        <SocialshareButtons
-          shareUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/${postDetails.slug}?id=${postDetails.id}`}
-          title={postDetails.title}
-        />
+        
+        <h1 className="text-4xl font-bold mb-4">{postDetails.title}</h1>
+        
+        <div className="flex items-center space-x-6 text-gray-600 mb-6">
+          <div className="flex items-center">
+            <User size={18} className="mr-2" />
+            <span>{postDetails.author}</span>
+          </div>
+          <div className="flex items-center">
+            <Clock size={18} className="mr-2" />
+            <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
+          </div>
+          <div className="flex items-center">
+            <Eye size={18} className="mr-2" />
+            <span>{viewsCount} views</span>
+          </div>
+          <LikeButton slug={postDetails.slug} />
+        </div>
+        
+        <div className="flex items-center space-x-4">
+          {postDetails.tags && postDetails.tags.map((tag, index) => (
+            <span key={index} className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm">
+              {tag}
+            </span>
+          ))}
+        </div>
       </header>
 
-      <article className="prose prose-lg max-w-none">
+      <article className="prose prose-lg max-w-none mb-12">
         {blocks.map((block) => (
           <Fragment key={block.id}>{renderBlock(block)}</Fragment>
         ))}
       </article>
 
-      <section className="border-t pt-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Latest articles</h2>
+      <SocialshareButtons
+        shareUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/${postDetails.slug}?id=${postDetails.id}`}
+        title={postDetails.title}
+      />
+
+      <section className="mt-16 border-t pt-12">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-bold">Related Articles</h2>
           <Link href="/blog" className="text-blue-600 hover:underline">
-            More articles →
+            View all articles →
           </Link>
         </div>
         <ArticleList articles={tagPosts} />

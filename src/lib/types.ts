@@ -13,6 +13,8 @@ export type FooterNavItem = {
 };
 
 export type Article = {
+  content: any;
+  viewsCount: ReactNode;
   wordCount: number;
   readTime: any;
   id: string;

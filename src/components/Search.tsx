@@ -1,5 +1,3 @@
-// components/Search.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -8,7 +6,6 @@ import { useDarkMode } from "@/context/DarkModeContext";
 import { Input } from "@/components/input";
 import Tags from "./Tags";
 import Feed from "./Feed";
-import Newsletter from "./Newsletter";
 import { Article, TagFrequencyMap } from "@/lib/types";
 
 const POSTS_PER_PAGE = 4;
@@ -79,8 +76,6 @@ const Search = ({
           </div>
         </>
       )}
-
-      {/* <Newsletter /> */}
     </div>
   );
 };
