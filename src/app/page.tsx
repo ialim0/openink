@@ -50,7 +50,7 @@ I'm passionate about creating smart, efficient solutions that drive innovation a
             className="mt-8 sm:mt-10 flex justify-center space-x-4"
           >
             <a
-              href="#projects"
+              href="https://github.com/ialim0"
               className={`px-6 py-3 rounded-full text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out ${darkMode ? 'hover:bg-blue-500' : ''}`}
             >
               View Projects
@@ -64,7 +64,7 @@ I'm passionate about creating smart, efficient solutions that drive innovation a
           </motion.div>
         </motion.div>
 
-        <div className="mt-12 sm:mt-16 relative">
+        {/* <div className="mt-12 sm:mt-16 relative">
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={currentIndex}
@@ -113,7 +113,7 @@ I'm passionate about creating smart, efficient solutions that drive innovation a
                 }`}
             />
           ))}
-        </div>
+        </div> */}
       </div>
 
       <AnimatePresence>
