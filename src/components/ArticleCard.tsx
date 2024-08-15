@@ -62,7 +62,7 @@ export default function ArticleCard({ article }: Props) {
                 {article.viewsCount}
               </span>
               <span className="flex items-center">
-                {article.readTime} min read time
+                {article.readTime} min read 
               </span>
             </div>
           </div>
