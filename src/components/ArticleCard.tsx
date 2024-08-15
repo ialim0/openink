@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import slugify from 'slugify';
 import Link from 'next/link';
-import { Clock, Eye } from 'lucide-react';
+import {  Eye } from 'lucide-react';
 import { useDarkMode } from '@/context/DarkModeContext'; 
 import getLocalizedDate from '@/utils/getLocalizedDate';
 import { Article } from '@/lib/types';
@@ -28,11 +28,13 @@ export default function ArticleCard({ article }: Props) {
       <article 
         className={`rounded-lg overflow-hidden border ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'} transition-colors duration-200`}
       >
-        <img
-          className="w-full h-48 object-cover"
-          src={article.coverImage}
-          alt={article.title}
-        />
+<div className="w-full max-h-72 overflow-hidden">
+  <img
+    className="w-full h-auto object-cover"
+    src={article.coverImage}
+    alt={article.title}
+  />
+</div>
         <div className={`p-4 ${darkMode ? 'text-gray-300' : 'text-gray-900'}`}>
           <h2 className={`font-semibold mb-2 line-clamp-2 ${darkMode ? 'text-gray-200' : 'text-gray-600'}`}>
             {article.title}
@@ -60,8 +62,7 @@ export default function ArticleCard({ article }: Props) {
                 {article.viewsCount}
               </span>
               <span className="flex items-center">
-                <Clock size={14} className="mr-1" />
-                {article.readTime} min
+                {article.readTime} min read time
               </span>
             </div>
           </div>

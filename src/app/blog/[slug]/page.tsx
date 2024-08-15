@@ -14,7 +14,7 @@ import { Article } from "@/lib/types";
 import { Redis } from "@upstash/redis";
 import { ReportView } from './view';
 import { LikeButton } from '@/components/LikeButton';
-import { Clock, Eye, User, Heart } from 'lucide-react';
+import { Clock, Eye, User, Heart, Tag } from 'lucide-react';
 
 interface Block {
   id: string;
@@ -45,51 +45,52 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
   const viewsCount = await redis.get<number>(`pageviews:posts:${postDetails.slug}`) || 0;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-12">
+    <div className="max-w-4xl mx-auto px-4 py-12">
       <ReportView slug={postDetails.slug} />
+      
       <header className="mb-12">
-  <div className="relative w-full h-[40rem] mb-8">
-    <Image
-      src={postDetails.coverImage}
-      alt={postDetails.title}
-      layout="fill"
-      objectFit="cover"
-      className="rounded-lg shadow-lg"
-      priority
-    />
-  </div>
+        <div className="relative w-full h-[60vh] mb-8">
+          <Image
+            src={postDetails.coverImage}
+            alt={postDetails.title}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-xl shadow-lg"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-xl"></div>
+          <div className="absolute bottom-0 left-0 p-6 text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">{postDetails.title}</h1>
+            <div className="flex flex-wrap items-center space-x-6 text-sm md:text-base">
+              <div className="flex items-center">
+                <User size={18} className="mr-2" />
+                <span>{postDetails.author}</span>
+              </div>
+              <div className="flex items-center">
+                <Clock size={18} className="mr-2" />
+                <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
+              </div>
+              <div className="flex items-center">
+                <Eye size={18} className="mr-2" />
+                <span>{viewsCount} views</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <h1 className="text-4xl font-bold mb-4">{postDetails.title}</h1>
-
-  <div className="flex items-center space-x-6 text-gray-600 mb-6">
-    <div className="flex items-center">
-      <User size={18} className="mr-2" />
-      <span>{postDetails.author}</span>
-    </div>
-    <div className="flex items-center">
-      <Clock size={18} className="mr-2" />
-      <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
-    </div>
-    <div className="flex items-center">
-      <Eye size={18} className="mr-2" />
-      <span>{viewsCount} views</span>
-    </div>
-  </div>
-
-  <div className="flex items-center space-x-4">
-    {postDetails.tags &&
-      postDetails.tags.map((tag, index) => (
-        <span
-          key={index}
-          className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm"
-        >
-          {tag}
-        </span>
-      ))}
-  </div>
-</header>
-
-
+        <div className="flex flex-wrap items-center space-x-2 mb-6">
+          <Tag size={20} className="text-gray-600" />
+          {postDetails.tags &&
+            postDetails.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm hover:bg-gray-300 transition-colors duration-200"
+              >
+                {tag}
+              </span>
+            ))}
+        </div>
+      </header>
 
       <article className="prose prose-lg max-w-none mb-12">
         {blocks.map((block) => (
@@ -109,13 +110,12 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
         <div className="mt-4 flex justify-center">
           <LikeButton slug={postDetails.slug} size="large" />
         </div>
-
       </div>
 
       <section className="mt-16 border-t pt-12">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold">Related Articles</h2>
-          <Link href="/blog" className="text-blue-600 hover:underline">
+          <Link href="/blog" className="text-blue-600 hover:underline transition-colors duration-200">
             View all articles →
           </Link>
         </div>
