@@ -1,5 +1,6 @@
 import React, { Fragment, FC, memo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '@/app/post.module.css';
 
 interface TexteProps {
@@ -71,9 +72,9 @@ const Block: FC<BlockProps> = memo(({ block }) => {
       case 'to_do':
         return <ToDo id={id} checked={value.checked} content={value.rich_text} />;
       case 'toggle':
-        return <Toggle summary={value.rich_text} children={block.children} />;
+        return <Toggle summary={value.rich_text}>{block.children?.map((child: any) => <Block key={child.id} block={child} />)}</Toggle>;
       case 'image':
-        return <Image value={value} />;
+        return <NotionImage value={value} />;
       case 'divider':
         return <hr />;
       case 'quote':
@@ -85,20 +86,35 @@ const Block: FC<BlockProps> = memo(({ block }) => {
       case 'bookmark':
         return <Bookmark href={value.url} />;
       case 'table':
-        return <Table value={value} children={block.children} />;
+        return <Table value={value} rows={block.children} />;
       case 'column_list':
-        return <ColumnList children={block.children} />;
+        return <ColumnList columns={block.children} />;
       case 'column':
-        return <Column children={block.children} />;
+        return <Column blocks={block.children} />;
       case 'bulleted_list_item':
         return <BulletedListItem content={value.rich_text} />;
       case 'numbered_list_item':
         return <NumberedListItem content={value.rich_text} />;
+      case 'callout':
+        return <Callout icon={value.icon} content={value.rich_text} />;
+      case 'equation':
+        return <Equation content={value.expression} />;
+      case 'synced_block':
+        return <SyncedBlock block={block} />;
+      case 'table_of_contents':
+        return <TableOfContents />;
+      case 'breadcrumb':
+        return <Breadcrumb />;
+      case 'video':
+        return <Video value={value} />;
+      case 'pdf':
+        return <PDF value={value} />;
+      case 'audio':
+        return <Audio value={value} />;
       default:
         return <UnsupportedBlock type={type} />;
     }
   };
-
 
   return (
     <div className={`${styles.block} ${styles[type]}`} key={id}>
@@ -106,6 +122,8 @@ const Block: FC<BlockProps> = memo(({ block }) => {
     </div>
   );
 });
+
+Block.displayName = 'Block';
 
 interface ParagraphProps {
   content: any;
@@ -125,10 +143,6 @@ const Heading: FC<HeadingProps> = ({ level, content }) => {
   return <HeadingTag><Texte title={content} /></HeadingTag>;
 };
 
-
-
-
-
 interface ToDoProps {
   id: string;
   checked: boolean;
@@ -144,13 +158,13 @@ const ToDo: FC<ToDoProps> = ({ id, checked, content }) => (
 
 interface ToggleProps {
   summary: any;
-  children?: any[];
+  children: React.ReactNode;
 }
 
 const Toggle: FC<ToggleProps> = ({ summary, children }) => (
   <details>
     <summary><Texte title={summary} /></summary>
-    {children?.map((child) => <Block key={child.id} block={child} />)}
+    {children}
   </details>
 );
 
@@ -163,12 +177,12 @@ interface ImageProps {
   };
 }
 
-const Image: FC<ImageProps> = ({ value }) => {
+const NotionImage: FC<ImageProps> = ({ value }) => {
   const src = value.type === 'external' ? value.external!.url : value.file!.url;
   const caption = value.caption ? value.caption[0]?.plain_text : '';
   return (
     <figure className={styles.image}>
-      <img src={src} alt={caption} />
+      <Image src={src} alt={caption || 'Notion image'} width={500} height={300} layout="responsive" />
       {caption && <figcaption>{caption}</figcaption>}
     </figure>
   );
@@ -230,13 +244,13 @@ interface TableProps {
   value: {
     has_column_header: boolean;
   };
-  children?: any[];
+  rows: any[];
 }
 
-const Table: FC<TableProps> = ({ value, children }) => (
+const Table: FC<TableProps> = ({ value, rows }) => (
   <table className={styles.table}>
     <tbody>
-      {children?.map((row, rowIndex) => (
+      {rows.map((row, rowIndex) => (
         <tr key={row.id}>
           {row.table_row?.cells.map((cell: any, cellIndex: number) => {
             const CellTag = value.has_column_header && rowIndex === 0 ? 'th' : 'td';
@@ -249,22 +263,22 @@ const Table: FC<TableProps> = ({ value, children }) => (
 );
 
 interface ColumnListProps {
-  children: any[];
+  columns: any[];
 }
 
-const ColumnList: FC<ColumnListProps> = ({ children }) => (
+const ColumnList: FC<ColumnListProps> = ({ columns }) => (
   <div className={styles.row}>
-    {children.map((column) => <Block key={column.id} block={column} />)}
+    {columns.map((column) => <Block key={column.id} block={column} />)}
   </div>
 );
 
 interface ColumnProps {
-  children: any[];
+  blocks: any[];
 }
 
-const Column: FC<ColumnProps> = ({ children }) => (
+const Column: FC<ColumnProps> = ({ blocks }) => (
   <div className={styles.column}>
-    {children.map((child) => <Block key={child.id} block={child} />)}
+    {blocks.map((block) => <Block key={block.id} block={block} />)}
   </div>
 );
 
@@ -284,6 +298,96 @@ const NumberedListItem: FC<ListItemProps> = ({ content }) => (
   </li>
 );
 
+interface CalloutProps {
+  icon: string;
+  content: any;
+}
+
+const Callout: FC<CalloutProps> = ({ icon, content }) => (
+  <div className={styles.callout}>
+    <span className={styles.calloutIcon}>{icon}</span>
+    <div className={styles.calloutContent}>
+      <Texte title={content} />
+    </div>
+  </div>
+);
+
+interface EquationProps {
+  content: string;
+}
+
+const Equation: FC<EquationProps> = ({ content }) => (
+  <div className={styles.equation}>{content}</div>
+);
+
+interface SyncedBlockProps {
+  block: any;
+}
+
+const SyncedBlock: FC<SyncedBlockProps> = ({ block }) => (
+  <div className={styles.syncedBlock}>
+    {block.children?.map((child: any) => <Block key={child.id} block={child} />)}
+  </div>
+);
+
+const TableOfContents: FC = () => (
+  <div className={styles.tableOfContents}>Table of Contents placeholder</div>
+);
+
+const Breadcrumb: FC = () => (
+  <div className={styles.breadcrumb}>Breadcrumb placeholder</div>
+);
+
+interface VideoProps {
+  value: {
+    type: string;
+    external?: { url: string };
+    file?: { url: string };
+  };
+}
+
+const Video: FC<VideoProps> = ({ value }) => {
+  const src = value.type === 'external' ? value.external!.url : value.file!.url;
+  return (
+    <div className={styles.video}>
+      <video controls src={src} />
+    </div>
+  );
+};
+
+interface PDFProps {
+  value: {
+    type: string;
+    external?: { url: string };
+    file?: { url: string };
+  };
+}
+
+const PDF: FC<PDFProps> = ({ value }) => {
+  const src = value.type === 'external' ? value.external!.url : value.file!.url;
+  return (
+    <div className={styles.pdf}>
+      <iframe src={`https://docs.google.com/viewer?url=${encodeURIComponent(src)}&embedded=true`} />
+    </div>
+  );
+};
+
+interface AudioProps {
+  value: {
+    type: string;
+    external?: { url: string };
+    file?: { url: string };
+  };
+}
+
+const Audio: FC<AudioProps> = ({ value }) => {
+  const src = value.type === 'external' ? value.external!.url : value.file!.url;
+  return (
+    <div className={styles.audio}>
+      <audio controls src={src} />
+    </div>
+  );
+};
 
 interface UnsupportedBlockProps {
   type: string;
