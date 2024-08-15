@@ -47,43 +47,49 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
       <ReportView slug={postDetails.slug} />
-      
       <header className="mb-12">
-        <div className="relative w-full h-96 mb-8">
-          <Image
-            src={postDetails.coverImage}
-            alt={postDetails.title}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg shadow-lg"
-          />
-        </div>
-        
-        <h1 className="text-4xl font-bold mb-4">{postDetails.title}</h1>
-        
-        <div className="flex items-center space-x-6 text-gray-600 mb-6">
-          <div className="flex items-center">
-            <User size={18} className="mr-2" />
-            <span>{postDetails.author}</span>
-          </div>
-          <div className="flex items-center">
-            <Clock size={18} className="mr-2" />
-            <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
-          </div>
-          <div className="flex items-center">
-            <Eye size={18} className="mr-2" />
-            <span>{viewsCount} views</span>
-          </div>
-        </div>
-        
-        <div className="flex items-center space-x-4">
-          {postDetails.tags && postDetails.tags.map((tag, index) => (
-            <span key={index} className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </header>
+  <div className="relative w-full h-[40rem] mb-8">
+    <Image
+      src={postDetails.coverImage}
+      alt={postDetails.title}
+      layout="fill"
+      objectFit="cover"
+      className="rounded-lg shadow-lg"
+      priority
+    />
+  </div>
+
+  <h1 className="text-4xl font-bold mb-4">{postDetails.title}</h1>
+
+  <div className="flex items-center space-x-6 text-gray-600 mb-6">
+    <div className="flex items-center">
+      <User size={18} className="mr-2" />
+      <span>{postDetails.author}</span>
+    </div>
+    <div className="flex items-center">
+      <Clock size={18} className="mr-2" />
+      <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
+    </div>
+    <div className="flex items-center">
+      <Eye size={18} className="mr-2" />
+      <span>{viewsCount} views</span>
+    </div>
+  </div>
+
+  <div className="flex items-center space-x-4">
+    {postDetails.tags &&
+      postDetails.tags.map((tag, index) => (
+        <span
+          key={index}
+          className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm"
+        >
+          {tag}
+        </span>
+      ))}
+  </div>
+</header>
+
+
 
       <article className="prose prose-lg max-w-none mb-12">
         {blocks.map((block) => (
@@ -103,7 +109,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
         <div className="mt-4 flex justify-center">
           <LikeButton slug={postDetails.slug} size="large" />
         </div>
-     
+
       </div>
 
       <section className="mt-16 border-t pt-12">
