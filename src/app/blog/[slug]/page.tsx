@@ -47,21 +47,16 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <ReportView slug={postDetails.slug} />
-      
+
       <header className="mb-12">
-      <div className="relative w-full aspect-[16/9] mb-8">
-      <Image
+        <div className="relative w-full aspect-[16/9] mb-8">
+        <div className="w-full max-h-full overflow-hidden">
+  <img
+    className="w-full h-auto object-cover"
     src={postDetails.coverImage}
     alt={postDetails.title}
-    layout="fill"
-    objectFit="cover"
-    objectPosition="center"
-    className="rounded-xl shadow-lg"
-    priority
-    quality={90}
-    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-   
   />
+</div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-xl"></div>
           <div className="absolute bottom-0 left-0 p-6 text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">{postDetails.title}</h1>
