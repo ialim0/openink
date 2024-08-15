@@ -3,7 +3,7 @@ const siteData = {
   author: 'Alim Idrissou',
   headerTitle: 'Alim Idrissou',
   profileUrl: '/profile.jpg',
-  headerDescription: 'Software Engineer | AI Enthusiast',
+  headerDescription: 'Software Engineer | AI Engineer',
   footerText: '© 2023 Alim Idrissou. All rights reserved.',
   language: 'en-us',
   locale: 'en-US',
