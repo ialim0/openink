@@ -1,138 +1,96 @@
-.container {
-    padding: 0 20px;
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.5;
-    white-space: pre-line;
-  }
-  
-  .container h1 {
-    font-size: 32px;
-  }
-  
-  .container img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .container figure {
-    margin-left: 0;
-    margin-right: 0;
-  }
-  
-  .container figcaption {
-    opacity: 0.6;
-  }
-  
-  .name {
-    font-size: 36px;
-  }
-  
-  .back {
-    display: inline-block;
-    margin-bottom: 20px;
-  }
-  
-  .bold {
-    font-weight: bold;
-  }
-  
-  .code {
-    font-family: monospace;
-    background-color: rgb(242, 242, 242);
-    padding: 2px 4px;
-    border-radius: 2px;
-  }
-  
-  .italic {
-    font-style: italic;
-  }
-  
-  .pre {
-    background-color: rgb(242, 242, 242);
-    padding: 2px 4px;
-    margin: 20px 0;
-    line-height: 2.3;
-    border-radius: 12px;
-    overflow: auto;
-  }
-  
-  .code_block {
-    padding: 20px;
-    font-family: monospace;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .file {
-    padding: 2px 4px;
-    text-decoration: none;
-  }
-  
-  .file a {
-    color: inherit;
-  }
-  
-  .file:hover {
-    background: rgba(55, 53, 47, 0.08);
-    cursor: pointer;
-    border-radius: 2px;
-  }
-  
-  .italic {
-    font-style: italic;
-  }
-  
-  .strikethrough {
-    text-decoration: line-through;
-  }
-  
-  .underline {
-    text-decoration: underline;
-  }
-  
-  .bookmark {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .table {
-    border: 1px solid currentColor;
-    border-collapse: collapse;
-  }
-  .table th {
-    border: 1px solid currentColor;
-    background-color: rgb(242, 242, 242);
-    padding: 6px 12px;
-  }
-  .table td {
-    border: 1px solid currentColor;
-    padding: 6px 12px;
-  }
-  
-  .row {
-    display: flex;
-  }
-  
-  .row > div {
-    flex: 1;
-  }
-  
-  .childPage {
-    border: 1px solid currentColor;
-    padding: 20px;
-    border-radius: 12px;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .code,
-    .table,
-    .pre {
-      background-color: rgb(15, 8, 28);
-    }
-    .file:hover {
-      background: rgba(255, 255, 255, 0.1);
-      cursor: pointer;
-      border-radius: 2px;
-    }
-  }
+.block {
+  margin-bottom: 1.5rem;
+}
+
+.heading_1 {
+  font-size: 2.5rem;
+  margin-top: 2rem;
+}
+
+.heading_2 {
+  font-size: 2rem;
+  margin-top: 1.5rem;
+}
+
+.heading_3 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.paragraph {
+  line-height: 1.6;
+}
+
+.image {
+  margin: 2rem 0;
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.quote {
+  border-left: 4px solid #ccc;
+  padding-left: 1rem;
+  font-style: italic;
+}
+
+.pre {
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.code_block {
+  font-family: monospace;
+}
+
+.file, .bookmark {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+}
+
+.column {
+  flex: 1;
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.unsupported {
+  color: #999;
+  font-style: italic;
+}
+
+/* Text styles */
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+.underline { text-decoration: underline; }
+.strikethrough { text-decoration: line-through; }
+.code { 
+  font-family: monospace;
+  background-color: #f4f4f4;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
