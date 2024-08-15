@@ -8,7 +8,7 @@ import Tags from "./Tags";
 import Feed from "./Feed";
 import { Article, TagFrequencyMap } from "@/lib/types";
 
-const POSTS_PER_PAGE = 6;
+const POSTS_PER_PAGE = 4;
 
 const Search = ({
   publishedPosts,

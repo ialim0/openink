@@ -16,7 +16,7 @@ export type Article = {
   content: any;
   viewsCount: ReactNode;
   wordCount: number;
-  readTime: any;
+  readTime: string;
   id: string;
   title: string;
   date: string;
