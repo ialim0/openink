@@ -57,25 +57,25 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
     alt={postDetails.title}
   />
 </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-xl"></div>
-          <div className="absolute bottom-0 left-0 p-6 text-white">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">{postDetails.title}</h1>
-            <div className="flex flex-wrap items-center space-x-6 text-sm md:text-base">
-              <div className="flex items-center">
-                <User size={18} className="mr-2" />
-                <span>{postDetails.author}</span>
-              </div>
-              <div className="flex items-center">
-                <Clock size={18} className="mr-2" />
-                <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
-              </div>
-              <div className="flex items-center">
-                <Eye size={18} className="mr-2" />
-                <span>{viewsCount} views</span>
-              </div>
-            </div>
-          </div>
+<div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg"></div>
+    <div className="absolute bottom-0 left-0 p-4 sm:p-6 text-white">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 leading-tight">{postDetails.title}</h1>
+      <div className="flex flex-wrap items-center space-x-4 sm:space-x-6 text-xs sm:text-sm md:text-base">
+        <div className="flex items-center">
+          <User size={16} className="mr-2" />
+          <span>{postDetails.author}</span>
         </div>
+        <div className="flex items-center">
+          <Clock size={16} className="mr-2" />
+          <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
+        </div>
+        <div className="flex items-center">
+          <Eye size={16} className="mr-2" />
+          <span>{viewsCount} views</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
         <div className="flex flex-wrap items-center space-x-2 mb-6">
           <Tag size={20} className="text-gray-600" />
