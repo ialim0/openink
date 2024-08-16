@@ -5,6 +5,7 @@ import AuthProvider from '@/providers /AuthProvider';
 import { LayoutWrapper } from '@/components/LayoutWrapper';
 import { MetaHead } from './MetaHead';
 import './globals.css';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,6 +32,8 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
     <body>
       <AuthProvider>
         <LayoutWrapper>
+        <GoogleAnalytics />
+
           {children}
         </LayoutWrapper>
       </AuthProvider>
