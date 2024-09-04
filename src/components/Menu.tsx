@@ -148,7 +148,7 @@ const Menu: React.FC = () => {
                                 <a href="https://github.com/ialim0" target="_blank" rel="noopener noreferrer" className={`${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-black'} transition-colors duration-300`}>
                                     <FaGithub className="text-3xl" />
                                 </a>
-                                <a href="https://twitter.com/ialim0" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-600 transition-colors duration-300">
+                                <a href="https://twitter.com/ialim01" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-600 transition-colors duration-300">
                                     <FaTwitter className="text-3xl" />
                                 </a>
                                 <a href="mailto:i.alim0229@gmail.com" className="text-red-500 hover:text-red-700 transition-colors duration-300">
