@@ -35,7 +35,7 @@ export const getTagFilteredPosts = async ({
       sorts: [
         {
           property: "date",
-          direction: "ascending",
+          direction: "descending",
         },
       ],
       page_size: 2, // Limit to 2 articles
