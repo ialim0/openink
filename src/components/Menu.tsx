@@ -1,176 +1,137 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { FaRobot, FaMicrochip, FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaCode, FaSyncAlt, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
-import { useDarkMode } from '@/context/DarkModeContext';
-import quotes from '@/app/data/quote';
-
-
+"use client";
+import React from "react";
+import Image from "next/image";
+import { FaGithub, FaLinkedin, FaEnvelope, FaGlobe } from "react-icons/fa";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const Menu: React.FC = () => {
-    const { darkMode, toggleDarkMode } = useDarkMode();
-    const [menuOpen, setMenuOpen] = useState(false);
-    const pathname = usePathname();
+  const { darkMode } = useDarkMode();
 
-
-
-    const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
-
-    const cycleQuote = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-        setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
-    };
-
-    const currentQuote = quotes[currentQuoteIndex];
-
-    return (
-        <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
-
-
-            <main className="container mx-auto px-6 py-8">
-            <section className="mt-60 md:mt-0 mb-12">
-                    <div className="flex flex-col  md:flex-row items-center">
-                        <div className="w-48 h-48 md:w-64 md:h-64  overflow-hidden mb-6 md:mb-0 md:mr-8">
-                            <Image
-                                src="/images/profile.png"
-                                alt="Alim Idrissou"
-                                width={180}
-                                height={280}
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="text-center md:text-left">
-                            <h1 className="text-4xl font-bold mb-2">Alim Idrissou.</h1>
-                            <p className="text-xl text-blue-500 mb-4">Software Engineer (AI)</p>
-                            <p className="text-lg max-w-2xl">
-                                Dedicated to creating innovative solutions through code. </p>
-                        </div>
-                    </div>
-                </section>
-                <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-6">Interests</h2>
-                    <div className="space-y-6">
-                        {[
-                            {
-                                title: "Technologies",
-                                icon: <FaRobot />,
-                                items: ['LLM Engineering', 'Planning and Local Development', 'Blockchain & Crypto']
-                            },
-                            {
-                                title: "Tools & Frameworks",
-                                icon: <FaMicrochip />,
-                                items: ['Langchain', 'Vector Databases', 'Transformers', 'Hugging Face Spaces', 'PyTorch', 'Scikit-learn', 'React', 'Next.js', 'FastAPI', 'Flask']
-                            },
-                            {
-                                title: "Programming Languages",
-                                icon: <FaCode />,
-                                items: ['Python', 'Go', 'Rust', 'JavaScript']
-                            }
-                        ].map((category, index) => (
-                            <div key={index} className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-                                <h3 className="text-xl font-semibold mb-4 flex items-center">
-                                    {React.cloneElement(category.icon, { className: "mr-2 text-blue-500" })}
-                                    {category.title}
-                                </h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {category.items.map((item) => (
-                                        <span key={item} className={`px-3 py-1 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'} ${darkMode ? 'text-white' : 'text-gray-800'} rounded-full text-sm transition-colors duration-300 hover:bg-blue-500 hover:text-white`}>
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-6">Education</h2>
-                    <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-                        <div className="space-y-4">
-                            <div>
-                                <h3 className="text-xl font-semibold">M.S. in Digital Finance</h3>
-                                <a href="https://esmt.sn/" target="_blank" rel="noopener noreferrer" className="text-lg text-blue-500 hover:underline">
-                                    Ecole Supérieure Multinationale des Télécommunications, Sénégal
-                                </a>
-                                <p className="text-md text-gray-500">2021 - 2023</p>
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-semibold">B.S. in Mathematics and Computer Science</h3>
-                                <a href="https://uac.bj/" target="_blank" rel="noopener noreferrer" className="text-lg text-blue-500 hover:underline">
-                                    Université Abomey Calavi, Bénin
-                                </a>
-                                <p className="text-md text-gray-500">2017 - 2021</p>
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-semibold">B.S. in Planning Sciences</h3>
-                                <a href="https://eneam.uac.bj/" target="_blank" rel="noopener noreferrer" className="text-lg text-blue-500 hover:underline">
-                                    Ecole Nationale d'Economie Appliquée et de Management, Bénin
-                                </a>
-                                <p className="text-md text-gray-500">2017 - 2020</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-6">Favorite Quotes</h2>
-                    <div className={`p-8 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg relative overflow-hidden`}>
-                        <div className="absolute top-3 right-3">
-                            <button
-                                onClick={cycleQuote}
-                                className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
-                                aria-label="Next quote"
-                            >
-                                <FaSyncAlt className="w-5 h-5" />
-                            </button>
-                        </div>
-                        <blockquote className="relative">
-                            <FaQuoteLeft className={`absolute top-0 left-0 w-6 h-6 ${darkMode ? 'text-gray-700' : 'text-gray-300'}`} />
-                            <p className="text-xl mt-8 mb-6 mx-8 italic">{currentQuote.quote}</p>
-                            <footer className="text-right mr-8">
-                                <cite className="text-lg text-gray-500 not-italic">— {currentQuote.author}</cite>
-                            </footer>
-                            <FaQuoteRight className={`absolute bottom-0 right-0 w-6 h-6 ${darkMode ? 'text-gray-700' : 'text-gray-300'}`} />
-                        </blockquote>
-                    </div>
-                </section>
-            </main>
-            <footer className={`${darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-200 text-gray-700'} py-12`}>
-                <div className="container mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-center">
-                        <div className="mb-6 md:mb-0">
-                            <h3 className="text-xl font-semibold mb-4">Connect with me</h3>
-                            <div className="flex space-x-6">
-                                <a href="https://www.linkedin.com/in/ialim" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 transition-colors duration-300">
-                                    <FaLinkedin className="text-3xl" />
-                                </a>
-                                <a href="https://github.com/ialim0" target="_blank" rel="noopener noreferrer" className={`${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-black'} transition-colors duration-300`}>
-                                    <FaGithub className="text-3xl" />
-                                </a>
-                                <a href="https://twitter.com/ialim01" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-600 transition-colors duration-300">
-                                    <FaTwitter className="text-3xl" />
-                                </a>
-                                <a href="mailto:i.alim0229@gmail.com" className="text-red-500 hover:text-red-700 transition-colors duration-300">
-                                    <FaEnvelope className="text-3xl" />
-                                </a>
-                            </div>
-                        </div>
-                        <div className="text-center md:text-right">
-                            <p className="text-sm mb-2">Alim Idrissou.</p>
-                            <p className="text-xs">Software Engineer (AI) </p>
-                        </div>
-                    </div>
-                    <div className="border-t border-gray-500 mt-8 pt-8 text-sm text-center">
-            
-                    <p className={`text-center md:text-right italic`}>
-              Note: My legal name is Alimoudine Idrissou.
+  return (
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      <main className="container mx-auto px-6 py-12">
+        {/* Intro */}
+        <section className="flex flex-col md:flex-row items-center mb-12">
+          <div className="w-36 h-36 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 md:mb-0 md:mr-8">
+            <Image
+              src="/images/profile.png"
+              alt="Idrissou Alimoudine"
+              width={200}
+              height={200}
+              className="object-cover rounded-full"
+            />
+          </div>
+          <div className="text-center md:text-left">
+            <h1 className="text-3xl font-bold mb-2">Idrissou Alimoudine</h1>
+            <p className="text-blue-500 mb-2">Software Engineer • Applied AI • Tech for Impact</p>
+            <p className="max-w-xl text-base">
+              I build intelligent solutions that simplify complex problems. My passion? Creating technology that works for people, not the other way around.
             </p>
-                    </div>
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold mb-4">Core Skills</h2>
+          <div className={`p-6 rounded-lg shadow ${darkMode ? "bg-gray-800" : "bg-gray-100"}`}>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm list-disc list-inside">
+              <li>Python, Rust, Go, JavaScript</li>
+              <li>FastAPI, Next.js, PostgreSQL</li>
+              <li>Machine Learning, LLMs & SLMs</li>
+              <li>AWS, GCP, Docker, Redis</li>
+              <li>Edge AI, Ethical AI, Sustainable Tech</li>
+              <li>Git, Bash, Linux</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Featured Work */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold mb-4">Highlighted Projects</h2>
+          <div className={`space-y-6`}>
+            <div className={`p-6 rounded-lg shadow ${darkMode ? "bg-gray-800" : "bg-gray-100"}`}>
+              <h3 className="font-semibold text-lg">CVBABA – AI Document Intelligence</h3>
+              <p className="text-sm mb-3">
+                I built a deep learning system that converts natural language into professionally styled documents. CVBABA solves the challenge of creating beautiful documents regardless of language or design skills.
+              </p>
+              <div className="space-y-2 text-sm mb-3">
+                <div className="flex items-start">
+                  <span className="text-blue-500 mr-2">✓</span>
+                  <span><span className="font-medium">Problem:</span> Documents are trapped in rigid formats, creating barriers for non-designers</span>
                 </div>
-            </footer>
+                <div className="flex items-start">
+                  <span className="text-blue-500 mr-2">✓</span>
+                  <span><span className="font-medium">Solution:</span> AI that understands document structure beyond just text</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-blue-500 mr-2">✓</span>
+                  <span><span className="font-medium">Innovation:</span> Preserves design integrity across languages with varying text lengths</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-blue-500 mr-2">✓</span>
+                  <span><span className="font-medium">Tech:</span> Custom neural architecture, Python, FastAPI, AWS</span>
+                </div>
+              </div>
+              <a
+                href="https://youtu.be/qBWWaCel7dI"
+                className="text-blue-500 text-sm font-medium inline-flex items-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                See it in action <span className="ml-1">→</span>
+              </a>
+            </div>
+
+            <div className={`p-6 rounded-lg shadow ${darkMode ? "bg-gray-800" : "bg-gray-100"}`}>
+              <h3 className="font-semibold text-lg">News Intelligence System</h3>
+              <p className="text-sm mb-3">
+                NLP platform processing 300+ daily French news articles, automatically extracting key information and insights.
+              </p>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-start">
+                  <span className="text-blue-500 mr-2">✓</span>
+                  <span>Entity extraction and topic classification</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-blue-500 mr-2">✓</span>
+                  <span>Sentiment analysis and scandal detection</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-blue-500 mr-2">✓</span>
+                  <span>40% faster analysis than previous systems</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className={`py-8 ${darkMode ? "bg-gray-800 text-gray-400" : "bg-gray-200 text-gray-600"}`}>
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
+          <div className="flex space-x-5 text-2xl mb-4 md:mb-0">
+            <a href="https://linkedin.com/in/ialim" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin className="hover:text-blue-600" />
+            </a>
+            <a href="https://github.com/ialim0" target="_blank" rel="noopener noreferrer">
+              <FaGithub className="hover:text-black" />
+            </a>
+            <a href="mailto:i.alim0229@gmail.com">
+              <FaEnvelope className="hover:text-red-500" />
+            </a>
+            <a href="https://alimidrissou.com" target="_blank" rel="noopener noreferrer">
+              <FaGlobe className="hover:text-green-600" />
+            </a>
+          </div>
+          <p className="text-sm text-center md:text-right">© 2025 Idrissou Alimoudine</p>
         </div>
-    );
+      </footer>
+    </div>
+  );
 };
 
 export default Menu;
