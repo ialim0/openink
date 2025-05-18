@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { DarkModeProvider, useDarkMode } from '@/context/DarkModeContext';
 import Menu from './Menu';
-import { FaBars, FaTimes, FaCode, FaHome, FaBlog, FaUser, FaMoon, FaSun,FaComments } from 'react-icons/fa';
+import { FaBars, FaTimes, FaCode, FaHome, FaBlog, FaUser, FaMoon, FaSun, FaComments } from 'react-icons/fa';
 import { usePathname, useRouter } from 'next/navigation';
 
 interface LayoutWrapperProps {
@@ -25,54 +25,80 @@ const LayoutContent: React.FC<LayoutWrapperProps> = ({ children }) => {
 
   return (
     <div className={`h-screen flex flex-col ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
-     <nav className={`sticky top-0 z-50 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-md`}>
-  <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-    <div className="flex items-center space-x-2">
-      <FaCode className="text-blue-500 text-2xl" />
-      <span className="text-xl font-bold">Alim Idrissou.</span>
-    </div>
-    <div className="md:hidden">
-      <button
-        onClick={toggleMenu}
-        className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-200 text-gray-700'} transition-colors duration-300`}
-      >
-        {menuVisible ? <FaTimes /> : <FaBars />}
-      </button>
-    </div>
-    <div className={`absolute md:relative top-full left-0 right-0 md:top-auto ${darkMode ? 'bg-gray-800' : 'bg-white'} md:bg-transparent ${menuVisible ? 'block' : 'hidden'} md:block`}>
-      <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4 p-4 md:p-0">
-        {['home', 'bio', 'blog', 'feedback'].map((link) => (
+      {/* Mobile Header */}
+      <nav className={`sticky top-0 z-50 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-md md:hidden`}>
+        <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <FaCode className="text-blue-500 text-2xl" />
+            <span className="text-xl font-bold">Alim Idrissou.</span>
+          </div>
           <button
-            key={link}
-            onClick={() => handleLinkClick(link === 'home' ? '/' : `/${link}`)}
-            className={`text-sm font-medium ${isActive(`/${link}`) ? 'text-blue-500' : `${darkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'}`} transition-colors duration-300 block md:inline-flex items-center`}
+            onClick={toggleMenu}
+            className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-200 text-gray-700'} transition-colors duration-300`}
           >
-            {link === 'home' && <FaHome className="inline mr-1" />}
-            {link === 'bio' && <FaUser className="inline mr-1" />}
-            {link === 'blog' && <FaBlog className="inline mr-1" />}
-            {link === 'feedback' && <FaComments className="inline mr-1" />}
-            {link.charAt(0).toUpperCase() + link.slice(1)}
+            {menuVisible ? <FaTimes /> : <FaBars />}
           </button>
-        ))}
-        <button
-          onClick={toggleDarkMode}
-          className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-200 text-gray-700'} transition-colors duration-300 block md:inline-block`}
-        >
-          {darkMode ? <FaSun /> : <FaMoon />}
-        </button>
-      </div>
-    </div>
-  </div>
-</nav>
+        </div>
+      </nav>
 
+      {/* Combined Sidebar */}
       <div className="flex flex-1 overflow-hidden">
         <aside className={`w-full md:w-1/3 flex-shrink-0 ${darkMode ? 'bg-gray-800' : 'bg-white'} border-r border-gray-200 shadow-lg ${menuVisible ? 'fixed inset-0 z-40' : 'hidden'} md:block md:relative`}>
-          <div className="h-full overflow-y-auto">
-            <Menu />
+          <div className="h-full overflow-y-auto p-6">
+            {/* Desktop Logo */}
+            <div className={`hidden md:flex items-center space-x-2 mb-8 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
+              <FaCode className="text-blue-500 text-2xl" />
+              <span className="text-xl font-bold">Alim Idrissou.</span>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="space-y-4 mb-8">
+              {['home', 'bio', 'blog', 'feedback'].map((link) => (
+                <button
+                  key={link}
+                  onClick={() => handleLinkClick(link === 'home' ? '/' : `/${link}`)}
+                  className={`w-full text-left p-3 rounded-lg flex items-center space-x-3 transition-colors duration-200 ${
+                    isActive(`/${link}`) 
+                      ? 'bg-blue-500 text-white' 
+                      : darkMode 
+                        ? 'hover:bg-gray-700' 
+                        : 'hover:bg-gray-100'
+                  }`}
+                >
+                  {link === 'home' && <FaHome className="text-lg" />}
+                  {link === 'bio' && <FaUser className="text-lg" />}
+                  {link === 'blog' && <FaBlog className="text-lg" />}
+                  {link === 'feedback' && <FaComments className="text-lg" />}
+                  <span>{link.charAt(0).toUpperCase() + link.slice(1)}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className={`w-full p-3 rounded-lg flex items-center space-x-3 ${
+                darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+              } transition-colors duration-200`}
+            >
+              {darkMode ? (
+                <FaSun className="text-yellow-400 text-lg" />
+              ) : (
+                <FaMoon className="text-gray-600 text-lg" />
+              )}
+              <span>{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
+            </button>
+
+            {/* Menu Content */}
+            <div className="mt-8">
+              <Menu />
+            </div>
           </div>
         </aside>
-        <main className={`w-full md:w-2/3 ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-          <div className="h-full overflow-y-auto p-8">
+
+        {/* Main Content */}
+        <main className={`flex-1 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+          <div className="h-full overflow-y-auto p-6 md:p-8">
             {children}
           </div>
         </main>
