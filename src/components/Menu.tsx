@@ -225,7 +225,7 @@ const Menu: React.FC = () => {
         {/* Projects Section - Simplified */}
         <section className="mb-16">
           <SectionHeader title="Highlighted Projects" darkMode={darkMode} />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-6">
             {projectsData.map((project, index) => (
               <ProjectCard
                 key={index}
