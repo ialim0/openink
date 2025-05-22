@@ -49,9 +49,13 @@ const Search = ({
         placeholder={slug ? `Search in #${normalizedSlug}` : "Search articles..."}
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        className="mb-6"
+        className={`mb-6 ${
+          darkMode
+            ? "bg-gray-800 border-gray-600 text-gray-100 placeholder-gray-400 focus:border-blue-400 focus:ring-blue-400"
+            : "bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+        }`}
       />
-      <Tags tagFrequencyMap={tagFrequencyMap}  />
+      <Tags tagFrequencyMap={tagFrequencyMap} />
       {filteredBlogPosts.length === 0 ? (
         <p className="text-center mt-8 text-lg">No posts found. Try a different search term.</p>
       ) : (
@@ -66,6 +70,8 @@ const Search = ({
                   className={`px-3 py-1 rounded-md transition-colors ${
                     currentPage === page
                       ? "bg-blue-500 text-white"
+                      : darkMode
+                      ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                   }`}
                 >
