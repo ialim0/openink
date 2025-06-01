@@ -102,7 +102,7 @@ const AboutPage: React.FC = () => {
         {/* Reflection Image */}
         <div className="mt-6 text-center">
           <Image
-            src="/images/alim_praying.png"
+            src="https://res.cloudinary.com/dlo6yuwt2/image/upload/v1748742680/alim_praying_pwt5sj.png"
             alt="Me in 2022"
             width={320}
             height={220}
