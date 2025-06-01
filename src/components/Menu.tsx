@@ -164,14 +164,14 @@ const Menu: React.FC = () => {
           <div className="relative w-40 h-40 mb-8">
             <Image
               src="/images/profile.png"
-              alt="Idrissou Alimoudine"
+              alt="Alim Idrissou "
               fill
               className="rounded-full object-cover"
               priority
             />
           </div>
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-3">Idrissou Alimoudine</h1>
+            <h1 className="text-4xl font-bold mb-3">Alim Idrissou</h1>
             <p className={`font-medium mb-3 ${darkMode ? 'text-blue-400' : 'text-blue-500'}`}>
               Software Engineer • Applied AI • Tech for Impact
             </p>
