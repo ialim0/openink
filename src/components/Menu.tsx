@@ -163,7 +163,7 @@ const Menu: React.FC = () => {
         <section className="flex flex-col items-center mb-16">
           <div className="relative w-40 h-40 mb-8">
             <Image
-              src="/images/profile.png"
+              src="https://res.cloudinary.com/dlo6yuwt2/image/upload/v1748742663/profile_xmvqia.png"
               alt="Alim Idrissou "
               fill
               className="rounded-full object-cover"
