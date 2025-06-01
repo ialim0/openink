@@ -1,5 +1,3 @@
-'use client';
-
 import "prismjs/themes/prism-tomorrow.css";
 import { Fragment, cache } from "react";
 import Link from "next/link";
@@ -24,6 +22,11 @@ interface Block {
   [key: string]: any;
 }
 
+interface PageProps {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
 const redis = Redis.fromEnv();
 
 const getBlocks = cache(async (blockID: string) => {
@@ -35,8 +38,14 @@ const getBlocks = cache(async (blockID: string) => {
   return response.results as Block[];
 });
 
-export default async function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
-  const { id } = searchParams;
+export default async function Page({ searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams;
+  const { id } = resolvedSearchParams;
+  
+  if (!id || typeof id !== 'string') {
+    return <div>Invalid page ID</div>;
+  }
+
   const pageProperties = await notion.pages.retrieve({ page_id: id });
   const postDetails = convertToPost(pageProperties);
   const blocks: Block[] = await getBlocks(id);
