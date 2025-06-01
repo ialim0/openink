@@ -22,7 +22,6 @@
     "marked": "^12.0.2",
     "next": "^15.3.3",
     "next-api-og-image": "^4.3.0",
-    "next-auth": "^5.0.0-beta.19",
     "notion-client": "^6.16.0",
     "process": "^0.11.10",
     "react": "^18.3.1",

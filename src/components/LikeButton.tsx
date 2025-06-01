@@ -6,7 +6,7 @@ import { Heart } from 'lucide-react';
 interface LikeButtonProps {
   slug: string;
   size?: 'small' | 'large';
-  onLikeStatusChange?: (hasLiked: boolean) => void; 
+  onLikeStatusChange?: (hasLiked: boolean) => void;
 }
 
 export function LikeButton({ slug, size = 'small', onLikeStatusChange }: LikeButtonProps) {
@@ -15,25 +15,32 @@ export function LikeButton({ slug, size = 'small', onLikeStatusChange }: LikeBut
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchLikes();
-    const hasLiked = localStorage.getItem(`liked_${slug}`);
-    if (hasLiked) setHasLiked(true);
-    if (onLikeStatusChange) onLikeStatusChange(hasLiked === 'true');
-  }, [slug]);
+    let isMounted = true;
 
-  const fetchLikes = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(`/api/like?slug=${slug}`);
-      if (!response.ok) throw new Error('Failed to fetch likes');
-      const data = await response.json();
-      setLikes(data.likes);
-    } catch (error) {
-      console.error('Error fetching likes:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const fetchLikes = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/like?slug=${slug}`);
+        if (!response.ok) throw new Error('Failed to fetch likes');
+        const data = await response.json();
+        if (isMounted) setLikes(data.likes);
+      } catch (error) {
+        console.error('Error fetching likes:', error);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    fetchLikes();
+    const stored = localStorage.getItem(`liked_${slug}`);
+    const initialHasLiked = stored === 'true';
+    if (initialHasLiked) setHasLiked(true);
+    if (onLikeStatusChange) onLikeStatusChange(initialHasLiked);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [slug, onLikeStatusChange]);
 
   const handleLike = async () => {
     if (hasLiked || loading) return;
@@ -60,7 +67,7 @@ export function LikeButton({ slug, size = 'small', onLikeStatusChange }: LikeBut
     }
   };
 
-  const buttonClass = size === 'large' 
+  const buttonClass = size === 'large'
     ? 'p-4 text-xl'
     : 'p-2 text-sm';
 

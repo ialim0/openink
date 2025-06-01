@@ -1,3 +1,5 @@
+'use client';
+
 import "prismjs/themes/prism-tomorrow.css";
 import { Fragment, cache } from "react";
 import Link from "next/link";
@@ -14,7 +16,7 @@ import { Article } from "@/lib/types";
 import { Redis } from "@upstash/redis";
 import { ReportView } from './view';
 import { LikeButton } from '@/components/LikeButton';
-import { Clock, Eye, User, Heart, Tag } from 'lucide-react';
+import { Clock, Eye, User, Tag } from 'lucide-react';
 
 interface Block {
   id: string;
@@ -50,32 +52,34 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 
       <header className="mb-12">
         <div className="relative w-full aspect-[16/9] mb-8">
-        <div className="w-full max-h-full overflow-hidden">
-  <img
-    className="w-full h-auto object-cover"
-    src={postDetails.coverImage}
-    alt={postDetails.title}
-  />
-</div>
-<div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg"></div>
-    <div className="absolute bottom-0 left-0 p-4 sm:p-6 text-white">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 leading-tight">{postDetails.title}</h1>
-      <div className="flex flex-wrap items-center space-x-4 sm:space-x-6 text-xs sm:text-sm md:text-base">
-        <div className="flex items-center">
-          <User size={16} className="mr-2" />
-          <span>{postDetails.author}</span>
+          <Image
+            src={postDetails.coverImage}
+            alt={postDetails.title}
+            fill
+            className="object-cover w-full h-full"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg"></div>
+          <div className="absolute bottom-0 left-0 p-4 sm:p-6 text-white">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 leading-tight">
+              {postDetails.title}
+            </h1>
+            <div className="flex flex-wrap items-center space-x-4 sm:space-x-6 text-xs sm:text-sm md:text-base">
+              <div className="flex items-center">
+                <User size={16} className="mr-2" />
+                <span>{postDetails.author}</span>
+              </div>
+              <div className="flex items-center">
+                <Clock size={16} className="mr-2" />
+                <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
+              </div>
+              <div className="flex items-center">
+                <Eye size={16} className="mr-2" />
+                <span>{viewsCount} views</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center">
-          <Clock size={16} className="mr-2" />
-          <time dateTime={postDetails.date}>{getLocalizedDate(postDetails.date)}</time>
-        </div>
-        <div className="flex items-center">
-          <Eye size={16} className="mr-2" />
-          <span>{viewsCount} views</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
         <div className="flex flex-wrap items-center space-x-2 mb-6">
           <Tag size={20} className="text-gray-600" />
