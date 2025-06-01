@@ -1,38 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# OpenInk
+
+**OpenInk** is my personal blog built with **Next.js** and hosted on **Vercel**. It has served as my official blog since 2024, and I am now open sourcing it to share the work behind it and provide a clean, scalable blogging platform for others.
+
+Live site: [alimoudineidrissou.com](https://alimoudineidrissou.com)
+
+---
+
+## What is OpenInk?
+
+OpenInk is a modern, performant blog platform designed for seamless content management using **Notion** as a CMS. It provides an intuitive experience for both readers and content creators, combining cutting-edge web technologies with simplicity.
+
+---
+
+## Key Features
+
+- Built with **Next.js** for fast server-side rendering and SEO optimization  
+- **Notion API** integration to manage articles without complex backend infrastructure  
+- **Redis caching** powered by **Upstash** for efficient view counters and like/unlike functionality  
+- Smart **tag-based article suggestions** to help users discover relevant content  
+- Responsive **dark mode** design for comfortable reading across devices and environments  
+- **User feedback system** enabling readers to share comments and suggestions directly  
+
+---
+
+## Why Open Source?
+
+This repository contains the same codebase as my official blog, with some features like admin panel and authentication removed for simplicity. I want to share this project to support developers looking for a solid blog foundation and to showcase my skills in full-stack web development.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+1. Clone this repository and install dependencies:
+   ```bash
+   git clone https://github.com/ialim0/openink.git
+   cd openink
+   npm install
+   ```
+2. Create a `.env.local` file and add your credentials (see `.env.example` for reference):
+   ```
+   NOTION_API_KEY=your_notion_api_key
+   NOTION_DATABASE_ID=your_notion_database_id
+   NEXT_PUBLIC_BASE_URL=http://localhost:3000
+   UPSTASH_REDIS_REST_URL=your_redis_rest_url
+   UPSTASH_REDIS_REST_TOKEN=your_redis_rest_token
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) to view your blog.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## About Me
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+I’m **Alim Idrissou**, a software engineer passionate about building impactful and scalable applications using modern technologies. OpenInk reflects my focus on clean code, performance, and excellent user experience.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Learn more about me and my work at [alimoudineidrissou.com](https://alimoudineidrissou.com)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Feedback & Contribution
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I welcome feedback and contributions! Readers can share their thoughts and suggestions through the built-in feedback system on the blog. Your input is invaluable in making OpenInk better.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Feel free to explore, use, or contribute to this project.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# my-portfolio
-# my-blog
+Thank you for checking out OpenInk!
