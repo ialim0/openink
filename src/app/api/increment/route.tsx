@@ -13,11 +13,17 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   if (!slug) {
     return new NextResponse('Slug not found', { status: 400 });
   }
+  
+  const ip = req.headers.get('x-forwarded-for') || 
+            req.headers.get('x-real-ip') || 
+            req.headers.get('cf-connecting-ip') || 
+            req.headers.get('x-client-ip') ||
+            req.headers.get('x-forwarded') ||
+            req.headers.get('forwarded-for') ||
+            req.headers.get('forwarded') ||
+            'unknown';
 
-  const forwarded = req.headers.get('x-forwarded-for') || '';
-  const ip = forwarded.split(',')[0].trim();
-
-  if (ip) {
+  if (ip && ip !== 'unknown') {
     const buf = await crypto.subtle.digest(
       'SHA-256',
       new TextEncoder().encode(ip),
@@ -34,8 +40,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       return new NextResponse(null, { status: 202 });
     }
   }
-
-  console.log("test 1");
+  
+  console.log("test 1")
   await redis.incr(['pageviews', 'posts', slug].join(':'));
   return new NextResponse(null, { status: 202 });
 }
