@@ -1,7 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import AuthProvider from '@/providers /AuthProvider';
 import { LayoutWrapper } from '@/components/LayoutWrapper';
 import { MetaHead } from './MetaHead';
 import './globals.css';
@@ -30,13 +29,11 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
       <MetaHead date={undefined} imageUrl={undefined} ogUrl={undefined} {...metaHeadProps} />
     </head>
     <body>
-      <AuthProvider>
         <LayoutWrapper>
         <GoogleAnalytics />
 
           {children}
         </LayoutWrapper>
-      </AuthProvider>
     </body>
   </html>
 );

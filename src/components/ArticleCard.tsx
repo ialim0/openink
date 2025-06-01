@@ -3,11 +3,12 @@
 import React, { useState } from 'react';
 import slugify from 'slugify';
 import Link from 'next/link';
-import {  Eye } from 'lucide-react';
-import { useDarkMode } from '@/context/DarkModeContext'; 
+import Image from 'next/image';
+import { Eye } from 'lucide-react';
+import { useDarkMode } from '@/context/DarkModeContext';
 import getLocalizedDate from '@/utils/getLocalizedDate';
 import { Article } from '@/lib/types';
-import { LikeButton } from '@/components/LikeButton'; 
+import { LikeButton } from '@/components/LikeButton';
 
 type Props = {
   article: Article;
@@ -16,7 +17,7 @@ type Props = {
 export default function ArticleCard({ article }: Props) {
   const slug = slugify(article.slug).toLowerCase();
   const formattedDate = getLocalizedDate(article.date);
-  const { darkMode } = useDarkMode(); 
+  const { darkMode } = useDarkMode();
   const [hasLiked, setHasLiked] = useState(false);
 
   const handleLikeStatusChange = (liked: boolean) => {
@@ -25,17 +26,23 @@ export default function ArticleCard({ article }: Props) {
 
   return (
     <Link href={`/blog/${slug}?id=${article.id}`} className="block">
-      <article 
-        className={`rounded-lg overflow-hidden border ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'} transition-colors duration-200`}
+      <article
+        className={`rounded-lg overflow-hidden border ${
+          darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'
+        } transition-colors duration-200`}
       >
-<div className="w-full max-h-72 overflow-hidden">
-  <img
-    className="w-full h-auto object-cover"
-    src={article.coverImage}
-    alt={article.title}
-  />
-</div>
-        <div className={`p-4 ${darkMode ? 'text-gray-300' : 'text-gray-900'}`}>
+        <div className="w-full max-h-72 overflow-hidden relative">
+          <Image
+            src={article.coverImage}
+            alt={article.title}
+            width={800}
+            height={450}
+            className="w-full h-auto object-cover"
+            style={{ objectFit: 'cover' }}
+            priority
+          />
+        </div>
+        <div className={`p-4 ${darkMode ? 'text-gray-300' : 'text-gray-900'}`}>  
           <h2 className={`font-semibold mb-2 line-clamp-2 ${darkMode ? 'text-gray-200' : 'text-gray-600'}`}>
             {article.title}
           </h2>
@@ -44,7 +51,12 @@ export default function ArticleCard({ article }: Props) {
           </p>
           <div className="flex flex-wrap gap-2 mb-3">
             {article.tags.slice(0, 3).map(tag => (
-              <span key={tag} className={`bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs ${darkMode ? 'bg-gray-700 text-white' : ''}`}>
+              <span
+                key={tag}
+                className={`bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs ${
+                  darkMode ? 'bg-gray-700 text-white' : ''
+                }`}
+              >
                 {tag}
               </span>
             ))}
@@ -62,7 +74,7 @@ export default function ArticleCard({ article }: Props) {
                 {article.viewsCount}
               </span>
               <span className="flex items-center">
-                {article.readTime} min read 
+                {article.readTime} min read
               </span>
             </div>
           </div>
