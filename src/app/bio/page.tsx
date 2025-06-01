@@ -39,7 +39,7 @@ const AboutPage: React.FC = () => {
         {/* Education & Growth */}
         <h2 className={subheading}>Education & Growth</h2>
         <p className={text}>
-          🎓 <ExternalLink href="https://quantic.edu/">Quantic School of Business and Technology</ExternalLink>: MS in Software Engineering (Leadership & Impact Scholar)<br />
+          🎓 <ExternalLink href="https://quantic.edu/ms-software-engineering/">Quantic School of Business and Technology</ExternalLink>: MS in Software Engineering (Leadership & Impact Scholar)<br />
           🎓 <ExternalLink href="https://www.esmt.sn/">ESMT Dakar</ExternalLink>: MSc in Digital Finance (Scholarship)<br />
           🧮 <ExternalLink href="https://uac.bj">UAC</ExternalLink>: BSc in Mathematical Fundamentals<br />
           🚀 <ExternalLink href="https://eneam.uac.bj/">ENEAM</ExternalLink>: BSc in Planning Science
@@ -72,7 +72,7 @@ const AboutPage: React.FC = () => {
         <h2 className={subheading}>Awards </h2>
         <ul className="list-disc pl-6 mb-4 space-y-2">
           <li className={text}>
-            <strong>Quantic Impact Scholarship</strong> for academic and career excellence.
+            <strong> Impact Scholarship</strong> for academic and career excellence.
           </li>
           <li className={text}>
             <strong>Strada Leadership Scholarship</strong> for leadership and social impact.
