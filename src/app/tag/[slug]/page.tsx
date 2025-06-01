@@ -4,8 +4,13 @@ import { calculateTagFrequency } from "@/functions/getAllTags";
 import { getTagFilteredPosts } from "@/functions/tagFilteredPosts";
 import { Article } from "@/lib/types";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function Page({ params }: PageProps) {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   const decodedSlug = decodeURIComponent(slug); 
   const tagFilteredPosts = await getTagFilteredPosts({ slug: decodedSlug });
   const publishedPosts: Article[] = await getAllPosts();
