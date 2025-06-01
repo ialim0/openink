@@ -64,7 +64,7 @@ const AboutPage: React.FC = () => {
             <ExternalLink href="https://e-smartraining.org/en/">E-Smart Training</ExternalLink>: Guided the first July 2022 cohort in web development, empowering 20+ young Africans from over 7 countries to launch their tech careers.
           </li>
           <li className={text}>
-            <ExternalLink href="https://rjbdbenindiaspo.com/">RJBD</ExternalLink>: As a member since 2022 of the leading Beninese youth diaspora engineering community, I designed and implemented the registration management system—covering data handling, administrative workflows, and user onboarding to streamline operations.
+            <ExternalLink href="https://rjbdbenindiaspo.com/">RJBD</ExternalLink>: As a member since 2022 of the leading Beninese youth diaspora community, I designed and implemented the registration management system—covering data handling, administrative workflows, and user onboarding to streamline operations.
           </li>
         </ul>
 
