@@ -2,7 +2,7 @@
 
 **OpenInk** is my personal blog built with **Next.js** and hosted on **Vercel**. It has served as my official blog since 2024, and I am now open sourcing it to share the work behind it and provide a clean, scalable blogging platform for others.
 
-Live site: [alimoudineidrissou.com](https://alimoudineidrissou.com)
+Live site: [alimidrissou.com](https://alimidrissou.com)
 
 ---
 
@@ -57,7 +57,7 @@ This repository contains the same codebase as my official blog, with some featur
 
 I’m **Alim Idrissou**, a software engineer passionate about building impactful and scalable applications using modern technologies. OpenInk reflects my focus on clean code, performance, and excellent user experience.
 
-Learn more about me and my work at [alimoudineidrissou.com](https://alimoudineidrissou.com)
+Learn more about me and my work at [alimidrissou.com](https://alimidrissou.com)
 
 ---
 
