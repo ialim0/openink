@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { Redis } from '@upstash/redis';
 
 const redis = Redis.fromEnv();
@@ -14,7 +13,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   if (!slug) {
     return new NextResponse('Slug not found', { status: 400 });
   }
-  const ip = req.ip;
+
+  const forwarded = req.headers.get('x-forwarded-for') || '';
+  const ip = forwarded.split(',')[0].trim();
+
   if (ip) {
     const buf = await crypto.subtle.digest(
       'SHA-256',
@@ -29,10 +31,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       ex: 24 * 60 * 60,
     });
     if (!isNew) {
-      new NextResponse(null, { status: 202 });
+      return new NextResponse(null, { status: 202 });
     }
   }
-  console.log("test 1")
+
+  console.log("test 1");
   await redis.incr(['pageviews', 'posts', slug].join(':'));
   return new NextResponse(null, { status: 202 });
 }
