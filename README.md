@@ -1,6 +1,6 @@
 # OpenInk
 
-**OpenInk** is my personal blog built with **Next.js** and hosted on **Vercel**. It has served as my official blog since 2024, and I am now open sourcing it to share the work behind it and provide a clean, scalable blogging platform for others.
+**OpenInk** is my personal blog built with **Next.js, Redis, Notion** and hosted on **Vercel**. It has served as my official blog since 2024, and I am now open sourcing it to share the work behind it and provide a clean, scalable blogging platform for others.
 
 Live site: [alimidrissou.com](https://alimidrissou.com)
 
