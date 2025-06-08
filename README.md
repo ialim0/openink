@@ -13,7 +13,7 @@ Live site: [alimidrissou.com](https://alimidrissou.com)
 - **Redis caching** powered by **Upstash** for efficient view counters and like/unlike functionality  
 - Smart **tag-based article suggestions** to help users discover relevant content  
 - Responsive **dark mode** design for comfortable reading across devices and environments  
-- **User feedback system** enabling readers to share comments and suggestions directly  
+- **User feedback system** that allows readers to share comments and suggestions directly, reflecting my commitment to continuous growth and valuing constructive input.
 
 ---
 
