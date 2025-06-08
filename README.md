@@ -6,12 +6,6 @@ Live site: [alimidrissou.com](https://alimidrissou.com)
 
 ---
 
-## What is OpenInk?
-
-OpenInk is a modern, performant blog platform designed for seamless content management using **Notion** as a CMS. It provides an intuitive experience for both readers and content creators, combining cutting-edge web technologies with simplicity.
-
----
-
 ## Key Features
 
 - Built with **Next.js** for fast server-side rendering and SEO optimization  
@@ -20,12 +14,6 @@ OpenInk is a modern, performant blog platform designed for seamless content mana
 - Smart **tag-based article suggestions** to help users discover relevant content  
 - Responsive **dark mode** design for comfortable reading across devices and environments  
 - **User feedback system** enabling readers to share comments and suggestions directly  
-
----
-
-## Why Open Source?
-
-This repository contains the same codebase as my official blog, with some features like admin panel and authentication removed for simplicity. I want to share this project to support developers looking for a solid blog foundation and to showcase my skills in full-stack web development.
 
 ---
 
@@ -63,8 +51,7 @@ Learn more about me and my work at [alimidrissou.com](https://alimidrissou.com)
 
 ## Feedback & Contribution
 
-I welcome feedback and contributions! Readers can share their thoughts and suggestions through the built-in feedback system on the blog. Your input is invaluable in making OpenInk better.
-
+I welcome feedback and contributions! 
 Feel free to explore, use, or contribute to this project.
 
 ---
