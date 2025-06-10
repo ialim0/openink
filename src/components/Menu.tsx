@@ -143,9 +143,9 @@ const Menu: React.FC = () => {
   // Simplified projects data structure
   const projectsData: Project[] = [
     {
-      title: "CVBABA – AI Document Intelligence",
-      description: "A deep learning system that converts natural language into professionally styled documents, solving the challenge of creating beautiful documents regardless of language or design skills.",
-      technologies: ["Python", "FastAPI", "AWS", "Neural Networks", "NLP"],
+      title: "CVBABA –DEMOCRATIZING CAREER ACCESS WITH AI",
+      description: "CVBABA is an innovative, multilingual AI career assistant that streamlined ATS-optimized résumé and cover letter generation from natural language, solving the challenge of creating beautiful documents regardless of language or design skills.",
+      technologies: ["Python", "FastAPI", "AWS", "LLM", "NLP", "Data Analytics"],
       link: "https://youtu.be/qBWWaCel7dI",
       linkText: "See it in action"
     },
