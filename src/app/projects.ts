@@ -3,7 +3,7 @@ export const projects = [
   {
     name: 'CVBABA – Career Platform for Emerging Markets',
     description:
-      'Founder project: A platform that provides ATS-optimized resume builders, personalized career tips, and AI-powered content in French, English, and African languages. Helps job seekers from low-resource settings get global opportunities.',
+      'CVBABA is an innovative, multilingual AI career assistant that streamlined ATS-optimized résumé and cover letter generation from natural language, solving the challenge of creating beautiful documents regardless of language or design skills.',
     imageUrls: ['/images/cvbaba-1.png', '/images/cvbaba-2.png'],
     tags: ['ML', 'NLP', 'Multilingual AI', 'Creativity', 'Python'],
     links: {
