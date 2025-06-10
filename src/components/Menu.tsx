@@ -144,7 +144,7 @@ const Menu: React.FC = () => {
   const projectsData: Project[] = [
     {
       title: "CVBABA –DEMOCRATIZING CAREER ACCESS WITH AI",
-      description: "CVBABA is an innovative, multilingual AI career assistant that streamlined ATS-optimized résumé and cover letter generation from natural language, solving the challenge of creating beautiful documents regardless of language or design skills.",
+      description: "CVBABA is an innovative, multilingual AI assistant that streamlined ATS-optimized résumé and cover letter generation from natural language, solving the challenge of creating beautiful documents regardless of language or design skills.",
       technologies: ["Python", "FastAPI", "AWS", "LLM", "NLP", "Data Analytics"],
       link: "https://youtu.be/qBWWaCel7dI",
       linkText: "See it in action"
