@@ -78,7 +78,7 @@ const AboutPage: React.FC = () => {
             <strong>Strada Leadership Scholarship</strong> for leadership and social impact.
           </li>
           <li className={text}>
-            <strong>National Scholarship</strong> awarded by the Ministry of Higher Education and Scientific Research of Benin.
+            <strong>International and National Scholarship</strong> awarded by the Ministry of Higher Education and Scientific Research of Benin.
           </li>
         </ul>
 

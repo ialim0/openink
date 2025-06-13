@@ -8,7 +8,7 @@ export const projects = [
     tags: ['ML', 'NLP', 'Multilingual AI', 'Creativity', 'Python'],
     links: {
       github: '',
-      demo: 'https://youtu.be/qBWWaCel7dI?si=YA7119vTGmu82BvR',
+      video: 'https://youtu.be/qBWWaCel7dI?si=YA7119vTGmu82BvR',
       live: 'https://cvbaba.com',
     },
   },

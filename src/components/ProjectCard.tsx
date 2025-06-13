@@ -11,7 +11,7 @@ interface Project {
   tags: string[];
   links: {
     github: string;
-    demo: string;
+    video: string;
     live: string;
   };
 }

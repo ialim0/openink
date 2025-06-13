@@ -25,6 +25,7 @@ Live site: [alimidrissou.com](https://alimidrissou.com)
    cd openink
    npm install
    ```
+
 2. Create a `.env.local` file and add your credentials (see `.env.example` for reference):
    ```
    NOTION_API_KEY=your_notion_api_key
@@ -33,10 +34,15 @@ Live site: [alimidrissou.com](https://alimidrissou.com)
    UPSTASH_REDIS_REST_URL=your_redis_rest_url
    UPSTASH_REDIS_REST_TOKEN=your_redis_rest_token
    ```
+
+   - 🔗 [Use this Notion database template](https://www.notion.so/2cdb95a2b4934d1588dfa3f96f03f72d?v=6cf8894c35424bf6b711d33e12776e1f&source=copy_link) — feel free to **make a copy** and use it for your own blog.
+   - 🔐 [Generate a Redis token via Upstash](https://upstash.com/)
+
 3. Run the development server:
    ```bash
    npm run dev
    ```
+
 4. Open [http://localhost:3000](http://localhost:3000) to view your blog.
 
 ---
@@ -51,8 +57,10 @@ Learn more about me and my work at [alimidrissou.com](https://alimidrissou.com)
 
 ## Feedback & Contribution
 
-I welcome feedback and contributions! 
+I welcome feedback and contributions!  
 Feel free to explore, use, or contribute to this project.
+
+🙋 Need help or just want to chat about tech? Reach out at [alimidrissou.com/feedback](https://alimidrissou.com/feedback)
 
 ---
 
