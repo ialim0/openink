@@ -13,7 +13,6 @@ import getLocalizedDate from "@/utils/getLocalizedDate";
 import { Article } from "@/lib/types";
 import { Redis } from "@upstash/redis";
 import { ReportView } from './view';
-import { LikeButton } from '@/components/LikeButton';
 import { Clock, Eye, User, Tag } from 'lucide-react';
 
 interface Block {
@@ -126,14 +125,6 @@ export default async function Page({ searchParams }: PageProps) {
         title={postDetails.title}
       />
 
-      <div className="mt-12 border-t pt-8">
-        <div className="flex items-center justify-center space-x-4">
-          <span className="text-lg font-semibold">Enjoyed this post? Show your love!</span>
-        </div>
-        <div className="mt-4 flex justify-center">
-          <LikeButton slug={postDetails.slug} size="large" />
-        </div>
-      </div>
 
       <section className="mt-16 border-t pt-12">
         <div className="flex justify-between items-center mb-8">

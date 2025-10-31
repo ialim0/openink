@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import slugify from 'slugify';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,7 +8,6 @@ import { Eye } from 'lucide-react';
 import { useDarkMode } from '@/context/DarkModeContext';
 import getLocalizedDate from '@/utils/getLocalizedDate';
 import { Article } from '@/lib/types';
-import { LikeButton } from '@/components/LikeButton';
 
 type Props = {
   article: Article;
@@ -18,31 +17,24 @@ export default function ArticleCard({ article }: Props) {
   const slug = slugify(article.slug).toLowerCase();
   const formattedDate = getLocalizedDate(article.date);
   const { darkMode } = useDarkMode();
-  const [hasLiked, setHasLiked] = useState(false);
-
-  const handleLikeStatusChange = (liked: boolean) => {
-    setHasLiked(liked);
-  };
 
   return (
     <Link href={`/blog/${slug}?id=${article.id}`} className="block">
       <article
-        className={`rounded-lg overflow-hidden border ${
+        className={`h-full flex flex-col rounded-lg overflow-hidden border ${
           darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'
         } transition-colors duration-200`}
       >
-        <div className="w-full max-h-72 overflow-hidden relative">
+        <div className="relative w-full aspect-[16/9] overflow-hidden">
           <Image
             src={article.coverImage}
             alt={article.title}
-            width={800}
-            height={450}
-            className="w-full h-auto object-cover"
-            style={{ objectFit: 'cover' }}
+            fill
+            className="object-cover"
             priority
           />
         </div>
-        <div className={`p-4 ${darkMode ? 'text-gray-300' : 'text-gray-900'}`}>  
+        <div className={`flex flex-col flex-1 p-4 ${darkMode ? 'text-gray-300' : 'text-gray-900'}`}>  
           <h2 className={`font-semibold mb-2 line-clamp-2 ${darkMode ? 'text-gray-200' : 'text-gray-600'}`}>
             {article.title}
           </h2>
@@ -66,7 +58,7 @@ export default function ArticleCard({ article }: Props) {
               </span>
             )}
           </div>
-          <div className="flex items-center justify-between text-gray-500 text-sm">
+          <div className="mt-auto flex items-center justify-between text-gray-500 text-sm">
             <span>{formattedDate}</span>
             <div className="flex items-center space-x-3">
               <span className="flex items-center">
@@ -77,14 +69,6 @@ export default function ArticleCard({ article }: Props) {
                 {article.readTime} min read
               </span>
             </div>
-          </div>
-          <div className="mt-4 flex justify-between items-center">
-            <LikeButton slug={article.slug} onLikeStatusChange={handleLikeStatusChange} />
-            {!hasLiked && (
-              <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                If you enjoyed this post, please like it!
-              </span>
-            )}
           </div>
         </div>
       </article>
