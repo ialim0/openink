@@ -33,7 +33,7 @@ const AboutPage: React.FC = () => {
         {/* Journey & Philosophy */}
         <h2 className={subheading}>Journey & Philosophy</h2>
         <p className={text}>
-          My journey into software engineering began in an environment where reliable electricity and internet were never guaranteed. I enjoy writing code as a way to explore ideas, push boundaries and take on complex challenges that have a meaningful impact, especially for communities that are often left behind by traditional innovation.
+          I enjoy writing code as a way to explore ideas, push boundaries and take on complex challenges that have a meaningful impact, especially for communities that are often left behind by traditional innovation.
         </p>
 
         {/* Education & Growth */}
@@ -73,13 +73,13 @@ const AboutPage: React.FC = () => {
         <h2 className={subheading}>Mentorship & Community</h2>
         <ul className="list-disc pl-6 mb-4 space-y-2">
           <li className={text}>
+            FORCE‑N Senegal Entrepreneur Network (Rufisque): member (since 2024).
+          </li>
+          <li className={text}>
             <ExternalLink href="https://www.turing.com/">Turing.com</ExternalLink>: Part of the vetted engineer network (since 2023).
           </li>
           <li className={text}>
             <ExternalLink href="https://www.rjbdbenin.com/">RJBD</ExternalLink>: Contributed to building a digital platform connecting Beninese youth worldwide, supported junior developers, and helped design a secure data management system.
-          </li>
-          <li className={text}>
-            FORCE‑N Senegal Entrepreneur Network (Rufisque): member (since 2024).
           </li>
         </ul>
 
