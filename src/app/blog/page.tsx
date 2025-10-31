@@ -20,24 +20,46 @@ const Articles = async () => {
   const publishedPosts: Article[] = await getAllPosts();
   const tagFrequencyMap = await calculateTagFrequency({ publishedPosts });
 
-  const views = redis
-    ? (
-        await redis.mget<number[]>(
-          ...publishedPosts.map((p) => ['pageviews', 'posts', p.slug].join(':')),
-        )
-      ).reduce(
-        (acc, v, i) => {
-          const slug = publishedPosts[i].slug;
-          const val = typeof v === 'number' ? v : undefined;
-          acc[slug] = val !== undefined && val >= MIN_VIEWS ? val : randomAtLeastMin();
-          return acc;
-        },
-        {} as Record<string, number>,
-      )
-    : publishedPosts.reduce((acc, p) => {
-        acc[p.slug] = randomAtLeastMin();
-        return acc;
-      }, {} as Record<string, number>);
+  let views: Record<string, number>;
+  if (redis) {
+    const keys = publishedPosts.map((p) => ['pageviews', 'posts', p.slug].join(':'));
+    const currentVals = await redis.mget<number[]>(...keys);
+    const toPersist: { key: string; value: number }[] = [];
+    views = currentVals.reduce((acc, v, i) => {
+      const slug = publishedPosts[i].slug;
+      const key = keys[i];
+      const val = typeof v === 'number' ? v : undefined;
+      const finalVal = val !== undefined && val >= MIN_VIEWS ? val : randomAtLeastMin();
+      acc[slug] = finalVal;
+      if (val === undefined || val < MIN_VIEWS) {
+        toPersist.push({ key, value: finalVal });
+      }
+      return acc;
+    }, {} as Record<string, number>);
+  } else {
+    views = publishedPosts.reduce((acc, p) => {
+      acc[p.slug] = randomAtLeastMin();
+      return acc;
+    }, {} as Record<string, number>);
+  }
+
+  if (redis) {
+    const keys = publishedPosts.map((p) => ['pageviews', 'posts', p.slug].join(':'));
+    const currentVals = await redis.mget<number[]>(...keys);
+    const persistOps: Array<Promise<unknown>> = [];
+    currentVals.forEach((v, i) => {
+      const val = typeof v === 'number' ? v : undefined;
+      const slug = publishedPosts[i].slug;
+      if (val === undefined || val < MIN_VIEWS) {
+        const key = keys[i];
+        const target = views[slug];
+        persistOps.push(redis.set(key, target));
+      }
+    });
+    if (persistOps.length) {
+      await Promise.all(persistOps);
+    }
+  }
 
   const articlesWithViews = publishedPosts.map((article) => ({
     ...article,

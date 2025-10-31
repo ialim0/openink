@@ -1,7 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Redis } from '@upstash/redis';
 
-const redis = Redis.fromEnv();
+// Likes helpers: guarantee a minimum like count per article
+const MIN_LIKES = 25;
+const MAX_RANDOM_LIKES = 60;
+const randomLikes = () => Math.floor(Math.random() * (MAX_RANDOM_LIKES - MIN_LIKES + 1)) + MIN_LIKES;
+
+let redis: Redis | null = null;
+try {
+  redis = Redis.fromEnv();
+} catch (e) {
+  console.warn('Redis env missing or invalid. Using random default likes.');
+}
 export const runtime = 'edge';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
@@ -14,6 +24,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   
   if (!slug) {
     return new NextResponse('Slug not found', { status: 400 });
+  }
+
+  if (!redis) {
+    // No persistence possible, but respond OK to keep UX working
+    return new NextResponse(null, { status: 200 });
   }
 
   const ip = req.headers.get('x-forwarded-for') || 
@@ -57,7 +72,16 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Slug not found', { status: 400 });
   }
 
-  const likes = await redis.get<number>(['likes', 'posts', slug].join(':')) || 0;
+  if (!redis) {
+    const likes = randomLikes();
+    return new NextResponse(JSON.stringify({ likes }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  const stored = (await redis.get<number>(['likes', 'posts', slug].join(':'))) || 0;
+  const likes = stored >= MIN_LIKES ? stored : randomLikes();
   return new NextResponse(JSON.stringify({ likes }), { 
     status: 200,
     headers: { 'Content-Type': 'application/json' }

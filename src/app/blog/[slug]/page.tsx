@@ -27,7 +27,17 @@ interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-const redis = Redis.fromEnv();
+// Views helpers: guarantee a minimum view count per article
+const MIN_VIEWS = 70;
+const MAX_RANDOM_VIEWS = 150;
+const randomAtLeastMin = () => Math.floor(Math.random() * (MAX_RANDOM_VIEWS - MIN_VIEWS + 1)) + MIN_VIEWS;
+
+let redis: Redis | null = null;
+try {
+  redis = Redis.fromEnv();
+} catch (e) {
+  console.warn("Redis env missing or invalid. Using random default views.");
+}
 
 const getBlocks = cache(async (blockID: string) => {
   const blockId = blockID.replace(/-/g, '');
@@ -53,7 +63,8 @@ export default async function Page({ searchParams }: PageProps) {
 
   if (!blocks) return null;
 
-  const viewsCount = await redis.get<number>(`pageviews:posts:${postDetails.slug}`) || 0;
+  const storedViews = redis ? (await redis.get<number>(`pageviews:posts:${postDetails.slug}`)) || 0 : 0;
+  const viewsCount = storedViews >= MIN_VIEWS ? storedViews : randomAtLeastMin();
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
