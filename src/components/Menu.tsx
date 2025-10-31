@@ -123,11 +123,11 @@ const Menu: React.FC = () => {
 
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
-      <main className="container mx-auto px-6 py-12 max-w-4xl">
+    <div className={`h-full flex flex-col ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
+      <main className="flex-1 px-4 py-6">
         {/* Hero Section with Image on Top */}
-        <section className="flex flex-col items-center mb-16">
-          <div className="relative w-40 h-40 mb-8">
+        <section className="flex flex-col items-center mb-8">
+          <div className="relative w-32 h-32 mb-6">
             <Image
               src="https://res.cloudinary.com/dlo6yuwt2/image/upload/v1748742663/profile_xmvqia.png"
               alt="Alim Idrissou "
@@ -152,7 +152,7 @@ const Menu: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className={`py-8 ${darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>
+      <footer className={`mt-auto py-4 ${darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-6 flex-wrap">
             <p className="text-sm text-center md:text-left leading-relaxed md:mb-0">

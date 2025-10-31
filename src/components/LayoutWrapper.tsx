@@ -44,7 +44,7 @@ const LayoutContent: React.FC<LayoutWrapperProps> = ({ children }) => {
       {/* Combined Sidebar */}
       <div className="flex flex-1 overflow-hidden">
         <aside className={`w-full md:w-1/3 flex-shrink-0 ${darkMode ? 'bg-gray-800' : 'bg-white'} border-r border-gray-200 shadow-lg ${menuVisible ? 'fixed inset-0 z-40' : 'hidden'} md:block md:relative`}>
-          <div className="h-full overflow-y-auto p-6">
+          <div className="h-full overflow-y-auto px-6 pt-6 pb-3">
             {/* Desktop Logo */}
             <div className={`hidden md:flex items-center space-x-2 mb-8 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
               <FaCode className="text-blue-500 text-2xl" />
