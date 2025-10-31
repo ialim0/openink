@@ -142,7 +142,7 @@ const Menu: React.FC = () => {
               Software Engineer • Applied AI
             </p>
             <p className={`max-w-xl text-base leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              I build solutions that simplify complex problems. My passion? Creating technology that works for people, not the other way around.
+              My passion? Creating technology that works for people, not the other way around.
             </p>
            
           </div>

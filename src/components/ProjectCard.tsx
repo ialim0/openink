@@ -112,18 +112,20 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           ))}
         </div>
         <div className="flex justify-between space-x-4">
-          {Object.entries(project.links).map(([type, url]) => (
-            <a
-              key={type}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex-1 py-3 px-4 ${darkMode ? 'bg-blue-700 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'} text-white text-sm font-semibold rounded-lg shadow-md transition duration-300 text-center`}
-            >
-              {type === 'github' ? <FaGithub className="inline-block mr-2" /> : <FaExternalLinkAlt className="inline-block mr-2" />}
-              {type === 'github' ? 'Code' : type.charAt(0).toUpperCase() + type.slice(1)}
-            </a>
-          ))}
+          {Object.entries(project.links)
+            .filter(([, url]) => typeof url === 'string' && url.trim().length > 0)
+            .map(([type, url]) => (
+              <a
+                key={type}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex-1 py-3 px-4 ${darkMode ? 'bg-blue-700 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'} text-white text-sm font-semibold rounded-lg shadow-md transition duration-300 text-center`}
+              >
+                {type === 'github' ? <FaGithub className="inline-block mr-2" /> : <FaExternalLinkAlt className="inline-block mr-2" />}
+                {type === 'github' ? 'Code' : type.charAt(0).toUpperCase() + type.slice(1)}
+              </a>
+            ))}
         </div>
       </motion.div>
     </motion.div>
