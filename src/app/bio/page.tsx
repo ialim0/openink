@@ -64,7 +64,7 @@ const AboutPage: React.FC = () => {
         {/* Experience & Impact */}
         <h2 className={subheading}>Experience & Impact</h2>
         <p className={text}>
-          • Co-Founder of <strong>CVBABA</strong>, a multilingual AI platform that transforms natural language into ATS-ready résumés and cover letters—prioritizing creativity, accessibility, and real-world outcomes (2025).<br />
+          • Co-Founder of <ExternalLink href="https://cvbaba.com"><strong>CVBABA</strong></ExternalLink>, a multilingual AI platform that transforms natural language into ATS-ready résumés and cover letters—prioritizing creativity, accessibility, and real-world outcomes (2025).<br />
           • Software Engineer freelancer (since 2023) helping startups in the US, Europe, and beyond launch their businesses.<br />
           • Mathematics teacher since 2019, supporting private schools in Benin to promote STEM and share a passion for mathematics.<br />
         </p>
