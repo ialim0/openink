@@ -33,34 +33,48 @@ const AboutPage: React.FC = () => {
         {/* Journey & Philosophy */}
         <h2 className={subheading}>Journey & Philosophy</h2>
         <p className={text}>
-          My journey into software engineering began in an environment where reliable electricity and internet were never guaranteed. Learning to code meant late nights with borrowed equipment, unstable connections and a lot of trial and error. Over time, I became someone who is deeply passionate about creating technology that solves real problems. I enjoy writing code as a way to explore ideas, push boundaries and take on complex challenges that have a meaningful impact, especially for communities that are often left behind by traditional innovation.
+          My journey into software engineering began in an environment where reliable electricity and internet were never guaranteed. Over time, I became someone who is deeply passionate about creating technology that solves real problems. I enjoy writing code as a way to explore ideas, push boundaries and take on complex challenges that have a meaningful impact, especially for communities that are often left behind by traditional innovation.
         </p>
 
         {/* Education & Growth */}
         <h2 className={subheading}>Education & Growth</h2>
-        <p className={text}>
-          🎓 <ExternalLink href="https://www.esmt.sn/">ESMT Dakar</ExternalLink>: MSc in Digital Finance (Scholarship)<br />
-          🧮 <ExternalLink href="https://uac.bj">UAC</ExternalLink>: BSc in Mathematical Fundamentals<br />
-          🚀 <ExternalLink href="https://eneam.uac.bj/">ENEAM</ExternalLink>: BSc in Planning Science
-        </p>
+        <ul className="mb-4 space-y-3">
+          <li className={`p-4 rounded-lg ${darkMode ? 'bg-gray-800/60 border border-gray-700' : 'bg-white/70 border border-gray-200'}`}>
+            <div className="font-medium">
+              <ExternalLink href="https://www.esmt.sn/">ESMT Dakar</ExternalLink>
+            </div>
+            <div className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>MSc in Digital Transformation Management (2023)</div>
+          </li>
+          <li className={`p-4 rounded-lg ${darkMode ? 'bg-gray-800/60 border border-gray-700' : 'bg-white/70 border border-gray-200'}`}>
+            <div className="font-medium">
+              <ExternalLink href="https://uac.bj">FAST (UAC)</ExternalLink>
+            </div>
+            <div className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>BSc in Mathematical Fundamentals (2021)</div>
+            <div className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-sm`}>Independent student; pursued out of passion. Studied concurrently with ENEAM.</div>
+          </li>
+          <li className={`p-4 rounded-lg ${darkMode ? 'bg-gray-800/60 border border-gray-700' : 'bg-white/70 border border-gray-200'}`}>
+            <div className="font-medium">
+              <ExternalLink href="https://uac.bj">ENEAM (UAC)</ExternalLink>
+            </div>
+            <div className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>BSc in Strategic Planning (2021)</div>
+            <div className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-sm`}>First choice program; studied concurrently with FAST.</div>
+          </li>
+        </ul>
 
         {/* Experience & Impact */}
         <h2 className={subheading}>Experience & Impact</h2>
         <p className={text}>
-          • Co-Founder of <strong>CVBABA</strong>, the first “vibe” document designer—making resume and cover letter creation as easy as ChatGPT, Canvas, and Word rolled into one app.<br />
-          • Built an NLP-driven News Intelligence platform processing 300+ francophone articles daily with entity recognition, topic classification, sentiment analysis, and scandal detection.<br />
-          • Developed AI-powered logistics automation using NLP to optimize customer interactions.<br />
-          • Engineered collision-free, memory-efficient navigation algorithms in Rust with area and graph optimization.
+          • Co-Founder of <strong>CVBABA</strong>, a multilingual AI platform that transforms natural language into ATS-ready résumés and cover letters—prioritizing creativity, accessibility, and real-world outcomes.<br />
         </p>
 
         {/* Mentorship & Community */}
         <h2 className={subheading}>Mentorship & Community</h2>
-        <p className={text}>
-          I actively mentor developers across West Africa in web development, product thinking, and career growth, believing in democratizing tech through teaching and community building.
-        </p>
         <ul className="list-disc pl-6 mb-4 space-y-2">
           <li className={text}>
-            <ExternalLink href="https://rjbdbenindiaspo.com/">RJBD</ExternalLink>: As a member since 2022 of the leading Beninese youth diaspora community, I designed and implemented the registration management system—covering data handling, administrative workflows, and user onboarding to streamline operations.
+            <ExternalLink href="https://www.rjbdbenin.com/">RJBD</ExternalLink>: Contributed to building a digital platform connecting Beninese youth worldwide, supported junior developers, and helped design a secure data management system.
+          </li>
+          <li className={text}>
+            <ExternalLink href="https://www.turing.com/">Turing.com</ExternalLink>: Vetted Software Engineer since 2023 — passed seniority vetting including technical and non‑technical interviews and a live coding challenge.
           </li>
         </ul>
 
@@ -68,13 +82,10 @@ const AboutPage: React.FC = () => {
         <h2 className={subheading}>Awards </h2>
         <ul className="list-disc pl-6 mb-4 space-y-2">
           <li className={text}>
-            <strong> Impact Scholarship</strong> for academic and career excellence.
+            <strong>FORCE-N Entrepreneurship Award</strong>, UN-CHK & Mastercard Foundation (2025).
           </li>
           <li className={text}>
-            <strong>Strada Leadership Scholarship</strong> for leadership and social impact.
-          </li>
-          <li className={text}>
-            <strong>International and National Scholarship</strong> awarded by the Ministry of Higher Education and Scientific Research of Benin.
+            <strong>National and International Scholarship</strong> awarded by the Ministry of Higher Education and Scientific Research of Benin (2017–2023).
           </li>
         </ul>
 
@@ -95,35 +106,13 @@ const AboutPage: React.FC = () => {
           • Muslim.
         </p>
 
-        {/* Reflection Image */}
-        <div className="mt-6 text-center">
-          <Image
-            src="https://res.cloudinary.com/dlo6yuwt2/image/upload/v1748742680/alim_praying_pwt5sj.png"
-            alt="Me in 2022"
-            width={320}
-            height={220}
-            className="rounded-lg shadow-lg mx-auto"
-          />
-          <p className="mt-2 text-sm text-gray-500 italic">Me in 2022</p>
-        </div>
 
         {/* Footer Note */}
         <p className="mt-8 text-sm italic text-gray-500">
           Note: Legal name is Alimoudine Idrissou.
         </p>
 
-        {/* Social Links */}
-        <div className="mt-6 flex justify-center space-x-6">
-          <a href="https://github.com/ialim0" target="_blank" rel="noopener noreferrer">
-            <FaGithub size={24} />
-          </a>
-          <a href="https://linkedin.com/in/ialim0" target="_blank" rel="noopener noreferrer">
-            <FaLinkedin size={24} />
-          </a>
-          <a href="https://twitter.com/ialim0" target="_blank" rel="noopener noreferrer">
-            <FaTwitter size={24} />
-          </a>
-        </div>
+       
       </div>
     </div>
   )

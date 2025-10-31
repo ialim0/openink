@@ -120,41 +120,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, icon: Icon, hoverColor, d
 const Menu: React.FC = () => {
   const { darkMode } = useDarkMode();
   
-  // Skills data organization
-  const skillsData: SkillCategory[] = [
-    {
-      category: "Programming",
-      skills: ["Python", "Rust", "Go", "JavaScript"]
-    },
-    {
-      category: "Web & Backend",
-      skills: ["FastAPI", "Next.js", "PostgreSQL", "GraphQL"]
-    },
-    {
-      category: "AI & ML",
-      skills: ["Machine Learning", "LLMs & SLMs", "NLP", "Computer Vision"]
-    },
-    {
-      category: "DevOps & Infrastructure",
-      skills: ["AWS", "GCP", "Docker", "Redis", "Git", "Linux"]
-    }
-  ];
 
-  // Simplified projects data structure
-  const projectsData: Project[] = [
-    {
-      title: "CVBABA –DEMOCRATIZING CAREER ACCESS WITH AI",
-      description: "CVBABA is an innovative, multilingual AI assistant that streamlined ATS-optimized résumé and cover letter generation from natural language, solving the challenge of creating beautiful documents regardless of language or design skills.",
-      technologies: ["Python", "FastAPI", "AWS", "LLM", "NLP", "Data Analytics"],
-      link: "https://youtu.be/qBWWaCel7dI",
-      linkText: "See it in action"
-    },
-    {
-      title: "Scandal Detection System",
-      description: "NLP platform analyzing 300+ daily French news articles to identify environmental scandals and extract key information for media monitoring and risk assessment.",
-      technologies: ["Selenium", "Python", "spaCy", "BERT", "NLP Pipeline"],
-    }
-  ];
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
@@ -173,81 +139,32 @@ const Menu: React.FC = () => {
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-3">Alim Idrissou</h1>
             <p className={`font-medium mb-3 ${darkMode ? 'text-blue-400' : 'text-blue-500'}`}>
-              Software Engineer • Applied AI • Tech for Impact
+              Software Engineer • Applied AI
             </p>
             <p className={`max-w-xl text-base leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              I build intelligent solutions that simplify complex problems. My passion? Creating technology that works for people, not the other way around.
+              I build solutions that simplify complex problems. My passion? Creating technology that works for people, not the other way around.
             </p>
-            <div className="flex space-x-4 mt-4 justify-center">
-              <SocialLink 
-                href="https://linkedin.com/in/ialim" 
-                icon={FaLinkedin} 
-                hoverColor={darkMode ? 'bg-gray-700' : 'bg-blue-100'} 
-                darkMode={darkMode}
-              />
-              <SocialLink 
-                href="https://github.com/ialim0" 
-                icon={FaGithub} 
-                hoverColor={darkMode ? 'bg-gray-700' : 'bg-gray-100'} 
-                darkMode={darkMode}
-              />
-              <SocialLink 
-                href="mailto:i.alim0229@gmail.com" 
-                icon={FaEnvelope} 
-                hoverColor={darkMode ? 'bg-gray-700' : 'bg-red-100'} 
-                darkMode={darkMode}
-              />
-              <SocialLink 
-                href="https://alimidrissou.com" 
-                icon={FaGlobe} 
-                hoverColor={darkMode ? 'bg-gray-700' : 'bg-green-100'} 
-                darkMode={darkMode}
-              />
-            </div>
+           
           </div>
         </section>
 
-        {/* Skills Section */}
-        <section className="mb-16">
-          <SectionHeader title="Core Skills" darkMode={darkMode} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {skillsData.map((category, index) => (
-              <SkillCategory 
-                key={index}
-                title={category.category}
-                skills={category.skills}
-                darkMode={darkMode}
-              />
-            ))}
-          </div>
-        </section>
 
-        {/* Projects Section - Simplified */}
-        <section className="mb-16">
-          <SectionHeader title="Highlighted Projects" darkMode={darkMode} />
-          <div className="flex flex-col gap-6">
-            {projectsData.map((project, index) => (
-              <ProjectCard
-                key={index}
-                project={project}
-                darkMode={darkMode}
-              />
-            ))}
-          </div>
-        </section>
       </main>
 
       {/* Footer */}
       <footer className={`py-8 ${darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>
         <div className="container mx-auto px-6 max-w-4xl">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm mb-4 md:mb-0">© 2025 Idrissou Alimoudine. All rights reserved.</p>
-            <div className="flex space-x-6">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-6 flex-wrap">
+            <p className="text-sm text-center md:text-left leading-relaxed md:mb-0">
+              © 2025 Idrissou Alimoudine. All rights reserved.
+            </p>
+            <div className="flex flex-row flex-wrap justify-center md:justify-end gap-x-6 gap-y-3">
               <a 
                 href="https://linkedin.com/in/ialim" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`hover:${darkMode ? 'text-blue-400' : 'text-blue-500'} transition-colors`}
+                className={`transition-colors ${darkMode ? 'hover:text-blue-400' : 'hover:text-blue-500'}`}
+                aria-label="LinkedIn"
               >
                 <FaLinkedin />
               </a>
@@ -255,13 +172,15 @@ const Menu: React.FC = () => {
                 href="https://github.com/ialim0" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`hover:${darkMode ? 'text-gray-100' : 'text-gray-900'} transition-colors`}
+                className={`transition-colors ${darkMode ? 'hover:text-gray-100' : 'hover:text-gray-900'}`}
+                aria-label="GitHub"
               >
                 <FaGithub />
               </a>
               <a 
                 href="mailto:i.alim0229@gmail.com" 
-                className={`hover:${darkMode ? 'text-red-400' : 'text-red-500'} transition-colors`}
+                className={`transition-colors ${darkMode ? 'hover:text-red-400' : 'hover:text-red-500'}`}
+                aria-label="Email"
               >
                 <FaEnvelope />
               </a>
@@ -269,7 +188,8 @@ const Menu: React.FC = () => {
                 href="https://alimidrissou.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`hover:${darkMode ? 'text-green-400' : 'text-green-500'} transition-colors`}
+                className={`transition-colors ${darkMode ? 'hover:text-green-400' : 'hover:text-green-500'}`}
+                aria-label="Website"
               >
                 <FaGlobe />
               </a>
