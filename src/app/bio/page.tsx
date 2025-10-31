@@ -33,7 +33,7 @@ const AboutPage: React.FC = () => {
         {/* Journey & Philosophy */}
         <h2 className={subheading}>Journey & Philosophy</h2>
         <p className={text}>
-          My journey into software engineering began in an environment where reliable electricity and internet were never guaranteed. Over time, I became someone who is deeply passionate about creating technology that solves real problems. I enjoy writing code as a way to explore ideas, push boundaries and take on complex challenges that have a meaningful impact, especially for communities that are often left behind by traditional innovation.
+          My journey into software engineering began in an environment where reliable electricity and internet were never guaranteed. I enjoy writing code as a way to explore ideas, push boundaries and take on complex challenges that have a meaningful impact, especially for communities that are often left behind by traditional innovation.
         </p>
 
         {/* Education & Growth */}
@@ -64,17 +64,22 @@ const AboutPage: React.FC = () => {
         {/* Experience & Impact */}
         <h2 className={subheading}>Experience & Impact</h2>
         <p className={text}>
-          • Co-Founder of <strong>CVBABA</strong>, a multilingual AI platform that transforms natural language into ATS-ready résumés and cover letters—prioritizing creativity, accessibility, and real-world outcomes.<br />
+          • Co-Founder of <strong>CVBABA</strong>, a multilingual AI platform that transforms natural language into ATS-ready résumés and cover letters—prioritizing creativity, accessibility, and real-world outcomes (2025).<br />
+          • Software Engineer freelancer (since 2023) helping startups in the US, Europe, and beyond launch their businesses.<br />
+          • Mathematics teacher since 2019, supporting private schools in Benin to promote STEM and share a passion for mathematics.<br />
         </p>
 
         {/* Mentorship & Community */}
         <h2 className={subheading}>Mentorship & Community</h2>
         <ul className="list-disc pl-6 mb-4 space-y-2">
           <li className={text}>
+            <ExternalLink href="https://www.turing.com/">Turing.com</ExternalLink>: Part of the vetted engineer network (since 2023).
+          </li>
+          <li className={text}>
             <ExternalLink href="https://www.rjbdbenin.com/">RJBD</ExternalLink>: Contributed to building a digital platform connecting Beninese youth worldwide, supported junior developers, and helped design a secure data management system.
           </li>
           <li className={text}>
-            <ExternalLink href="https://www.turing.com/">Turing.com</ExternalLink>: Vetted Software Engineer since 2023 — passed seniority vetting including technical and non‑technical interviews and a live coding challenge.
+            FORCE‑N Senegal Entrepreneur Network (Rufisque): member (since 2024).
           </li>
         </ul>
 
