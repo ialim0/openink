@@ -39,7 +39,6 @@ const AboutPage: React.FC = () => {
         {/* Education & Growth */}
         <h2 className={subheading}>Education & Growth</h2>
         <p className={text}>
-          🎓 <ExternalLink href="https://quantic.edu/ms-software-engineering/">Quantic School of Business and Technology</ExternalLink>: MS in Software Engineering (Leadership & Impact Scholar)<br />
           🎓 <ExternalLink href="https://www.esmt.sn/">ESMT Dakar</ExternalLink>: MSc in Digital Finance (Scholarship)<br />
           🧮 <ExternalLink href="https://uac.bj">UAC</ExternalLink>: BSc in Mathematical Fundamentals<br />
           🚀 <ExternalLink href="https://eneam.uac.bj/">ENEAM</ExternalLink>: BSc in Planning Science
@@ -60,9 +59,6 @@ const AboutPage: React.FC = () => {
           I actively mentor developers across West Africa in web development, product thinking, and career growth, believing in democratizing tech through teaching and community building.
         </p>
         <ul className="list-disc pl-6 mb-4 space-y-2">
-          <li className={text}>
-            <ExternalLink href="https://e-smartraining.org/en/">E-Smart Training</ExternalLink>: Guided the first July 2022 cohort in web development, empowering 20+ young Africans from over 7 countries to launch their tech careers.
-          </li>
           <li className={text}>
             <ExternalLink href="https://rjbdbenindiaspo.com/">RJBD</ExternalLink>: As a member since 2022 of the leading Beninese youth diaspora community, I designed and implemented the registration management system—covering data handling, administrative workflows, and user onboarding to streamline operations.
           </li>
