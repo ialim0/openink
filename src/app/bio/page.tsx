@@ -76,6 +76,14 @@ const AboutPage: React.FC = () => {
             <div className="flex items-start">
               <span className={`mr-3 mt-1 text-lg ${darkMode ? 'text-blue-400' : 'text-blue-500'}`}>•</span>
               <div>
+                <strong>01Edu</strong> (2023–2025): Worked on AI and software projects at 01Edu, a global peer-to-peer coding school, supporting hands-on learning for students of diverse backgrounds.
+              </div>
+            </div>
+          </li>
+          <li className={`p-5 rounded-lg shadow-sm ${darkMode ? 'bg-gray-700/40 border border-gray-600' : 'bg-gray-50 border border-gray-200'}`}>
+            <div className="flex items-start">
+              <span className={`mr-3 mt-1 text-lg ${darkMode ? 'text-blue-400' : 'text-blue-500'}`}>•</span>
+              <div>
                 <strong>Software Engineer freelancer</strong> (since 2023) helping startups in the US, Europe, and beyond launch their businesses.
               </div>
             </div>
@@ -84,7 +92,7 @@ const AboutPage: React.FC = () => {
             <div className="flex items-start">
               <span className={`mr-3 mt-1 text-lg ${darkMode ? 'text-blue-400' : 'text-blue-500'}`}>•</span>
               <div>
-                <strong>Mathematics teacher</strong> since 2019, supporting private schools in Benin to promote STEM and share a passion for mathematics.
+                <strong>Mathematics teacher</strong> (2019–2021), supporting private schools in Benin to promote STEM and share a passion for mathematics.
               </div>
             </div>
           </li>
@@ -103,7 +111,7 @@ const AboutPage: React.FC = () => {
           </li>
           <li className={`${text} flex items-start`}>
             <span className={`mr-3 text-lg ${darkMode ? 'text-blue-400' : 'text-blue-500'}`}>•</span>
-            <span><ExternalLink href="https://www.rjbdbenin.com/">RJBD</ExternalLink>: Contributed to building a digital platform connecting Beninese youth worldwide, supported junior developers, and helped design a secure data management system.</span>
+            <span><ExternalLink href="https://www.rjbdbenin.com/">RJBD</ExternalLink>: Contributed to building a digital platform connecting Beninese youth worldwide, supported junior developers, and helped design a secure data management system (since 2022).</span>
           </li>
         </ul>
 
