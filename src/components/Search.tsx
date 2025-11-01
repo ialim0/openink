@@ -46,7 +46,7 @@ const Search = ({
     <div className={`max-w-4xl mx-auto p-6 ${darkMode ? "text-gray-100" : "text-gray-900"}`}>
       <h1 className="text-3xl font-bold mb-6">Explore Articles</h1>
       <Input
-        placeholder={slug ? `Search in #${normalizedSlug}` : "Search articles..."}
+        placeholder={"Search articles..."}
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         className={`mb-6 ${

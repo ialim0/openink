@@ -1,4 +1,5 @@
 import React from 'react';
+import { Check } from 'lucide-react';
 
 interface CategoryProps {
   setSelectedTag: (tag: string | null) => void;
@@ -15,14 +16,20 @@ export default function Category({ setSelectedTag, tag, selectedTag }: CategoryP
   };
 
   return (
-    <div
+    <button
       key={tag}
+      type="button"
       onClick={() => handleTagClick(tag)}
-      className={`${
-        selectedTag === tag && 'ring-2 ring-gray-400 text-gray-700'
-      } inline-flex items-center px-3 py-1.5 uppercase bg-gray-100 rounded cursor-pointer`}
+      aria-pressed={selectedTag === tag}
+      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium uppercase transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500
+        ${selectedTag === tag
+          ? 'bg-gray-900 text-white'
+          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}
+      `}
+      title={selectedTag === tag ? `Unselect ${tag}` : `Select ${tag}`}
     >
-      <span className="text-xs font-medium uppercase">{tag || 'All'}</span>
-    </div>
+      {selectedTag === tag && <Check size={14} aria-hidden="true" />}
+      <span>{tag || 'All'}</span>
+    </button>
   );
 }

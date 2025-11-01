@@ -56,7 +56,7 @@ const AboutPage: React.FC = () => {
             <div className="font-medium">
               <ExternalLink href="https://uac.bj">ENEAM (UAC)</ExternalLink>
             </div>
-            <div className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>BSc in Strategic Planning (2021)</div>
+            <div className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>BSc in Project Planning (2021)</div>
             <div className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-sm mt-1`}>First choice program; studied concurrently with FAST.</div>
           </li>
         </ul>
