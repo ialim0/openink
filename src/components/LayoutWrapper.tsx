@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { DarkModeProvider, useDarkMode } from '@/context/DarkModeContext';
 import Menu from './Menu';
-import { FaBars, FaTimes, FaCode, FaHome, FaBlog, FaUser, FaMoon, FaSun, FaComments } from 'react-icons/fa';
+import { FaBars, FaTimes, FaCode, FaHome, FaUser, FaMoon, FaSun, FaComments } from 'react-icons/fa';
 import { usePathname, useRouter } from 'next/navigation';
 
 interface LayoutWrapperProps {
@@ -53,7 +53,7 @@ const LayoutContent: React.FC<LayoutWrapperProps> = ({ children }) => {
 
             {/* Navigation Links */}
             <div className="space-y-4 mb-8">
-              {['home', 'bio', 'blog', 'feedback'].map((link) => (
+              {['home', 'projects', 'bio', 'feedback'].map((link) => (
                 <button
                   key={link}
                   onClick={() => handleLinkClick(link === 'home' ? '/' : `/${link}`)}
@@ -67,7 +67,7 @@ const LayoutContent: React.FC<LayoutWrapperProps> = ({ children }) => {
                 >
                   {link === 'home' && <FaHome className="text-lg" />}
                   {link === 'bio' && <FaUser className="text-lg" />}
-                  {link === 'blog' && <FaBlog className="text-lg" />}
+                  {link === 'projects' && <FaCode className="text-lg" />}
                   {link === 'feedback' && <FaComments className="text-lg" />}
                   <span>{link.charAt(0).toUpperCase() + link.slice(1)}</span>
                 </button>

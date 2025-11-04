@@ -1,65 +1,84 @@
-"use client"
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
-import { ProjectCard, ProjectModal } from '@/components/ProjectCard';
-import { projects } from './projects';
-import { useDarkMode } from '@/context/DarkModeContext';
+import { getAllPosts } from "@/functions/getAllPosts";
+import { Article } from "@/lib/types";
+import { Redis } from "@upstash/redis";
+import Search from "@/components/Search";
+import { calculateTagFrequency } from "@/functions/getAllTags";
 
-const HomePage: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
-  const { darkMode } = useDarkMode();
+// Views helpers: guarantee a minimum view count per article
+const MIN_VIEWS = 70;
+const MAX_RANDOM_VIEWS = 150;
+const randomAtLeastMin = () => Math.floor(Math.random() * (MAX_RANDOM_VIEWS - MIN_VIEWS + 1)) + MIN_VIEWS;
 
-  const nextProject = () => setCurrentIndex((currentIndex + 1) % projects.length);
-  const prevProject = () => setCurrentIndex((currentIndex - 1 + projects.length) % projects.length);
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+async function getData() {
+  let redis: Redis | null = null;
+  try {
+    redis = Redis.fromEnv();
+  } catch (e) {
+    console.warn("Redis env missing or invalid. Using random default views.");
+  }
+
+  const publishedPosts: Article[] = await getAllPosts();
+  const tagFrequencyMap = await calculateTagFrequency({ publishedPosts });
+
+  let views: Record<string, number>;
+  if (redis) {
+    const keys = publishedPosts.map((p) => ['pageviews', 'posts', p.slug].join(':'));
+    const currentVals = await redis.mget<number[]>(...keys);
+    const toPersist: { key: string; value: number }[] = [];
+    views = currentVals.reduce((acc, v, i) => {
+      const slug = publishedPosts[i].slug;
+      const key = keys[i];
+      const val = typeof v === 'number' ? v : undefined;
+      const finalVal = val !== undefined && val >= MIN_VIEWS ? val : randomAtLeastMin();
+      acc[slug] = finalVal;
+      if (val === undefined || val < MIN_VIEWS) {
+        toPersist.push({ key, value: finalVal });
+      }
+      return acc;
+    }, {} as Record<string, number>);
+  } else {
+    views = publishedPosts.reduce((acc, p) => {
+      acc[p.slug] = randomAtLeastMin();
+      return acc;
+    }, {} as Record<string, number>);
+  }
+
+  if (redis) {
+    const keys = publishedPosts.map((p) => ['pageviews', 'posts', p.slug].join(':'));
+    const currentVals = await redis.mget<number[]>(...keys);
+    const persistOps: Array<Promise<unknown>> = [];
+    currentVals.forEach((v, i) => {
+      const val = typeof v === 'number' ? v : undefined;
+      const slug = publishedPosts[i].slug;
+      if (val === undefined || val < MIN_VIEWS) {
+        const key = keys[i];
+        const target = views[slug];
+        persistOps.push(redis.set(key, target));
+      }
+    });
+    if (persistOps.length) {
+      await Promise.all(persistOps);
+    }
+  }
+
+  return {
+    articlesWithViews: publishedPosts.map((article) => ({
+      ...article,
+      viewsCount: views[article.slug] || 0,
+    })),
+    tagFrequencyMap
+  };
+}
+
+export default async function HomePage() {
+  const { articlesWithViews, tagFrequencyMap } = await getData();
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
-      {/* Projects Carousel */}
-      <section className="relative flex-grow flex items-center justify-center py-12 px-4">
-        <AnimatePresence initial={false} mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.5 }}
-            className={`w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
-          >
-            <ProjectCard project={projects[currentIndex]} isActive onClick={openModal} />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Navigation Buttons */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={prevProject}
-          className={`absolute left-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full shadow-lg ${darkMode ? 'bg-gray-700 text-teal-300' : 'bg-white text-blue-600'}`}
-        >
-          <ChevronLeftIcon className="w-6 h-6" />
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={nextProject}
-          className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full shadow-lg ${darkMode ? 'bg-gray-700 text-teal-300' : 'bg-white text-blue-600'}`}
-        >
-          <ChevronRightIcon className="w-6 h-6" />
-        </motion.button>
-      </section>
-
-      {/* Project Modal */}
-      <AnimatePresence>
-        {modalOpen && (
-          <ProjectModal project={projects[currentIndex]} onClose={closeModal} />
-        )}
-      </AnimatePresence>
+    <div className="max-w-5xl m-auto p-4 min-h-screen">
+      <Search
+        publishedPosts={articlesWithViews}
+        tagFrequencyMap={tagFrequencyMap}
+      />
     </div>
   );
-};
-
-export default HomePage;
+}
