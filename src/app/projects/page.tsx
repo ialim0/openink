@@ -1,63 +1,69 @@
 "use client"
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
-import { ProjectCard, ProjectModal } from '@/components/ProjectCard';
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { projects } from './projects';
 import { useDarkMode } from '@/context/DarkModeContext';
 
-const ProjectsPage: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
-  const { darkMode } = useDarkMode();
+// Note: metadata export doesn't work in client components
+// Consider wrapping this in a layout.tsx if metadata is needed
 
-  const nextProject = () => setCurrentIndex((currentIndex + 1) % projects.length);
-  const prevProject = () => setCurrentIndex((currentIndex - 1 + projects.length) % projects.length);
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+const ProjectsPage = () => {
+  const { darkMode } = useDarkMode();
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
-      {/* Projects Carousel */}
-      <section className="relative flex-grow flex items-center justify-center py-12 px-4">
-        <AnimatePresence initial={false} mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.5 }}
-            className={`w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
-          >
-            <ProjectCard project={projects[currentIndex]} isActive onClick={openModal} />
-          </motion.div>
-        </AnimatePresence>
+      <main className="container mx-auto py-12 px-4">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
+          <p className={`mt-2 max-w-2xl ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            A curated selection of work. Click a card to learn more.
+          </p>
+        </header>
 
-        {/* Navigation Buttons */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={prevProject}
-          className={`absolute left-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full shadow-lg ${darkMode ? 'bg-gray-700 text-teal-300' : 'bg-white text-blue-600'}`}
-        >
-          <ChevronLeftIcon className="w-6 h-6" />
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={nextProject}
-          className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full shadow-lg ${darkMode ? 'bg-gray-700 text-teal-300' : 'bg-white text-blue-600'}`}
-        >
-          <ChevronRightIcon className="w-6 h-6" />
-        </motion.button>
-      </section>
-
-      {/* Project Modal */}
-      <AnimatePresence>
-        {modalOpen && (
-          <ProjectModal project={projects[currentIndex]} onClose={closeModal} />
-        )}
-      </AnimatePresence>
+        <section aria-label="Project list" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project) => (
+            <article
+              key={project.id}
+              className={`group rounded-xl border ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'} overflow-hidden shadow-sm transition-all hover:shadow-md focus-within:shadow-md`}
+            >
+              <Link
+                href={`/projects/${project.slug}`}
+                aria-label={`View details for ${project.name}`}
+                className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-transparent"
+              >
+                {project.imageUrls?.[0] && (
+                  <figure className="relative aspect-[16/9] w-full overflow-hidden">
+                    <Image
+                      src={project.imageUrls[0]}
+                      alt={project.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      priority={false}
+                    />
+                  </figure>
+                )}
+                <div className="p-5">
+                  <h2 className="text-lg font-semibold leading-snug">{project.name}</h2>
+                  <p className={`mt-2 line-clamp-3 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {project.description}
+                  </p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <li key={tag}>
+                        <span className={`inline-block rounded-full px-2.5 py-1 text-xs font-medium ${darkMode ? 'bg-gray-700 text-teal-300' : 'bg-blue-50 text-blue-700'}`}>
+                          {tag}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Link>
+            </article>
+          ))}
+        </section>
+      </main>
     </div>
   );
 };

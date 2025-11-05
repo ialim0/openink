@@ -1,6 +1,9 @@
-export const projects: Array<{
+export interface Project {
+  id: string;
+  slug: string;
   name: string;
   description: string;
+  fullDescription?: string;
   imageUrls: string[];
   tags: string[];
   links: {
@@ -8,4 +11,6 @@ export const projects: Array<{
     video?: string;
     live?: string;
   };
-}>;
+}
+
+export const projects: Project[];
