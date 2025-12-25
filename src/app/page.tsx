@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { projects } from './projects'; // This path is correct as projects.ts is in the same directory
+import { projects } from './projects';
 import { useDarkMode } from '@/context/DarkModeContext';
 
 const getYouTubeID = (url: string): string | null => {
@@ -11,7 +11,7 @@ const getYouTubeID = (url: string): string | null => {
   return (match && match[2].length === 11) ? match[2] : null;
 };
 
-const ProjectsPage = () => {
+const HomePage = () => {
   const { darkMode } = useDarkMode();
 
   return (
@@ -31,7 +31,7 @@ const ProjectsPage = () => {
               className={`group rounded-xl border ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'} overflow-hidden shadow-sm transition-all hover:shadow-md focus-within:shadow-md`}
             >
               <Link
-                href={`/projects/${project.slug}`}
+                href={`/${project.slug}`}
                 aria-label={`View details for ${project.name}`}
                 className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-transparent"
               >
@@ -84,4 +84,4 @@ const ProjectsPage = () => {
   );
 };
 
-export default ProjectsPage;
+export default HomePage;
