@@ -5,7 +5,13 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink, Github, Video, ArrowLeft } from 'lucide-react';
 import { useDarkMode } from '@/context/DarkModeContext';
-import { Project } from '../projects.d';
+import { Project } from '../../projects.d';
+
+const getYouTubeID = (url: string): string | null => {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+};
 
 const variants = {
   enter: (direction: number) => ({
@@ -70,10 +76,22 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
         </header>
 
         {/* Main Content Grid */}
-        <section className="grid gap-8 lg:gap-12 lg:grid-cols-5">
-          {/* Image Gallery - Takes more space */}
-          <div className="lg:col-span-3 space-y-6">
-            {project.imageUrls?.length ? (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="lg:col-span-2">
+            {project.previewType === 'video' && project.links?.video ? (
+              <div className={`relative w-full overflow-hidden rounded-2xl border ${darkMode ? 'border-gray-800 bg-gray-900/50' : 'border-gray-200 bg-white'} shadow-2xl`}>
+                <div className="aspect-video">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${getYouTubeID(project.links.video)}`}
+                    title={`YouTube video player for ${project.name}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
+              </div>
+            ) : project.imageUrls?.length ? (
               <div className={`relative w-full overflow-hidden rounded-2xl border ${darkMode ? 'border-gray-800 bg-gray-900/50' : 'border-gray-200 bg-white'} shadow-2xl`}>
                 <div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
                   <AnimatePresence initial={false} custom={direction}>
@@ -113,7 +131,6 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                     </motion.figure>
                   </AnimatePresence>
 
-                  {/* Navigation Arrows */}
                   {project.imageUrls.length > 1 && (
                     <>
                       <button
@@ -134,7 +151,6 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                   )}
                 </div>
 
-                {/* Dots Indicator */}
                 {project.imageUrls.length > 1 && (
                   <div className={`px-4 py-4 flex justify-center gap-2 ${darkMode ? 'bg-gray-900/30' : 'bg-gray-50/50'} backdrop-blur-sm`}>
                     {project.imageUrls.map((_, i) => (
@@ -153,24 +169,12 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
               </div>
             ) : (
               <div className={`flex h-64 items-center justify-center rounded-2xl border ${darkMode ? 'border-gray-800 bg-gray-900/50' : 'border-gray-200 bg-gray-50'}`}>
-                <p className={`text-sm ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>No images available</p>
+                <p className={`text-sm ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>No preview available</p>
               </div>
             )}
           </div>
 
-          {/* Project Details Sidebar */}
-          <article className="lg:col-span-2 space-y-6">
-            {project.fullDescription && (
-              <section aria-labelledby="desc-heading" className={`rounded-2xl p-6 border ${darkMode ? 'bg-gray-900/50 border-gray-800' : 'bg-white border-gray-200'} shadow-lg`}>
-                <h2 id="desc-heading" className={`text-sm font-semibold uppercase tracking-wider mb-3 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  About
-                </h2>
-                <p className={`text-base leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  {project.fullDescription}
-                </p>
-              </section>
-            )}
-
+          <aside className="lg:col-span-1 space-y-6">
             {project.tags?.length ? (
               <section aria-labelledby="tech-heading" className={`rounded-2xl p-6 border ${darkMode ? 'bg-gray-900/50 border-gray-800' : 'bg-white border-gray-200'} shadow-lg`}>
                 <h2 id="tech-heading" className={`text-sm font-semibold uppercase tracking-wider mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
@@ -230,8 +234,19 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                 </div>
               </section>
             )}
-          </article>
-        </section>
+          </aside>
+        </div>
+
+        {project.fullDescription && (
+          <section aria-labelledby="desc-heading" className={`mt-12 rounded-2xl p-6 border ${darkMode ? 'bg-gray-900/50 border-gray-800' : 'bg-white border-gray-200'} shadow-lg`}>
+            <h2 id="desc-heading" className={`text-sm font-semibold uppercase tracking-wider mb-3 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              About
+            </h2>
+            <p className={`text-base leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+              {project.fullDescription}
+            </p>
+          </section>
+        )}
       </main>
     </div>
   );

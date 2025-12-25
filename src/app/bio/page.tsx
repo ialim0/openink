@@ -120,6 +120,10 @@ const AboutPage: React.FC = () => {
         <ul className="mb-6 space-y-3">
           <li className={`${text} flex items-start`}>
             <span className={`mr-3 text-lg ${darkMode ? 'text-blue-400' : 'text-blue-500'}`}>•</span>
+            <span><strong>First Prize in EdTech</strong> at the Hackathon de l'Innovation Scientifique by African Institute for Mathematical Sciences (AIMS), December 2025.</span>
+          </li>
+          <li className={`${text} flex items-start`}>
+            <span className={`mr-3 text-lg ${darkMode ? 'text-blue-400' : 'text-blue-500'}`}>•</span>
             <span><strong>FORCE-N Entrepreneurship Award</strong>, UN-CHK & Mastercard Foundation (2025).</span>
           </li>
           <li className={`${text} flex items-start`}>

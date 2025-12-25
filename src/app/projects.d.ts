@@ -1,11 +1,12 @@
 export interface Project {
   id: string;
-  slug: string;
   name: string;
+  slug: string;
   description: string;
-  fullDescription?: string;
+  fullDescription: string;
   imageUrls: string[];
   tags: string[];
+  previewType?: 'image' | 'video';
   links: {
     github?: string;
     video?: string;

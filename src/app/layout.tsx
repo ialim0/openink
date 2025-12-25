@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Alim Idrissou Software Engineer',
-  description: 'This is my blog official blog post.',
+  description: 'A portfolio of projects by Alim Idrissou, a software engineer.',
 };
 
 const metaHeadProps = {

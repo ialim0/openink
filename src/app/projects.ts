@@ -1,16 +1,75 @@
 // projects.ts
 export const projects = [
   {
+    id: 'gandalab',
+    name: 'GandaLab',
+    slug: 'gandalab',
+    description: 'GandaLab is an AI-powered digital library featuring SymLab, a virtual laboratory that transforms mathematics education through gamification and interactive coding.',
+    fullDescription: 'GandaLab is an AI-powered digital library featuring SymLab, a virtual laboratory designed to revolutionize mathematics education. It bridges the gap between abstract theory and practical application by offering students a hands-on experience with gamified lessons and interactive coding experiments. GandaLab was the EdTech First Prize Winner at the AIMS Scientific Innovation Hackathon.',
+    imageUrls: ['/images/gandalab/1.png', '/images/gandalab/2.png', '/images/gandalab/3.png', '/images/gandalab/4.png'],
+    tags: ['AI', 'Mathematics', 'Physics', 'Software Development', 'Gamification'],
+    links: {
+      github: '',
+      video: '',
+      live: '',
+    },
+  },
+  {
+    id: 'hakili',
+    name: 'Hakili',
+    slug: 'hakili',
+    description: 'Hakili is an intelligent educational platform dedicated to combating misinformation, deepfakes, and digital threats across francophone Africa.',
+    fullDescription: 'Hakili is an intelligent educational platform dedicated to combating misinformation, deepfakes, and digital threats across francophone Africa. Built with an AI chatbot assistant, it educates users on digital literacy, critical thinking, and online safety through interactive conversations. Role: Full-stack Engineer | Team-based development. Key Features: Deepfake detection, Fact-checking, Data protection guidance, Harassment detection, Misinformation identification, Multilingual support (French-focused). Impact: Protecting African communities from digital misinformation and enabling critical engagement with online content.',
+    imageUrls: ['/images/hakili/1.png', '/images/hakili/2.png', '/images/hakili/3.png'],
+    tags: ['Next.js', 'AI/LLMs', 'Digital Literacy', 'Full-stack'],
+    links: {
+      github: '',
+      video: '',
+      live: '',
+    },
+  },
+  {
+    id: 'cvbaba',
     name: 'CVBABA',
-    description:
-      'CVBABA is an innovative, multilingual AI assistant that streamlined ATS-optimized résumé and cover letter generation from natural language, solving the challenge of creating beautiful documents regardless of language or design skills.',
-    imageUrls: ['/images/cvbaba-1.png', '/images/cvbaba-2.png', '/images/cvbaba-3.png', '/images/cvbaba-4.png'],
+    slug: 'cvbaba',
+    previewType: 'video',
+    description: 'CVBABA is an innovative AI assistant that builds professional, ATS-friendly resumes from natural language. It overcomes the limitations of generic AIs by creating beautifully designed documents in any language or layout you choose.',
+    fullDescription: 'As the Founding AI/ML Engineer, I led the development of CVBABA, an innovative, multilingual AI assistant for creating ATS-optimized résumés. Unlike general language models, CVBABA acts as a specialized agent, taking natural language input to generate professionally designed documents in any layout. This project won a grant from the FORCE-N program for its innovative approach to making effective career tools accessible to everyone, regardless of language or design skills.',
+    imageUrls: ['/images/cvbaba/1.png', '/images/cvbaba/2.png', '/images/cvbaba/3.png'],
     tags: ['ML', 'NLP', 'Multilingual AI', 'Creativity', 'Python'],
     links: {
       github: '',
-      video: 'https://youtu.be/qBWWaCel7dI?si=YA7119vTGmu82BvR',
+      video: 'https://youtu.be/uk7grduj-8w',
       live: 'https://cvbaba.com',
     },
   },
-  
+  {
+    id: 'subtlereply',
+    name: 'Subtle Reply',
+    slug: 'subtlereply',
+    previewType: 'video',
+    description: 'AI-Driven Product Growth Platform. Subtle Reply is a B2B SaaS platform that connects products with users discussing relevant problems across Reddit communities.',
+    fullDescription: 'In my first startup experience as a Full-Stack AI/ML Software Engineer, I helped build Subtle Reply, a B2B SaaS platform connecting products with users on Reddit. We used AI-powered engagement strategies to create authentic interactions and maximize conversion opportunities. I collaborated with a distributed team across the US and Europe to launch a live product for growth-focused companies.',
+    imageUrls: [],
+    tags: ['B2B', 'SaaS', 'AI', 'Full-stack', 'Product Launch'],
+    links: {
+      github: '',
+      video: 'https://www.youtube.com/watch?v=lJVS-ykvUOs',
+      live: '',
+    },
+  },
+  {
+    id: 'afroxlmr-ner',
+    name: 'AfroXLMR NER',
+    slug: 'afroxlmr-ner',
+    description: 'A Python application that allows you to extract named entities from text or PDF documents for 21 African languages.',
+    fullDescription: 'As a Data Scientist on this project, I was responsible for training the Named Entity Recognition (NER) model, masakhane/afroxlmr-large-ner-masakhaner-1.0_2.0, which supports 21 African languages. The resulting Python application allows users to extract named entities from text and PDF documents, making advanced NLP accessible for a wide range of languages including Amharic, Bambara, Ewe, Fon, Hausa, Igbo, Kinyarwanda, and more.',
+    imageUrls: ['/images/afroxlmr-ner/1.png', '/images/afroxlmr-ner/2.png'],
+    tags: ['Python', 'NLP', 'NER', 'AI', 'African Languages'],
+    links: {
+      github: 'https://github.com/ialim0/afroxlmr-ner-app',
+      video: '',
+      live: '',
+    },
+  },
 ];

@@ -1,84 +1,87 @@
-import { getAllPosts } from "@/functions/getAllPosts";
-import { Article } from "@/lib/types";
-import { Redis } from "@upstash/redis";
-import Search from "@/components/Search";
-import { calculateTagFrequency } from "@/functions/getAllTags";
+"use client"
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { projects } from './projects'; // This path is correct as projects.ts is in the same directory
+import { useDarkMode } from '@/context/DarkModeContext';
 
-// Views helpers: guarantee a minimum view count per article
-const MIN_VIEWS = 70;
-const MAX_RANDOM_VIEWS = 150;
-const randomAtLeastMin = () => Math.floor(Math.random() * (MAX_RANDOM_VIEWS - MIN_VIEWS + 1)) + MIN_VIEWS;
+const getYouTubeID = (url: string): string | null => {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+};
 
-async function getData() {
-  let redis: Redis | null = null;
-  try {
-    redis = Redis.fromEnv();
-  } catch (e) {
-    console.warn("Redis env missing or invalid. Using random default views.");
-  }
-
-  const publishedPosts: Article[] = await getAllPosts();
-  const tagFrequencyMap = await calculateTagFrequency({ publishedPosts });
-
-  let views: Record<string, number>;
-  if (redis) {
-    const keys = publishedPosts.map((p) => ['pageviews', 'posts', p.slug].join(':'));
-    const currentVals = await redis.mget<number[]>(...keys);
-    const toPersist: { key: string; value: number }[] = [];
-    views = currentVals.reduce((acc, v, i) => {
-      const slug = publishedPosts[i].slug;
-      const key = keys[i];
-      const val = typeof v === 'number' ? v : undefined;
-      const finalVal = val !== undefined && val >= MIN_VIEWS ? val : randomAtLeastMin();
-      acc[slug] = finalVal;
-      if (val === undefined || val < MIN_VIEWS) {
-        toPersist.push({ key, value: finalVal });
-      }
-      return acc;
-    }, {} as Record<string, number>);
-  } else {
-    views = publishedPosts.reduce((acc, p) => {
-      acc[p.slug] = randomAtLeastMin();
-      return acc;
-    }, {} as Record<string, number>);
-  }
-
-  if (redis) {
-    const keys = publishedPosts.map((p) => ['pageviews', 'posts', p.slug].join(':'));
-    const currentVals = await redis.mget<number[]>(...keys);
-    const persistOps: Array<Promise<unknown>> = [];
-    currentVals.forEach((v, i) => {
-      const val = typeof v === 'number' ? v : undefined;
-      const slug = publishedPosts[i].slug;
-      if (val === undefined || val < MIN_VIEWS) {
-        const key = keys[i];
-        const target = views[slug];
-        persistOps.push(redis.set(key, target));
-      }
-    });
-    if (persistOps.length) {
-      await Promise.all(persistOps);
-    }
-  }
-
-  return {
-    articlesWithViews: publishedPosts.map((article) => ({
-      ...article,
-      viewsCount: views[article.slug] || 0,
-    })),
-    tagFrequencyMap
-  };
-}
-
-export default async function HomePage() {
-  const { articlesWithViews, tagFrequencyMap } = await getData();
+const ProjectsPage = () => {
+  const { darkMode } = useDarkMode();
 
   return (
-    <div className="max-w-5xl m-auto p-4 min-h-screen">
-      <Search
-        publishedPosts={articlesWithViews}
-        tagFrequencyMap={tagFrequencyMap}
-      />
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <main className="container mx-auto py-12 px-4">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
+          <p className={`mt-2 max-w-2xl ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            Here are some public AI projects I'm able to share details about.
+          </p>
+        </header>
+
+        <section aria-label="Project list" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project) => (
+            <article
+              key={project.id}
+              className={`group rounded-xl border ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'} overflow-hidden shadow-sm transition-all hover:shadow-md focus-within:shadow-md`}
+            >
+              <Link
+                href={`/projects/${project.slug}`}
+                aria-label={`View details for ${project.name}`}
+                className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-transparent"
+              >
+                <div className="relative aspect-[16/9] w-full overflow-hidden">
+                  {project.previewType === 'video' && project.links?.video ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeID(project.links.video)}`}
+                      title={`YouTube video player for ${project.name}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    ></iframe>
+                  ) : project.imageUrls?.[0] ? (
+                    <Image
+                      src={project.imageUrls[0]}
+                      alt={project.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      priority={false}
+                    />
+                  ) : (
+                    <div className={`w-full h-full flex items-center justify-center ${darkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>
+                      <span className={`${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>No preview</span>
+                    </div>
+                  )}
+                </div>
+                <div className="p-5">
+                  <h2 className="text-lg font-semibold leading-snug">{project.name}</h2>
+                  <p className={`mt-2 line-clamp-3 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {project.description}
+                  </p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <li key={tag}>
+                        <span className={`inline-block rounded-full px-2.5 py-1 text-xs font-medium ${darkMode ? 'bg-gray-700 text-teal-300' : 'bg-blue-50 text-blue-700'}`}>
+                          {tag}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Link>
+            </article>
+          ))}
+        </section>
+      </main>
     </div>
   );
-}
+};
+
+export default ProjectsPage;

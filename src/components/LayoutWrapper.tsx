@@ -53,7 +53,7 @@ const LayoutContent: React.FC<LayoutWrapperProps> = ({ children }) => {
 
             {/* Navigation Links */}
             <div className="space-y-4 mb-8">
-              {['home', 'projects', 'bio', 'feedback'].map((link) => (
+              {['home', 'blog', 'bio', 'feedback'].map((link) => (
                 <button
                   key={link}
                   onClick={() => handleLinkClick(link === 'home' ? '/' : `/${link}`)}
@@ -66,8 +66,8 @@ const LayoutContent: React.FC<LayoutWrapperProps> = ({ children }) => {
                   }`}
                 >
                   {link === 'home' && <FaHome className="text-lg" />}
+                  {link === 'blog' && <FaCode className="text-lg" />}
                   {link === 'bio' && <FaUser className="text-lg" />}
-                  {link === 'projects' && <FaCode className="text-lg" />}
                   {link === 'feedback' && <FaComments className="text-lg" />}
                   <span>{link.charAt(0).toUpperCase() + link.slice(1)}</span>
                 </button>

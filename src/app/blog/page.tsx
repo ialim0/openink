@@ -1,7 +1,7 @@
 import { getAllPosts } from "@/functions/getAllPosts";
 import { Article } from "@/lib/types";
 import { Redis } from "@upstash/redis";
-import Search from "../../components/Search";
+import Search from "@/components/Search";
 import { calculateTagFrequency } from "@/functions/getAllTags";
 
 // Views helpers: guarantee a minimum view count per article
