@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink, Github, Video, ArrowLeft } from 'lucide-react';
 import { useDarkMode } from '@/context/DarkModeContext';
-import { Project } from '../../projects.d';
+import { Project } from '../projects.d';
 
 const getYouTubeID = (url: string): string | null => {
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -55,11 +55,11 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
         {/* Back Navigation */}
         <nav aria-label="Breadcrumb" className="mb-8 sm:mb-12">
           <Link
-            href="/projects"
+            href="/"
             className={`group inline-flex items-center gap-2 text-sm font-medium transition-all duration-200 ${darkMode ? 'text-gray-400 hover:text-teal-400' : 'text-gray-600 hover:text-blue-600'}`}
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back to projects</span>
+            <span>Back to home</span>
           </Link>
         </nav>
 
