@@ -1,6 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { projects } from '../../projects';
+import { projects } from '../projects';
 import { Metadata } from 'next';
 import ProjectDetailClient from './ProjectDetailClient';
 
